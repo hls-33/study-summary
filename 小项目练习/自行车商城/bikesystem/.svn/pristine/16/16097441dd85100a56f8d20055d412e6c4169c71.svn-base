@@ -1,0 +1,98 @@
+package com.bikesystem.hs.servlet;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.bikesystem.entity.BikeKind;
+import com.bikesystem.entity.BikeRent;
+import com.bikesystem.entity.ShopImage;
+import com.bikesystem.hs.dao.BikeKindDaoImpl;
+import com.bikesystem.hs.dao.BikeRentDaoImpl;
+import com.bikesystem.hs.dao.BikeSellDaoImpl;
+import com.bikesystem.hs.dao.IBikeKindDao;
+import com.bikesystem.hs.dao.ShopDaoImpl;
+import com.bikesystem.hs.dao.ShopImageDaoImpl;
+import com.bikesystem.hs.service.IShopImageService;
+import com.bikesystem.hs.service.IShopService;
+import com.bikesystem.hs.service.ShopImageServiceImpl;
+import com.bikesystem.hs.service.ShopServiceImpl;
+
+/**
+ *
+ * @author bwfadmin  E-mail: 654835916@qq.com
+ * @version v1.0 创建时间：2017年5月2日  下午5:16:17
+ * tags
+ */
+@WebServlet("/hs/shop")
+public class ShopInfoServlet extends HttpServlet {
+
+	private static final long serialVersionUID = 1L;
+	private IShopService shopService;
+	private IBikeKindDao bikeKindDao;
+	private IShopImageService shopImageService;
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		shopService = new ShopServiceImpl(new ShopDaoImpl(),
+				 new BikeRentDaoImpl(),new BikeSellDaoImpl());
+		bikeKindDao = new BikeKindDaoImpl();
+		shopImageService = new ShopImageServiceImpl(new ShopImageDaoImpl());
+	}
+
+	@Override
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		//查询自行车种类
+		List<BikeKind> bikeKinds = bikeKindDao.queryAllBikeKind();
+		request.setAttribute("bikeKinds", bikeKinds);
+		
+		//获取查询所需传递参数
+		String kindName = request.getParameter("kindname");
+		String shopName = request.getParameter("shopname");
+		
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("kindname", kindName);
+		map.put("shopname", shopName);
+		
+		System.out.println("shopName:"+shopName);
+		//查询商店的主页图片路径并保存到request请求
+		List<ShopImage> headImages = shopImageService.queryShopImage(shopName,"headImage");
+		request.setAttribute("headImages", headImages);
+		
+		List<ShopImage> navImages = shopImageService.queryShopImage(shopName,"navImage");
+		request.setAttribute("navImages", navImages);
+		
+//		List<ShopImage> hotRentImage = shopImageService.queryShopImage(shopName,"hotRentImage");
+//		request.setAttribute("hotRentImage", hotRentImage);
+//		
+//		List<ShopImage> hotSellImage = shopImageService.queryShopImage(shopName,"hotSellImage");
+//		request.setAttribute("hotSellImage", hotSellImage);
+		
+		List<ShopImage> backgroundImage = shopImageService.queryShopImage(shopName,"backgroundImage");
+		request.setAttribute("backgroundImage", backgroundImage);
+		
+		
+		//查询最热销的6个出租自行车
+		List<BikeRent> hotRentBikes = shopService.queryHotBikeRentByShopName(shopName);
+		request.setAttribute("hotRentBikes", hotRentBikes);
+		
+		request.setAttribute("shopname",shopName);
+		
+		
+		if(hotRentBikes==null && backgroundImage==null && navImages==null && headImages==null){
+			//全部为null，说明不存在shop
+			request.getRequestDispatcher("/WEB-INF/jsp/hs/noshopfounds.jsp");
+		}else{
+			//只要有一个不为null，说明存在该shop
+			request.getRequestDispatcher("/WEB-INF/jsp/hs/shop.jsp").forward(request, response);
+		}
+		}
+}

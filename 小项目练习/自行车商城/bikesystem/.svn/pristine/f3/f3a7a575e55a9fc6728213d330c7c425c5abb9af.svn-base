@@ -1,0 +1,23 @@
+$("#exit").click(function(){
+	location.href="/bikesystem/adminexit";
+});
+$("#adminmanger li:nth-of-type(2n+0)").slideUp("slow");
+$("#adminmanger li:nth-of-type(2n+1)").click(function(){
+	$(this).next().slideToggle("slow");
+});
+
+$("#querypersoninfo").click(function(){
+	$("#selpersoninfo").css("display","block");
+	$.ajax({
+		url:"/bikesystem/adminqueryinfo",
+		type:"post",
+		success:function(message){
+			for(var i=0;i<message.length;i++){
+				if(message[i]!=null||message[i]!=""){
+					$("#adminimg").html("<img src='"+message[i].imagepath+"'>");
+				}
+				else $("#adminimg").html("<img src='/bikesystem/image/txz/admin.png'>");
+			}
+		}
+	});
+});

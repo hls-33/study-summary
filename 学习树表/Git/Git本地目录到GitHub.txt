@@ -1,0 +1,8 @@
+1.进入到当前需要上传的目录 cd xx （或者到当前目录,右键：Git Bash Here）
+2.将当前目录转变为Git目录：git init
+3.将当前目录添加到本地git仓库：git add . （.代表当前目录下所有文件和目录）（还没有提交到仓库信息）
+4.检查当前目录文件是否都已经成功添加到本地git仓库 :git status,有红色代表没成功
+5.将项目信息提交给仓库：git commit -m "this is your annotation!"(-m 代表添加注释（即README.md）)
+6.连接GITHUB上的远程仓库：git remote add origin https://github.com/itvagrant/study-spring-boot-2-angular-5-example.git
+7.如果在GitHub上创建仓库时，添加了README.md,那就先合并一下README.md文件：git pull --rebase origin master(否则在push项目到远程Git仓库时会报错)
+8.将项目push到远程Git仓库：git push -u origin master(-u是因为是第一次上传项目，远程仓库是空的。下次就不用-u了)

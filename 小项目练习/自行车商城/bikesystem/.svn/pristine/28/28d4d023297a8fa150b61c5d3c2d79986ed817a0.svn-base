@@ -1,0 +1,95 @@
+package com.bikesystem.hp.dao;
+
+import com.bikesystem.entity.BikeSellInfo;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+public class BikeSellInfoDaoIpml extends BaseDao  implements IBikeSellInfoDao{
+	
+	private static final String QueryUserBikeRent = "select  * from bike_sell_info where  name=?";
+	private static final String QueryAdminBikeRent = "select  * from bike_sell_info where shopname=?";
+	private static final String  InsertBikeSellInfo = "insert into bike_sell_info (shopname,name,bikeprice,selldate) values (?,?,?,?)";
+	
+	
+	/**查询用户销售信息*/
+	@Override
+	public List<BikeSellInfo> queryUserBikeRent(String name) {
+	
+		createPreparedStatement(QueryUserBikeRent);
+		List<BikeSellInfo> list = null;
+		try {
+			pstmt.setString(1,name);
+			rs = pstmt.executeQuery();
+			list= new ArrayList<BikeSellInfo>();
+			while(rs.next()){
+				list.add(new BikeSellInfo(rs.getInt("bsiid"),rs.getInt("bsid"),
+						rs.getString("shopname"),rs.getString("name"),
+						rs.getDouble("bikeprice"),rs.getString("selldate")));
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		finally {
+			close();
+		}
+	
+		return list;
+	}
+	/**查询所有用户销售信息*/
+	@Override
+	public List<BikeSellInfo> queryAdminBikeRent(String shopname) {
+	
+		createPreparedStatement(QueryAdminBikeRent);
+		List<BikeSellInfo> list = null;
+		try {
+			list= new ArrayList<BikeSellInfo>();
+			pstmt.setString(1,shopname);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				list.add(new BikeSellInfo(rs.getInt("bsiid"),rs.getInt("bsid"),
+						rs.getString("shopname"),rs.getString("name"),
+						rs.getDouble("bikeprice"),rs.getString("selldate")));
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		finally {
+			close();
+		}
+	
+		return list;
+	}
+
+	/**
+	 * 插入销售记录
+	 * */
+	@Override
+	public boolean insertBikeSellInfo(BikeSellInfo BikeSellInfo) {
+	
+		createPreparedStatement(InsertBikeSellInfo);
+		try {
+			pstmt.setString(1, BikeSellInfo.getShopName());
+			pstmt.setString(2,BikeSellInfo.getName());
+			pstmt.setDouble(3, BikeSellInfo.getBikePrice());
+			pstmt.setString(4, BikeSellInfo.getSellDate());
+			int rs = pstmt.executeUpdate();
+			while(rs>0){
+				return true;
+				
+			}	
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		finally {
+			close();
+		}
+		return false;
+	}
+
+}

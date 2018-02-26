@@ -1,0 +1,138 @@
+@CHARSET "UTF-8";
+*{
+	margin:0px;
+	padding:0px;
+}
+ul li{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+}
+body{
+	font:12px/1.5 tahoma,arial,'Hiragino Sans GB',\5b8b\4f53,sans-serif;
+	font-family:arial,'Hiragino Sans GB',"\5b8b\4f53",sans-serif;
+}
+
+/* total开始 */
+.total{
+	width:1350px;
+}
+.shop-head{
+	width:1350px;
+}
+.shop-title{
+	width:1350px;
+	height:150px;
+}
+.shop-title img{
+	width:1350px;
+	height:109px;
+}
+.shop-nav{
+	width:1350px;
+	height:41px;
+}
+
+/* 上下导航css工具类 */
+.nav-img{
+	width:48px;
+	height:48px;
+	border:none;
+	cursor:pointer;
+	position:relative;
+	display:inline-block;
+	font-size:0px;
+	background-image:url("/bikesystem/image/hs/淘宝资源图.png");
+	background-repeat:no-repeat;
+}
+/* end */
+.img-nav{
+	width:1350px;
+	height:550px;
+}
+.img-ul{
+	width:1350px;
+}
+.img-list img{
+	width:1350px;
+	height:550px;
+}
+.prev-img{
+	top:-840px;
+	left:1300px;
+	background-position:-325px -64px;
+}
+.next-img{
+	top:-840px;
+	left:-50px;
+	background-position:-238px -266px;
+}
+
+.img-list{
+	float:left;
+	position: relative;
+}
+.img-list:last-child{
+	display: none;
+}
+
+
+/* 商店热销产品展示 */
+.shop-main{
+	width:1350px;
+	height:1000px;
+}
+
+.hot-rent{
+	width:1200px;
+	height:460px;
+	background-color:#d5d5d5;
+}
+.hot-logo{
+	float:left;
+	outline: none;
+    width: 303px;
+    height: 454px;
+}
+
+.hot-bike{
+	float:right;
+	width:860px;
+	height:454px;
+	background-image:url("");
+}
+.hot-item{
+	display: inline-block;
+	width:280px;
+	height:210px;
+}
+.hot-item img{
+	width:280px;
+	height:210px;
+}
+.price{
+	position: relative;
+	
+}
+.choose-count{
+	position: relative;
+	top:-230px;
+	left:220px;
+	padding-left:5px;
+	padding-top:10px;
+	display: block;
+	width:60px;
+	height:60px;
+	border-radius: 30px;
+	background-color:#f50;
+	color:#ffffff;
+	font-size:14px;
+	font-style: italic;
+	opacity: 0.7;
+}
+
+
+
+
+

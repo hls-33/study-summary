@@ -1,0 +1,17 @@
+<div id="qrcode"></div>    //图片生成在此div中
+
+//引用下面两个js
+<script src="jquery.min.js"></script>    
+<script type="text/javascript"  src="jquery.qrcode.min.js"></script>
+
+//设置参数
+<script>
+var oHref = window.location.href;   //获取当前页url
+
+ $('#qrcode').qrcode({
+      width: 100,     //宽高可调
+      height: 100, 
+      （！！！重点）render: !!document.createElement('canvas').getContext ? 'canvas' : 'table', //为了支持ie8及以下
+      text: oHref    //当前页面url地址
+      });
+</script>

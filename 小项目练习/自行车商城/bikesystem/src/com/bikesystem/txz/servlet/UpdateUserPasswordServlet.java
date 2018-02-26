@@ -1,0 +1,46 @@
+package com.bikesystem.txz.servlet;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.bikesystem.entity.User;
+import com.bikesystem.txz.interfaces.service.IUserService;
+import com.bikesystem.txz.ipml.dao.UserDaoIpml;
+import com.bikesystem.txz.ipml.service.UserServiceIpml;
+import com.bikesystem.utils.RegexUtil;
+
+/**
+ * Servlet implementation class UpdateUserPasswordServlet
+ */
+@WebServlet("/user/updatepassword")
+public class UpdateUserPasswordServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+    private IUserService uservice;   
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public UpdateUserPasswordServlet() {
+        uservice=new UserServiceIpml(new UserDaoIpml());
+    }
+
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String str=request.getParameter("pass");
+		User user=(User) request.getSession().getAttribute("user");
+		//oldpass--pass[0]   newpass--pass[1]
+		String[] pass=str.split(":");
+		boolean f1=RegexUtil.getPassword(pass[0]);
+		boolean f2=RegexUtil.getPassword(pass[1]);
+		if(f1&&f2){
+			boolean flag=uservice.updateUserInfoByPassword(user.getUphone(), pass[0], pass[1]);
+			if(flag){
+				user.setPassword(pass[1]);
+				request.getSession().setAttribute("user", user);
+			}
+		}
+		response.sendRedirect("/bikesystem/user/userpersonal");
+	}
+}

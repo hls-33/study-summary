@@ -1,0 +1,27 @@
+var arr = ["/bikesystem/image/hp/a1.jpg","/bikesystem/image/hp/a2.jpg","/bikesystem/image/hp/a3.jpg","/bikesystem/image/hp/a4.jpg","/bikesystem/image/hp/a5.jpg","/bikesystem/image/hp/a6.jpg"];
+var cur = 0;
+var before = -1;
+function loop(){
+	document.getElementById("img").src = arr[cur%arr.length];
+	document.getElementById("img"+cur%arr.length).style.border = "1px solid red";
+	if(before != -1){
+		document.getElementById("img"+before%arr.length).style.borderWidth = "0px";
+	}
+	before = cur;
+	cur++;
+	timer = setTimeout("loop()",2000);
+}
+function over(index){
+	clearTimeout(timer);
+	if(-1 == index)
+		return;
+	document.getElementById("img").src = arr[index];
+	document.getElementById("img"+before%arr.length).style.borderWidth = "0px";
+	document.getElementById("img"+index).style.border = "1px solid red";
+	before = index;
+	cur = before+1;
+}
+function out(){
+	timer = setTimeout("loop()",2000);
+}
+		

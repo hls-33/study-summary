@@ -1,0 +1,36 @@
+package com.bikesystem.hgg.service;
+
+import java.util.List;
+
+import com.bikesystem.entity.BikeRent;
+import com.bikesystem.hgg.dao.IBikeRentDao;
+
+public class BikeRentServiceImpl implements IBikeRentService {
+
+	private IBikeRentDao iBikeRentDao;
+	
+	
+	public BikeRentServiceImpl(IBikeRentDao iBikeRentDao) {
+		super();
+		this.iBikeRentDao = iBikeRentDao;
+	}
+
+	@Override
+	public List<BikeRent> queryAllBikeRent() {
+		// TODO Auto-generated method stub
+		return iBikeRentDao.queryAllBikeRent();
+	}
+
+	@Override
+	public List<BikeRent> queryBikeRentByShopName(String shopName) {
+		// TODO Auto-generated method stub
+		return iBikeRentDao.queryBikeRentByShopName(shopName);
+	}
+
+	@Override
+	public boolean insertBikeRent(BikeRent bikeRent) {
+		// TODO Auto-generated method stub
+		return iBikeRentDao.insertBikeRent(bikeRent);
+	}
+
+}

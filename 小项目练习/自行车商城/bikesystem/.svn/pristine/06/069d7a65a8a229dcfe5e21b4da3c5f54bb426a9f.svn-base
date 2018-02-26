@@ -1,0 +1,11 @@
+package com.bikesystem.hs.dao;
+
+import java.util.List;
+
+import com.bikesystem.entity.ShopImage;
+
+public interface IShopImageDao {
+	List<ShopImage> queryShopImage(String shopname,String imagename); //查看商店主页图片路径
+	boolean insertShopImage(ShopImage shopImage);//上传商店主页图片
+	boolean updateShopImage(ShopImage shopImage);//修改主页图片
+}

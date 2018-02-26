@@ -1,0 +1,253 @@
+@CHARSET "UTF-8";
+*{
+	margin: 0;
+	padding: 0;
+	font:12px/1.5 tahoma,arial,'Hiragino Sans GB',\5b8b\4f53,sans-serif;
+	font-family:arial,'Hiragino Sans GB',"\5b8b\4f53",sans-serif;
+}
+#alogin-div{
+	width:440px;
+	margin: auto;
+	border:1px solid gray;
+	box-shadow: 5px 5px 5px gray;
+	position: relative;
+	top:160px;
+	background-color: rgb(241,241,241);
+	z-index:5;
+}
+#alogin-div p{
+	width:90%;
+	height:40px;
+	line-height: 30px;
+	margin-top:30px;
+	margin: auto;
+	display: inline-block;
+	height:60px;
+	line-height: 60px;
+	position: relative;
+}
+#alogin-div p img{
+	width:60px;
+	height:60px;
+}
+p input{
+	width:51%;
+	height:40px;
+	position: relative;
+	top:-20px;
+	background-color: white;
+}
+.content{
+	position: relative;
+	top:-15px;
+	left:10px;
+	font-size:16px;
+	color:red;
+}
+.contentck{
+	width:135px;
+	height:40px;
+	position: absolute;
+	right:5px;
+	top:13px;
+	color:red;
+	margin-left:5px;
+	font-size:16px;
+}
+p:nth-of-type(3){
+	position: relative;
+	top:13px;
+	font-size:18px;
+}
+p:nth-of-type(3) input{
+	position: relative;
+	top:3px;
+	width:42%;
+	font-weight: bolder;
+}
+#checkspan{
+	width:100%;
+	height:30px;
+	display:inline-block;
+	line-height: 30px;
+	color:red;
+	font-size:16px;
+	position: relative;
+	top:20px;
+	text-align: center;
+}
+p:nth-of-type(4){
+	position: relative;
+	top:40px;
+	left:30px;
+}
+p:nth-of-type(4) input{
+	background-color: rgb(194,233,214);
+	color:rgb(16,132,122);
+	font-size:18px;
+	font-weight: bolder;
+	margin-left: 20px;
+}
+p:nth-of-type(5){
+	display:inline-block;
+	color:rgb(16,132,122);
+	text-align:right;
+	background-color: rgb(241,241,241);
+}
+p:nth-of-type(5) a{
+	color:rgb(16,132,122);
+	text-decoration: none;
+	margin-left: 10%;
+	cursor: pointer;
+}
+p:nth-of-type(5) input{
+	width:16px;
+	height:16px;
+	display: inline-block;
+	position: relative;
+	top:4px;
+}
+p:nth-of-type(5) span:hover{
+	color:red;
+}
+p:nth-of-type(5) a:hover{
+	color:red;
+}
+
+/*管理员忘记密码CSS设置*/
+#losspassword{
+	width:440px;
+	height:340px;
+	border:1px solid gray;
+	box-shadow: 5px 5px 5px gray;
+	position: absolute;
+	top:150px;
+	left:36%;
+	display: none;
+	z-index: 20;
+	background-color: rgb(222,222,224);
+}
+#losspassword p{
+	margin-left:5%;
+	display: inline-block;
+	width:30%;
+	height:40px;
+	line-height: 40px;
+	font-size:16px;
+}
+#losspassword input{
+	width:50%;
+	background-color: white;
+	height:30px;
+}
+#losspassword button{
+	width:120px;
+	height:30px;
+	text-align: center;
+	line-height: 30px;
+	background-color: white;
+	margin-left: 30%;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-size:16px;
+}
+#getphone{
+	width:100%;
+	line-height: 40px;
+	text-align: center;
+	font-size:16px;
+}
+#closeimg{
+	width:30px;
+	height:30px;
+	position: absolute;
+	top:10px;
+	right:20px;
+	color:red;
+	font-size:20px;
+	font-weight: bolder;
+	border: 1px solid black;
+	text-align: center;
+	line-height: 30px;
+}
+
+
+
+
+
+
+/*管理员注册页面*/
+#top-div{
+	text-align: center;
+}
+#create-div{
+	width:37%;
+	margin: auto;
+	border:1px solid gray;
+	box-shadow: 5px 5px 5px gray;
+}
+#create-div table{
+	width:100%;
+	margin-bottom: 30px;
+}
+#create-div table td{
+	height:60px;
+	line-height: 60px;
+	fone-size:18px;
+	padding-right: 20px;
+}
+#create-div table tr td:nth-of-type(1){
+	width:30%;
+	text-align: right;
+}
+#create-div table tr td:nth-of-type(2){
+	width:70%;
+}
+#create-div table tr td:nth-of-type(2) input{
+	width:50%;
+	height:40px;
+	background-color: white;
+}
+#create-div table tr td:nth-of-type(2) span{
+	display: inline-block;
+	width:40%;
+	font-size:13px;
+	heigth:40px;
+	line-height: 40px;
+	color:red;
+}
+th input{
+	width:120px;
+	height:40px;
+	background-color: white;
+}
+input[type='submit']{
+	position: relative;
+	left:50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

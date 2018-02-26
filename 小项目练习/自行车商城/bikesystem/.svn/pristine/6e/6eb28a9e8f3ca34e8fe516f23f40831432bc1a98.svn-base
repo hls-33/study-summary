@@ -1,0 +1,36 @@
+package com.bikesystem.txz.ajax.servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class UserCreateUemailAjaxServlet
+ */
+@WebServlet("/user/uemail")
+public class UserCreateUemailAjaxServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public UserCreateUemailAjaxServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String email=request.getParameter("email");
+		PrintWriter out=response.getWriter();
+		if(email==null||"".equals(email))
+			out.write("���䲻��Ϊ��");
+		else if(email.contains("."))
+			out.write("");
+		else out.write("���������ʽ����");
+	}
+
+}

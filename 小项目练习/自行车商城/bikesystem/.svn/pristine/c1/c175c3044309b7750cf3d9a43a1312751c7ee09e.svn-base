@@ -1,0 +1,95 @@
+$(function(){
+							var one = false;
+							var two = false;
+							var thir = false;
+							var forth=false;
+							var fifth = false;
+						window.onload=function(){
+										$(".order-address .tableid:nth-of-type(1)  table").css({"border":"2px solid red","opacity":"1"});
+										$(".order-address .tableid:nth-of-type(2)  table").css({"border":"none","opacity":"0.5"});
+										$(".order-address .tableid:nth-of-type(3)  table").css({"border":"none","opacity":"0.5"});
+										$(".order-address .tableid:nth-of-type(4)  table").css({"border":"none","opacity":"0.5"});
+										$(".order-address .tableid:nth-of-type(5)  table").css({"border":"none","opacity":"0.5"});
+						}
+							$(".order-address .tableid:nth-of-type(1)").click(function(){
+									$(".order-address .tableid:nth-of-type(1)  table").css({"border":"2px solid red","opacity":"1"});
+									one=true;
+									if(one){
+										$(".order-address .tableid:nth-of-type(2)  table").css({"border":"none","opacity":"0.5"});
+										$(".order-address .tableid:nth-of-type(3)  table").css({"border":"none","opacity":"0.5"});
+										$(".order-address .tableid:nth-of-type(4)  table").css({"border":"none","opacity":"0.5"});
+										$(".order-address .tableid:nth-of-type(5)  table").css({"border":"none","opacity":"0.5"});
+										
+										}
+							});
+
+							$(".order-address .tableid:nth-of-type(2)").click(function(){
+									$(".order-address .tableid:nth-of-type(2)  table").css({"border":"2px solid red","opacity":"2"});
+	
+									two=true;
+									if(two){
+											$(".order-address .tableid:nth-of-type(1)  table").css({"border":"none","opacity":"0.5"});
+											$(".order-address .tableid:nth-of-type(3)  table").css({"border":"none","opacity":"0.5"});
+											$(".order-address .tableid:nth-of-type(4)  table").css({"border":"none","opacity":"0.5"});
+											$(".order-address .tableid:nth-of-type(5)  table").css({"border":"none","opacity":"0.5"});
+											
+										
+										}
+							});
+							
+						$(".order-address .tableid:nth-of-type(3)").click(function(){
+							$(".order-address .tableid:nth-of-type(3)  table").css({"border":"2px solid red","opacity":"1"});
+
+									thir=true;
+									if(thir){
+											$(".order-address .tableid:nth-of-type(1)  table").css({"border":"none","opacity":"0.5"});
+											$(".order-address .tableid:nth-of-type(2)  table").css({"border":"none","opacity":"0.5"});
+											$(".order-address .tableid:nth-of-type(4)  table").css({"border":"none","opacity":"0.5"});
+											$(".order-address .tableid:nth-of-type(5)  img").css({"border":"none","opacity":"0.5"});
+										
+										}
+							});
+						$(".order-address .tableid:nth-of-type(4)").click(function(){
+							$(".order-address .tableid:nth-of-type(4)  table").css({"border":"2px solid red","opacity":"1"});
+
+							forth=true;
+							if(forth){
+									$(".order-address .tableid:nth-of-type(1)  table").css({"border":"none","opacity":"0.5"});
+									$(".order-address .tableid:nth-of-type(2)  table").css({"border":"none","opacity":"0.5"});
+									$(".order-address .tableid:nth-of-type(5)  table").css({"border":"none","opacity":"0.5"});
+									$(".order-address .tableid:nth-of-type(3)  table").css({"border":"none","opacity":"0.5"});
+								
+								}
+					});
+						$(".order-address .tableid:nth-of-type(5)").click(function(){
+							$(".order-address .tableid:nth-of-type(5)  table").css({"border":"2px solid red","opacity":"1"});
+
+							fifth=true;
+							if(fifth){
+									$(".order-address .tableid:nth-of-type(1)  img").css({"border":"none","opacity":"0.5"});
+									$(".order-address .tableid:nth-of-type(2)  img").css({"border":"none","opacity":"0.5"});
+									$(".order-address .tableid:nth-of-type(3)  img").css({"border":"none","opacity":"0.5"});
+									$(".order-address .tableid:nth-of-type(4)  img").css({"border":"none","opacity":"0.5"});
+								
+								}
+					});
+							
+
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+					})

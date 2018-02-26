@@ -1,0 +1,23 @@
+package com.bikesystem.utils;
+public class RegexUtil {
+	public static String getPhoneRegex(){//只能输入11位数字
+		String reg="^\\d{11}$";
+		return reg;
+	}
+	public static String getIdnumber(){
+		String reg="^\\d{18}$";
+		return reg;
+	}
+	public static String getEmail(){
+		String reg="^[0-9]+\\.([a-z]|[0-9])+\\.[com|cn]$";
+		return reg;
+	}
+	public static String getName(){
+		String reg="^[\u4e00-\u9fa5]{0,}$";
+		return reg;
+	}
+	public static String getPassworg(){
+		String reg="^([a-zA-Z0-9])$";
+		return reg;
+	}
+}

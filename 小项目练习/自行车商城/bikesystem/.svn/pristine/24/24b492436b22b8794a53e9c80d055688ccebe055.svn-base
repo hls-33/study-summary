@@ -1,0 +1,164 @@
+@CHARSET "UTF-8";
+
+*{
+	margin: 0px;
+	padding:0px;
+}
+
+body{
+	font:12px/1.5 tahoma,arial,'Hiragino Sans GB',\5b8b\4f53,sans-serif;
+	font-family:arial,'Hiragino Sans GB',"\5b8b\4f53",sans-serif;
+}
+a{
+	text-decoration: none;
+}
+/* 搜索主体main start */
+.main{
+	width:940px;
+}
+	/* 自行车种类导航栏 */
+#mainsrp-nav{
+	
+}
+.m-nav{
+	margin-top:10px;
+	font-weight:400;
+	border:1px solid rgb(232,232,232);
+}
+.crumb{
+	margin-left:20px;
+	margin-top:10px;
+}
+.h{
+	color:#F40!important;
+}
+.group{
+	margin:0 8px;
+	border-bottom:1px dashed #dedede;
+	height:37px;
+}
+.nav-title{
+	display:inline-block;
+	width:100px;
+	color:#999;
+	margin-top:10px;
+}
+.nav-text{
+	display:inline-block;
+	margin-right: 15px;
+	margin-top:10px;
+}
+	/* end */
+/* end */
+
+/* 搜索结果框 */
+.s-result{
+	margin-top:20px;
+}
+	/* 单个搜索结果框 */
+.result-item{
+	width:220px;
+	height:315px;
+	margin-right:17px;
+	float:left;
+	border:1px solid #ededed;
+}
+	/* end */
+	/* 图片显示框 */
+.img-item{
+	width:220px;
+	height:220px;
+}
+.img-item img{
+	width:220px;
+	height:220px;
+}
+	/* end */
+	/* 租金价格 */
+.price-item{
+	margin-top:11px;
+	width:220px;
+	height:22px;
+	font-family:arial;
+	font-size:18px;
+	line-height:22px;
+	overflow:hidden;
+	padding:0 10px;
+}	
+.price{
+	float:left;
+	color:#F40;
+	width:120px;
+}
+.price .span1{
+	margin-right: 3px;
+}
+.price strong{
+	font-family:arial;
+	letter-spacing:0.8px;
+}
+.price .span2{
+	display: inline-block;
+	background-color:#F40;
+	height:18px;
+	margin-left:2px;
+	color:white;
+	font-size:10px;
+}
+.choose-count{
+	float:right;
+	padding-left:15px;
+	width:85px;
+	color:#888;
+	line-height:22px;
+	height:22px;
+	font-size:12px;
+}
+	/* end */
+	/* 自行车商品名 */
+.goods-title-item{
+	margin-top:6px;
+	height:24px;
+	padding:0 10px;
+	overflow:hidden;
+	font-weight:400;
+}
+.goods-title-item .span3{
+	display: inline-block;
+	float:right;
+	color:#888;
+	line-height:14px;
+	height:14px;
+	font-size:12px;
+}
+	/* end */
+	/* 商店名 */
+.shop-item{
+	margin-top:5px;
+	height:22px;
+	line-height:22px;
+	overflow:hidden;
+	padding:0 10px;
+}
+.shopname{
+	color:#888;
+	text-decoration:underline;
+}
+.dsrs{
+	margin-top:4px;
+	width:13px;
+	float:left;
+}
+.dsr{
+	float:left;
+	margin-top:2px;
+	height:2px;
+	width:8px;
+	overflow:hidden;
+}
+.equalthan{
+	background:#f40;
+}
+
+
+

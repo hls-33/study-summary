@@ -1,0 +1,111 @@
+package com.bikesystem.hs.dao;
+
+import java.util.List;
+
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.junit.Test;
+
+import com.bikesystem.entity.BikeKind;
+import com.bikesystem.entity.BikeSell;
+import com.bikesystem.utils.JdbcUtils;
+/**
+ * 自行车销售信息Dao层实现类
+ * @author 祷
+ *
+ */
+public class BikeSellDaoImpl implements IBikeSellDao {
+	private QueryRunner qr = new QueryRunner(JdbcUtils.getDataSource());
+	/**
+	 * 插入新可销售自行车的信息
+	 */
+	@Override
+	public boolean insertBikeSell(BikeSell bikeSell) {
+		String sql="insert into bike_sell(bikename,bikecount,color,kindname,shopname," +
+				"bikeprice,imgpath)values(?,?,?,?,?,?,?) ";
+		try{
+			int result = qr.update(sql,bikeSell.getBikeName(),bikeSell.getBikeCount(),
+					bikeSell.getColor(),bikeSell.getKindName(),bikeSell.getShopName(),
+					bikeSell.getBikePrice(),bikeSell.getImgPath());
+			if(result>0){return true;}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return false;
+	}
+	/**
+	 * 删除可销售自行车信息
+	 */
+	@Override
+	public boolean deleteBikeSellById(int bsid) {
+		String sql="delete from bike_sell where bsid=? ";
+		try{
+			int result = qr.update(sql,bsid);
+			if(result>0){return true;}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return false;
+	}
+	/**
+	 * 更新可销售自行车信息
+	 */
+	@Override
+	public boolean updateBikeSell(BikeSell bikeSell) {
+		String sql="update bike_sell set bikename=?,bikecount=?,color=?,kindname=?,shopname=?," +
+				"bikeprice=?,imgpath=? where bsid=?";
+		try{
+			int result = qr.update(sql,bikeSell.getBikeName(),bikeSell.getBikeCount(),
+					bikeSell.getColor(),bikeSell.getKindName(),bikeSell.getShopName(),
+					bikeSell.getBikePrice(),bikeSell.getImgPath(),bikeSell.getBsid());
+			if(result>0){return true;}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return false;
+	}
+	/**
+	 * 查询某商家可销售自行车信息
+	 */
+	@Override
+	public List<BikeSell> queryAllBikeSellByShopName(String shopName) {
+		String sql="select * from bike_sell where shopname=? ";
+		try{
+			return qr.query(sql, new BeanListHandler<BikeSell>(BikeSell.class),shopName);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	/**
+	 * 查询某种类型的可销售自行车信息
+	 */
+	@Override
+	public List<BikeSell> queryAllBikeSellByBikeName(String bikeName) {
+		String sql="select * from bike_sell where bikename=? ";
+		try{
+			return qr.query(sql, new BeanListHandler<BikeSell>(BikeSell.class),bikeName);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	/**
+	 * 查询某商家的某种类型的可销售自行车信息
+	 */
+	@Override
+	public List<BikeSell> queryAllBikeSell(String bikeName, String shopName) {
+		String sql="select * from bike_sell where bikename=? and shopname=? ";
+		try{
+			return qr.query(sql, new BeanListHandler<BikeSell>(BikeSell.class),bikeName,shopName);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Test
+	public void test(){
+	}
+
+}

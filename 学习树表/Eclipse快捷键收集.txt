@@ -1,0 +1,22 @@
+（1）：注释快捷键：alt+shift+j  ：给类或者方法加注释模板
+	模板修改方法：preferences-->java-->code_style-->code_template-->comments
+类注释模板：
+/****************************************************
+ * <p>Title:</p>									*
+ * <p>Description:</p>								*
+ * <p>Copyright:Copyright(c)</p>					*
+ * <p>Company:SI-TECH</p>							*
+ * @author ${user}									*
+ * @Version 1.0										*
+ * 日期:${date}										*
+ * ${tags}											*
+ ****************************************************/
+方法注释模板：
+/*************************************************************
+ * 类型：【普通方法${enclosing_method}】					 *
+ * 作者：													 *
+ * 归属：${enclosing_type}									 *
+ * 日期：${date}											 *
+ * Input:											 		 *
+ * Output:${return_type}									 *
+ *************************************************************/

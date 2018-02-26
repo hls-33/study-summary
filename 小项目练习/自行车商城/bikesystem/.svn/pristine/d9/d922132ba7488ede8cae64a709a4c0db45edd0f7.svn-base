@@ -1,0 +1,37 @@
+@CHARSET "UTF-8";
+*{
+	margin: 0;
+	padding: 0;
+	font:12px/1.5 tahoma,arial,'Hiragino Sans GB',\5b8b\4f53,sans-serif;
+	font-family:arial,'Hiragino Sans GB',"\5b8b\4f53",sans-serif;
+}
+#top-div{
+	width:100%;
+	text-align: center;
+	background-color: rgb(254,242,204);
+}
+#manger-div{
+	width:100%;
+	height:100%;
+	position: relative;
+}
+#admin,#user{
+	position: absolute;
+	top:30%;
+}
+#admin{
+	left:26%;
+}
+#user{
+	right:26%;
+}
+p{
+	width:80%;
+	display: inline-block;
+	height:40px;
+	font-size:24px;
+	text-align: center;
+	margin: auto;
+	color:blue;
+	text-shadow: 3px 3px 3px gray;
+}

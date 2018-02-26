@@ -1,0 +1,74 @@
+@CHARSET "UTF-8";
+*{
+	margin: 0;
+	padding: 0;
+	
+	font:12px/1.5 tahoma,arial,'Hiragino Sans GB',\5b8b\4f53,sans-serif;
+	font-family:arial,'Hiragino Sans GB',"\5b8b\4f53",sans-serif;242,204);
+	
+}
+#top-div{
+	width:90%;
+	margin: auto;
+	background-color: rgb(254,242,204);
+}
+
+/*注册页面*/
+#create-div{
+	width:90%;
+	margin:auto;
+	height:600px;
+	background-image: url("/bikesystem/image/txz/bike.jpg");
+	background-size: 100% 100%;
+	padding-top: 5%;
+}
+#create-div fieldset{
+	text-align: center;
+	width:40%;
+	margin-left: 30%;
+}
+#create-div legend{
+	font-size: 24px;
+	color:rgb(0,176,240);
+	text-shadow: 3px 3px 3px;
+}
+#create-div table{
+	width:100%;
+	border-collapse: collapse;
+}
+#create-div table tr td:nth-of-type(1){
+	width:70%;
+	height:40px;
+	line-height: 40px;
+}
+#create-div table tr{
+	margin-top: 10px;
+}
+#create-div table tr td:nth-of-type(1){
+	width:30%;
+	height:40px;
+	line-height: 40px;
+	text-align: right;
+	padding-right: 7%;
+}
+input[type='text'],input[type='password']{
+	width:50%;
+	height:100%;
+	background-color: white;
+}
+#create-div td span{
+	width:14%;
+	color:red;
+	font-size:15px;
+	line-height: 40px;
+	margin-left: 10px;
+}
+#create-div button,#regist{
+	width:100px;
+	height:35px;
+	line-height: 35px;
+	text-align: center;
+	background-color: rgb(240,240,240);
+	box-shadow: 3px 3px 3px gray;
+	margin-bottom: 10px;
+}

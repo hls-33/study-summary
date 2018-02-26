@@ -1,0 +1,17 @@
+package com.bikesystem.hgg.service;
+
+import java.util.List;
+
+import com.bikesystem.entity.BikeRent;
+
+public interface IBikeRentService {
+
+	//查看所有的自行车信息
+	public List<BikeRent> queryAllBikeRent();
+	
+	//根据商店名查看自行车
+	public List<BikeRent> queryBikeRentByShopName(String shopName);
+	
+	//添加租赁自行车
+	public boolean insertBikeRent(BikeRent bikeRent);
+}

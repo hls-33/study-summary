@@ -1,0 +1,85 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>My JSP 'shopbikes.jsp' starting page</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+	<link rel="stylesheet" type="text/css" href="css/hs/shop.css" >
+	<link rel="stylesheet" type="text/css" href="css/hs/shopbikes.css">
+	<!-- js文件 -->
+	<script type="text/javascript" src=""></script>
+	<!-- jqeury库和bootstrap库 -->
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+ 	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  	<link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+  </head>
+  
+  <body>
+    <div>
+  	<jsp:include page="../hp/navigation.jsp"></jsp:include>
+  	</div>
+  	<div class="shop-head">
+	    <div class="shop-title" >
+	    	
+	    	<img alt="${requestScope.shopname}" src="${requestScope.headImages[0].imagePath}">
+	    	<div class="shop-nav" >
+		    	<nav class="navbar navbar-default" role="navigation">
+		    	<div class="container-fluid">
+			    <div class="navbar-header">
+			        <a class="navbar-brand" href="#">本店所有商品</a>
+			    </div>
+			    <div>
+			    	<ul class="nav navbar-nav">
+			    		<c:forEach items="${requestScope.bikeKinds}" var="kind">
+			    		<li><a href="hs/shop?shopname=${requestScope.shopname}&kindname=${kind.kindName}">${kind.kindName}</a></li>
+			    		</c:forEach>
+			    	</ul>
+			    </div>
+			    </div>
+		    	</nav>
+	   		</div>
+	    </div>
+	</div>
+	<div class="shop-bikes">
+		<div class="kind-nav">
+			<div class="kind-nav-title">商品分类</div>
+			<div class="kind-nav-rent">
+				<a href="hs/category?shopname=${requestScope.shopname}&biketype=rent">查看所有出租车型</a>
+				<a href="hs/category?shopname=${requestScope.shopname}&biketype=rent&orderType=hotrent_desc">按租量</a>
+				<a href="hs/category?shopname=${requestScope.shopname}&biketype=rent&orderType=hotrent_desc">按日租价格</a>
+			</div>
+			<div class="kind-nav-sell">
+				<a href="hs/category?shopname=${requestScope.shopname}&biketype=sell">查看所有销售车型</a>
+				<a href="hs/category?shopname=${requestScope.shopname}&biketype=sell&orderType=hotsell_desc">按销量</a>
+				<a href="hs/category?shopname=${requestScope.shopname}&biketype=sell&orderType=hotsell_desc">按销售价格</a>
+			</div>
+			<div class="kind-nav-kindname">
+				<c:forEach items="${requestScope.bikeKinds}" var="bikeKind">
+					<a class="nav-kindname" href="hs/category?shopname=${requestScope.shopname}&biketype=kind&kindname=${bikeKind.kindName}">${bikeKind.kindName}</a>
+					<span  class="kind-nav-icon"></span>
+				</c:forEach>
+			</div>
+		
+		</div>
+		<div class="bikes-info">
+		
+		</div>
+	</div>
+  </body>
+</html>

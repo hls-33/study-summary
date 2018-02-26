@@ -1,0 +1,101 @@
+package com.bikesystem.entity;
+/**
+ * 评论记录表：comment
+ * @author bwfadmin
+ *
+ */
+public class Comment {
+	private int cid;
+	private String name;	//评论用户，关联用户表
+	private String shopName;//关联商店表
+	private String bikeName;//关联（关联bike_sell或bike_rent表）
+	private String message;
+	private String commentDate;
+	private String commentImgPath;//（评论图片路径）
+	private String commentStatus;//（好、中、差评状态）
+	
+	
+	public Comment() {
+		super();
+	}
+	public Comment(int cid, String name, String shopName, String bikeName, String message, String commentDate,
+			String commentImgPath, String commentStatus) {
+		super();
+		this.cid = cid;
+		this.name = name;
+		this.shopName = shopName;
+		this.bikeName = bikeName;
+		this.message = message;
+		this.commentDate = commentDate;
+		this.commentImgPath = commentImgPath;
+		this.commentStatus = commentStatus;
+	}
+	
+	public Comment(String name, String shopName, String bikeName, String message, String commentDate,
+			String commentImgPath, String commentStatus) {
+		super();
+		this.name = name;
+		this.shopName = shopName;
+		this.bikeName = bikeName;
+		this.message = message;
+		this.commentDate = commentDate;
+		this.commentImgPath = commentImgPath;
+		this.commentStatus = commentStatus;
+	}
+	
+	public int getCid() {
+		return cid;
+	}
+	public void setCid(int cid) {
+		this.cid = cid;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getShopName() {
+		return shopName;
+	}
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+	public String getBikeName() {
+		return bikeName;
+	}
+	public void setBikeName(String bikeName) {
+		this.bikeName = bikeName;
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	public String getCommentDate() {
+		return commentDate;
+	}
+	public void setCommentDate(String commentDate) {
+		this.commentDate = commentDate;
+	}
+	public String getCommentImgPath() {
+		return commentImgPath;
+	}
+	public void setCommentImgPath(String commentImgPath) {
+		this.commentImgPath = commentImgPath;
+	}
+	public String getCommentStatus() {
+		return commentStatus;
+	}
+	public void setCommentStatus(String commentStatus) {
+		this.commentStatus = commentStatus;
+	}
+	@Override
+	public String toString() {
+		return "Comment [cid=" + cid + ", name=" + name + ", shopName=" + shopName + ", bikeName=" + bikeName
+				+ ", message=" + message + ", commentDate=" + commentDate + ", commentImgPath=" + commentImgPath
+				+ ", commentStatus=" + commentStatus + "]";
+	}
+	
+}

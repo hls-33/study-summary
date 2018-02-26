@@ -1,0 +1,421 @@
+@CHARSET "UTF-8";
+
+*{
+	margin:0px;
+	padding:0px;
+}
+
+li{
+	list-style: none;
+}
+
+/* header-order */
+.header-order{
+	width:1350px;
+	height:100px;
+}
+.malllogo{
+	width:260px;
+	height:64px;
+	float:left;
+	margin-left:98px;
+}
+	/* 商店图标logo（暂用天猫代替，没有合适的） */
+.logo-item{
+	display:block;
+	height: 28px;
+    width: 190px;
+	background: url(//img.alicdn.com/tps/i1/TB1JCr_IpXXXXcAXFXXOK.sIXXX-190-27.png) no-repeat;
+	cursor: pointer;
+}	
+	/* 5大步展示 */
+.stepbarbox{
+	float:right;
+	width:728px;
+	height:80px;
+	margin-right:176px;
+}
+	/* 每一个step-item的设置 */
+.step-item{
+	display: block;
+	width:145px;
+	height:78px;
+	float:left;
+	text-align: center;
+}
+.step-name{
+	font-weight: 700;
+    color: #888;
+    margin-bottom:2px;
+}
+.step-no{
+	height:34px;
+	font-family: 'arial black';
+	line-height: 34px;
+	color: #fff;
+    font-size: 18px;
+}
+	/* 5大步骤的背景图 */
+.step-first>.step-no {
+	background: url(//img.alicdn.com/tps/i1/T1Usl8FnRfXXcVlxZa-734-340.png) 50% -204px no-repeat;
+}
+.step-second>.step-no{
+	background: url(//img.alicdn.com/tps/i1/T1Usl8FnRfXXcVlxZa-734-340.png) 50% -102px no-repeat;
+}
+.step-third>.step-no{
+	background: url(//img.alicdn.com/tps/i1/T1Usl8FnRfXXcVlxZa-734-340.png) 50% -102px no-repeat;
+}
+.step-fourth>.step-no{
+	background: url(//img.alicdn.com/tps/i1/T1Usl8FnRfXXcVlxZa-734-340.png) 50% -102px no-repeat;
+}
+.step-last>.step-no{
+	background: url(//img.alicdn.com/tps/i1/T1Usl8FnRfXXcVlxZa-734-340.png) 50% -136px no-repeat;
+}
+/* end */
+
+.main-container{
+	width:1070px;
+	height:650px;
+}
+
+/* order-info信息 */
+.confirm-order{
+	width:1070px;
+	height:600px;
+	margin-left:98px;
+}
+	/* order-title */
+.order-title{
+	height:67px;
+}
+.order-th{
+	line-height: 25px;
+    color: #333;
+    font-weight: 700;
+    font-size: 16px;
+}
+.order-td-div{
+	margin-top: 15px;
+    color: #6C6C6C;
+}
+.order-td-item{
+	display: inline-block;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    border-bottom: 3px solid #b2d1ff;
+    font-size: 12px;
+    margin-left: 1px;
+    vertical-align: bottom;
+}
+.order-td-0{
+	width:255px;
+}
+.order-td-1{
+	width:190px;
+}
+.order-td-2{
+	width:185px;
+}
+.order-td-3{
+	width:185px;
+}
+.order-td-4{
+	width:185px;
+}
+	/* order-title-end */
+
+
+
+	/* 主信息框 */
+.order-main{
+	height:302px;
+	color: #6c6c6c;
+}
+	/* 商店信息栏 */
+.order-info{
+	height:28px;
+	margin-top: 25px;
+    border-bottom: 1px dotted #80b2ff;
+}
+.shop-icon{
+	width: 16px;
+    height: 16px;
+    vertical-align: text-bottom;
+    margin-right: 3px;
+}
+	/* end */
+
+.money-strong{
+	color: #dd2727;
+    font-family: verdana,arial;
+    font-size: 14px;
+    font-weight: bolder;
+}
+
+	/* 商品属性 */
+.order-item{
+	height:85px;
+	border-bottom: 1px dotted #ddd;
+	background-color: #fbfcff;
+}
+.order-item-row{
+	float:left;
+	height:90px;
+	margin-right:5px;
+	text-align: center;
+}
+.order-item-0{
+	width:255px;
+}
+.order-rent-image{
+	width:50px;
+	height:50px;
+	display: block;
+	float:left;
+	margin-left: 30px;
+}
+.order-rent-info{
+	float:left;
+}
+.order-item-1{
+	width:190px;
+}
+.order-item-1 li{
+	text-align: left;
+}
+
+.order-item-2{
+	width:185px;
+}
+.order-item-3{
+	width:185px;
+}
+.order-item-4{
+	width:185px;
+}
+	/* end */
+
+	/* 优惠信息 */
+.order-service{
+	height:30px;
+	border-bottom: 1px dotted #ddd;
+	background-color: #fbfcff;
+}
+.order-service-title{
+	float:left;
+	margin-left:30px;
+}
+.order-service-info{
+	float:left;
+	margin-left:5px;
+	width:970px;
+	
+}
+.order-service-icon{
+	float:left;
+}
+.order-service-saleprice{
+	float:right;
+	margin-right:134px;
+	
+}
+
+.hourPriceSale{
+	width:50px;
+	display: inline-block;
+	margin-right:130px;
+	
+}
+.dayPriceSale{
+	width:50px;
+	display: inline-block;
+	margin-right:170px;
+}
+	/* end */
+
+	/* 租车模式选择及天数/小时数选择 */
+.order-rentTime{
+	height:30px;
+	border-bottom: 1px dotted #ddd;
+	background-color: #fbfcff;
+}
+.order-rentTime-title{
+	float:left;
+	margin-left:30px;
+	height:30px;
+	padding-top:5px;
+}
+.order-rentModel{
+	float:left;
+	margin-left:10px;
+}
+.order-rentModel>div{
+	display: inline-block;
+}
+.input-span{
+	display:inline-block;
+	margin-top:2px;
+}
+
+/* 日期选择框 */
+.order-date-choose{
+	padding-top: 2px;
+	padding-bottom: 2px;
+	height:34px;
+}
+
+.date-choose{
+	width:800px;
+	height:30px;
+	float:left;
+	margin-left:10px;
+}
+.input-group{
+	height:30px;
+	width:400px;
+}
+#input-date{
+	height:30px;
+	width:160px;
+}
+#input-date-icon{
+	height:30px;
+	border-left:none;
+}
+
+.order-rent-time{
+	width:20px;
+	margin-left:40px;
+}
+.rent-time-input{
+	width:60px;
+	height:22px;
+}
+
+.order-totalTime-price{
+	float:right;
+	margin-right:134px;
+}
+.waring-info{
+	color:#ff3e3e;
+	display: block;
+	float:left;
+	width:300px;
+	height:30px;
+	line-height: 30px;
+	margin-left:5px;
+}
+	/* 日期选择end  */
+
+
+
+
+	/*  */
+.order-ext{
+	height:52px;
+	border-bottom: 1px dotted #ddd;
+}
+.order-ext>div{
+	display: inline-block;
+	height:52px;
+	padding-top:16px;
+}
+.order-ext-user{
+	width:452px;
+	padding-left:30px;
+	border-right: 1px solid #fff;
+	background-color: #f2f7ff;
+	
+}
+.order-ext-diliver{
+	width:400px;
+	padding-left:70px;
+	border-left: 1px solid #fff;
+	background-color: #f2f7ff;
+	margin-left:-4px;
+}
+.order-ext-price{
+	width:214px;
+	padding-left:43px;
+	background-color: #f2f7ff;
+	margin-left:-2px;
+}
+	/* end */
+
+
+
+.order-pay{
+	height:51px;
+	text-align: right;
+	padding-right:100px;
+	background-color: #f2f7ff;
+	border-bottom: 1px dotted #80b2ff;
+	margin-top:1px;
+	padding-top:15px;
+}
+.total-price{
+	font-size:16px;
+}
+	/* end */
+	
+	/* 付钱框 */
+.order-payinfo{
+	height:125px;
+	margin-top: 50px;
+}
+.order-payInfo-wrapper{
+	width:465px;
+	height:125px;
+	border: 1px solid #dd2727;
+	box-shadow: 0 0 5px 0px #dd2727 inset;
+	float: right;
+	text-align: right;
+	padding:20px 20px 10px 10px;
+	color: #999;
+}
+.order-payinfo-money{
+	height:39px;
+	margin-bottom: 10px;
+}
+.order-payinfo-address{
+	height:19px;
+	margin-bottom: 8px;
+	overflow:hidden;
+}
+.order-payinfo-user{
+	height:19px;
+}
+	/* end */
+	/* 提交按钮 */
+.order-submit{
+	height:44px;
+}
+.order-submit-button{
+	width:182px;
+	height:39px;
+	float:right;
+}
+.a-button{
+	display: block;
+	width: 182px;
+    height: 39px;
+    vertical-align: middle;
+    line-height: 39px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    background: #dd2727;
+    color: #fff;
+}
+.a-button:hover{
+	text-decoration: none;
+
+}
+/* end */
+
+
+
+
+

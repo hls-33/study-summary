@@ -1,0 +1,84 @@
+package com.bikesystem.hgg.dao;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.bikesystem.entity.BikeRent;
+
+public class BikeRentDaoImpl extends BaseDao implements IBikeRentDao {
+	private static final String queryAllBikeRentSql="select * from bike_rent";
+	private static final String queryBikeRentByShopNameSql="select * from bike_rent where shopname=?";
+	private static final String insertBikeRentSql="insert into bike_rent(bikenumber,bikename,color,kindname,shopname,hourprice,dayprice,isrented,imgpath,bikedeposit,rentcount) values(?,?,?,?,?,?,?,?,?,?,?)";
+	
+	@Override
+	public List<BikeRent> queryAllBikeRent() {
+		List<BikeRent> allBikeRentList=new ArrayList<BikeRent>();
+		getDb(queryAllBikeRentSql);
+		try {
+			rs=ps.executeQuery();
+			while(rs.next()){
+				allBikeRentList.add(new BikeRent(rs.getInt("brid"),rs.getString("bikenumber"),rs.getString("bikename"),rs.getString("color"),
+						rs.getString("kindname"),rs.getString("shopname"),rs.getDouble("hourprice"),
+						rs.getDouble("dayprice"),rs.getString("isrented"),rs.getString("imgpath"),
+						rs.getDouble("bikedeposit"),rs.getInt("rentcount")));
+			}
+			return allBikeRentList;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<BikeRent> queryBikeRentByShopName(String shopName) {
+		if(shopName==null){
+			return null;
+		}
+		List<BikeRent> shopBikeRentList=new ArrayList<BikeRent>();
+		try {
+			getDb(queryBikeRentByShopNameSql);
+			ps.setString(1, shopName);
+			rs=ps.executeQuery();
+			while(rs.next()){
+				shopBikeRentList.add(new BikeRent(rs.getInt("brid"), rs.getString("bikenumber"), rs.getString("bikename"), rs.getString("color"), 
+						rs.getString("kindname"), rs.getString("shopname"), rs.getDouble("hourprice"), rs.getDouble("dayprice"),
+						rs.getString("isrented"), rs.getString("imgpath"), rs.getDouble("bikedeposit"),rs.getInt("rentcount"))) ;
+			}
+			return shopBikeRentList;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public boolean insertBikeRent(BikeRent bikeRent) {
+		if(bikeRent==null)
+			return false;
+		try {
+			getDb(insertBikeRentSql);
+			ps.setString(1, bikeRent.getBikeNumber());
+			ps.setString(2, bikeRent.getBikeName());
+			ps.setString(3, bikeRent.getColor());
+			ps.setString(4, bikeRent.getKindName());
+			ps.setString(5, bikeRent.getShopName());
+			ps.setDouble(6, bikeRent.getHourPrice());
+			ps.setDouble(7, bikeRent.getDayPrice());
+			ps.setString(8, bikeRent.getIsRented());
+			ps.setString(9, bikeRent.getImgPath());
+			ps.setDouble(10, bikeRent.getBikedeposit());
+			ps.setInt(11, bikeRent.getRentCount());
+			if(ps.executeUpdate()>0){
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	
+
+}

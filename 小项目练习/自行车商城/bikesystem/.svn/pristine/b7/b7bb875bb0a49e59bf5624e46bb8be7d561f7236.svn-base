@@ -1,0 +1,12 @@
+package com.bikesystem.txz.interfaces.dao;
+import com.bikesystem.entity.User;
+public interface IUserDao {
+//	用户
+	User UserLogin(String username,String password);//
+	boolean userRegist(User user);//
+	User queryUserInfo(int uid);//
+	boolean updateUserInfo(User user);//
+	boolean deleteUserInfo(int uid);//
+	boolean queryUserByPhone(String uphone);//
+	boolean queryUserByEmail(String email);//
+}

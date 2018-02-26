@@ -1,0 +1,167 @@
+@CHARSET "UTF-8";
+table{
+	width:100%;
+}
+.good_div td,th{
+	border:1px solid #E0E0E0;
+	text-align:center;
+	
+}
+.good_div img{
+	width:80px;
+	height:80px;
+}
+.gooddescription{
+	width:100%;
+	height:100%;
+}
+.good_div td:nth-of-type(4){
+	width:90px;
+}
+.good_div td:nth-of-type(1),.good_div td:nth-of-type(2),.good_div td:nth-of-type(3){
+	width:202px;
+}
+#content_table{
+	background-color:#F1F1F1;
+}
+.good_div td{
+	font:14px 黑体;
+	color:#3C3C3C;
+}
+td[colspan="2"]{
+	text-align:left;
+}
+.good_div tr:nth-of-type(1)>td:nth-of-type(1){
+	border-right:1px solid white;
+	width:150px;
+}
+
+.good_div td:nth-of-type(2){
+	width:240px;
+	text-align:left;
+}
+.good_div td:nth-of-type(3),.good_div td:nth-of-type(4){
+	width:90px;
+}
+.good_div td:nth-of-type(5){
+	width:90px
+}
+.good_div td:nth-of-type(6){
+	width:70px
+}
+.good_div td:nth-of-type(7){
+	width:80px
+}
+.content_div{
+	border:1px solid white;
+}
+#content_table th:nth-of-type(1){
+	width:395px;
+}
+#content_table th:nth-of-type(2){
+	width:90px;
+}
+#content_table th:nth-of-type(3){
+	width:90px;
+}
+#content_table th:nth-of-type(4){
+	width:90px;
+}
+#content_table th:nth-of-type(5){
+	width:70px;
+}
+.updatebut{
+	border:1px solid #FF4401;
+	background-color:#FFFFFF;
+	color:black;
+	border-radius:3px;
+	width:40px;
+	height:25px;
+	font:14px;
+	
+}
+.updatebut:hover{
+	background:#FF4401;
+	color:#FFFFFF;
+}
+#model_div{
+	width:1357px;
+	height:2000px;;
+	background-color:#717171;
+	position:absolute;
+	top:-8px;
+	left:-8px;
+	opacity:0.5;
+	display:none;
+}
+#model_content_div{
+	width:400px;
+	height:300px;
+	border-radius:10px;
+	background-color:#FFFFFF;
+	position:fixed;
+	top:150px;
+	left:500px;
+	display:none;
+}
+#update_div table{
+	margin:auto;
+	width:300px;
+	border-collapse:separate;
+	border-spacing:0px 5px;
+}
+#update_div td:last-child{
+	
+	
+}
+#update_div table tr:last-child td{
+	text-align:center;
+}
+#update_div td:first-child{
+	text-align:right;
+	width:100px;
+	
+}
+#close{
+	position:relative;
+	left:260px;
+}
+#close:hover{
+	cursor:pointer;
+}
+#upbuttton{
+	border:2px solid #239CF5;
+	background-color:#FFFFFF;
+	color:black;
+	border-radius:3px;
+	width:80px;
+	height:25px;
+	font:14px;
+}
+#upbuttton:hover{
+	background:#5DB7F9;
+	color:#FFFFFF;
+	
+}
+#page{
+	width: 500px;
+}
+#page li{
+	width:40px;
+	height:40px;
+	background-color: silver;
+	border-left:1px solid gray;
+	float: left;
+	list-style-type: none;
+	line-height: 30px;
+	text-align: center;
+}
+
+
+
+
+
+
+
+
+

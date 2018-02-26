@@ -1,0 +1,45 @@
+package com.bikesystem.hp.servlet;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.bikesystem.entity.BikeSell;
+import com.bikesystem.hp.dao.BikeSellDaoImpl;
+import com.bikesystem.hp.dao.IBikeSellDao;
+
+@WebServlet("/user/hp/priceajax")
+public class PriceAjax extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	 private	IBikeSellDao sellDao;
+    public PriceAjax() {
+        super();
+        sellDao = new BikeSellDaoImpl();
+
+    }
+
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//价格修改
+		String  number = request.getParameter("numeber");
+		String bikeprice= request.getParameter("bikeprice");
+		int count = 1;
+		int totalprice = 0;
+		if(number!=null&&!number.equals("")){
+				 count = Integer.parseInt(number);	 
+		}
+		int price = Integer.parseInt(bikeprice);
+		totalprice =count*price;
+		request.setAttribute("totalprice", totalprice);
+		System.out.print("price:"+price);
+	}
+	
+		//地址，收货人的修改
+	
+	
+
+}

@@ -1,0 +1,237 @@
+package com.bikesystem.txz.ipml.dao;
+import java.sql.SQLException;
+
+import com.bikesystem.entity.User;
+import com.bikesystem.txz.interfaces.dao.IUserDao;
+public class UserDaoIpml extends BaseSystemDao implements IUserDao {
+	@Override
+	public User UserLogin(String username,String password) {
+		String keystr=null;
+		User user=null;
+		if(username.contains("."))
+			keystr="email";
+		else keystr="uphone";
+		String sql="select *from user where "+keystr+"=? && password=?";
+		getPreparedStatement(sql);
+		try {
+			prep.setString(1, username);
+			prep.setString(2, password);
+			res=prep.executeQuery();
+			if(res.next()){
+				user=new User(res.getInt("uid"),res.getString("uphone"),
+						password, res.getString("name"),res.getString("idnumber"),res.getString("sex"),
+						res.getString("address"), res.getString("email"),res.getDouble("balance"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{closeAll();}
+		return user;
+	}
+	@Override
+	public boolean userRegist(User user) {
+		String sql="insert into user(uphone,password,name,idnumber,sex,address,email,balance)"
+				+ "values(?,?,?,?,?,?,?,?)";
+		getPreparedStatement(sql);
+		try {
+			prep.setString(1, user.getUphone());
+			prep.setString(2, user.getPassword());
+			prep.setString(3, user.getName());
+			prep.setString(4, user.getIdnumber());
+			prep.setString(5, user.getSex());
+			prep.setString(6, user.getAddress());
+			prep.setString(7, user.getEmail());
+			prep.setDouble(8, user.getBalance());
+			int result=prep.executeUpdate();
+			if(result>0)
+				return true;
+			else return false;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{closeAll();}
+		return false;
+	}
+	@Override
+	public User queryUserInfo(String uphone) {//
+		String sql="select * from user where uphone=?";
+		User user=null;
+		getPreparedStatement(sql);
+		try {
+			prep.setString(1, uphone);
+			res=prep.executeQuery();
+			if(res.next()){
+				user=new User(res.getInt("uid"), res.getString("uphone"),
+						res.getString("password"), res.getString("name"), res.getString("idnumber"),
+						res.getString("sex"), res.getString("address"), 
+						res.getString("email"), res.getDouble("balance"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{closeAll();}
+		return user;
+	}
+	private boolean updateUserSellUserName(User user,String name){
+		String sql="update bike_sell_info set name=? where name=?";
+		getPreparedStatement(sql);
+		try {
+			prep.setString(1, user.getName());
+			prep.setString(2, name);
+			int result=prep.executeUpdate();
+			if(result>0)
+				return true;
+			return false;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{closeAll();}
+		return false;
+	}
+	@Override
+	public boolean updateUserInfo(User user,String name) {
+		String sql="update user set name=?,sex=?,address=? where uphone=?";
+		getPreparedStatement(sql);
+		try {
+			prep.setString(1, user.getName());
+			prep.setString(2, user.getSex());
+			prep.setString(3, user.getAddress());
+			prep.setString(4, user.getUphone());
+			int result=0;
+			result=prep.executeUpdate();
+			if(result>0){
+				return updateUserSellUserName(user, name);
+			}
+			return false;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{closeAll();}
+		return false;
+	}
+	@Override
+	public boolean deleteUserInfo(String uphone) {//ɾ��
+		String sql="delete from user where uphone=?";
+		getPreparedStatement(sql);
+		try {
+			prep.setString(1, uphone);
+			int result=prep.executeUpdate();
+			if(result>0)
+				return true;
+			return false;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{closeAll();}
+		return false;
+	}
+	@Override
+	public boolean queryUserByPhone(String uphone) {
+		String sql="select * from user where uphone=?";
+		getPreparedStatement(sql);
+		try {
+			prep.setString(1, uphone);
+			res=prep.executeQuery();
+			if(res.next())
+				return false;
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{closeAll();}
+		return false;
+	}
+	@Override
+	public boolean queryUserByEmail(String email) {
+		String sql="select * from user where email=?";
+		getPreparedStatement(sql);
+		try {
+			prep.setString(1, email);
+			res=prep.executeQuery();
+			if(res.next())
+				return false;
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{closeAll();}
+		return false;
+	}
+	@Override
+	public boolean updateUserInfoByEmail(String uphone, String email) {
+		String sql="update user set email=? where uphone=?";
+		getPreparedStatement(sql);
+		try {
+			prep.setString(1, email);
+			prep.setString(2, uphone);
+			if(prep.executeUpdate()>0)
+				return true;
+			return false;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{closeAll();}
+		return false;
+	}
+	@Override
+	public boolean updateUserInfoByPhone(String oldphone, String newphone) {
+		String sql="update user set uphone=? where uphone=?";
+		getPreparedStatement(sql);
+		try {
+			prep.setString(1, newphone);
+			prep.setString(2, oldphone);
+			if(prep.executeUpdate()>0)
+				return true;
+			return false;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{closeAll();}
+		return false;
+	}
+	@Override
+	public boolean updateUserInfoByPassword(String uphone, String oldpassword, String newpassword) {
+		String sql="update user set password=? where uphone=? && password=?";
+		getPreparedStatement(sql);
+		try {
+			prep.setString(1, newpassword);
+			prep.setString(2, uphone);
+			prep.setString(3, oldpassword);
+			if(prep.executeUpdate()>0)
+				return true;
+			return false;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	@Override
+	public boolean updateUserInfo(User user) {
+		String sql="update user set name=?,sex=?,address=?,balance=? where uphone=?";
+		getPreparedStatement(sql);
+		try {
+			prep.setString(1, user.getName());
+			prep.setString(2, user.getSex());
+			prep.setString(3, user.getAddress());
+			prep.setDouble(4, user.getBalance());
+			prep.setString(5, user.getUphone());
+			int result=0;
+				result=prep.executeUpdate();
+			if(result>0)
+				return true;
+			return false;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{closeAll();}
+		return false;
+	}
+}

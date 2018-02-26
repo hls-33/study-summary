@@ -1,0 +1,130 @@
+@CHARSET "UTF-8";
+
+/* 商品展示框start */
+.shop-bikes{
+	margin-top:30px;
+	margin-left:30px;
+}
+	/* 种类选择导航栏start */
+.kind-nav{
+	width:150px;
+	height:600px;
+	border:1px solid rgb(221, 221, 221);
+	float:left;
+}
+	/* 导航行元素工具类 */
+.kind-nav-row{
+	padding:10px 0px 5px 20px;
+	border-bottom:1px solid rgb(221, 221, 221);
+	box-sizing: content-box;
+}
+
+.kind-nav-title{
+	height: 36px;
+	line-height: 36px;
+	font-size:18px;
+	font-weight:bold;
+	color:#428bca;
+	font-style: italic;
+}
+.kind-nav-rent{
+	height: 52px;
+}
+.kind-nav-rent a:first-child{
+	font-weight: bolder;
+	display: block;
+	font-size:15px;
+}
+.kind-nav-rent a:NTH-OF-TYPE(2){
+	display: inline-block;
+	margin-top:5px;
+}
+.kind-nav-rent a:NTH-OF-TYPE(3){
+	display: inline-block;
+	margin-top:5px;
+}
+
+.kind-nav-sell{
+	height: 52px;
+}
+.kind-nav-sell a:first-child{
+	font-weight: bolder;
+	display: block;
+	font-size:15px;
+}
+.kind-nav-sell a:NTH-OF-TYPE(2){
+	display: inline-block;
+	margin-top:5px;
+}
+.kind-nav-sell a:NTH-OF-TYPE(3){
+	display: inline-block;
+	margin-top:5px;
+}
+
+.kind-nav-kindname{
+	height: 350px;
+	
+}
+	/* 每个kind列表项 */
+.kind-nav-item{
+	border-top:1px solid rgb(221, 221, 221);
+}
+
+.nav-kindname{
+	display: inline-block;
+}
+
+.kind-type-choose a{
+	display:block;
+	height:26px;
+}
+.nav-kindname-div:hover{
+	background-color:rgb(244,244,244);
+}
+
+.kind-type-choose>a{
+	padding-left:20px;
+}
+
+.kind-type-choose>a:hover{
+	background-color:rgb(244,244,244);
+}
+
+.kind-nav-icon-open{
+	display: inline-block;
+	width:9px;
+	height:10px;
+	background-image:url("/bikesystem/image/hs/toggleicon.png");
+	position: relative;
+}
+	/* icon转换为另一种状态的工具类 ,以方便js转换图片icon*/
+.kind-nav-icon-close{
+	display: inline-block;
+	width:9px;
+	height:9px;
+	background-image:url("/bikesystem/image/hs/toggleicon.png");
+	background-position:0px 20px;
+	position: relative;
+}
+.kind-nav-icon-item{
+	
+}
+
+
+.bikes-info{
+	width:940px;
+	heigth:auto;
+	float:left;
+	margin-left:30px;
+}
+
+
+
+
+
+
+
+
+
+
+

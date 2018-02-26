@@ -1,0 +1,31 @@
+package com.bikesystem.hs.servlet;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.ServletConfig;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ *
+ * @author bwfadmin  E-mail: 654835916@qq.com
+ * @version v1.0 创建时间：2017年5月5日  上午10:45:55
+ * tags
+ */
+@WebServlet("/user/hs/shoppingcart")
+public class ShoppingCartServlet extends HttpServlet {
+
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+	}
+
+	@Override
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+	}
+}

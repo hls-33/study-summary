@@ -1,0 +1,18 @@
+@CHARSET "UTF-8";
+
+/* payqrcode部分代码的css */
+.qrcode-main{
+	width:1070px;
+	height:600px;
+	margin-left:98px;
+	padding-left: 400px;
+}
+
+.checkpay{
+	display: inline-block;
+	width:160px;
+	height:160px;
+	position: relative;
+	left:-225px;
+}
+

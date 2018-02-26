@@ -1,0 +1,36 @@
+package com.bikesystem.txz.ajax.servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class UserCreateByAddressAjaxServlet
+ */
+@WebServlet("/user/uaddress")
+public class UserCreateByAddressAjaxServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public UserCreateByAddressAjaxServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String address=request.getParameter("address");
+		PrintWriter out=response.getWriter();
+		if(address==null||"".equals(address))
+			out.write("邮箱不能为空");
+		else if(address.contains("省")&&address.contains("市"))
+			out.write("");
+		else out.write("住址格式错误（省、市）");
+	}
+
+}

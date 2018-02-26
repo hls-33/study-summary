@@ -1,0 +1,6 @@
+package com.bikesystem.hgg.dao;
+
+public interface IBikeSellDao {
+
+	//
+}

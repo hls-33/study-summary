@@ -1,0 +1,66 @@
+package com.bikesystem.hgg.servlet;
+
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.bikesystem.entity.BikeDestroy;
+import com.bikesystem.entity.BikeRent;
+import com.bikesystem.hgg.dao.BikeDestroyDaoImpl;
+import com.bikesystem.hgg.dao.BikeRentDaoImpl;
+import com.bikesystem.hgg.service.BikeDestroyServiceImpl;
+import com.bikesystem.hgg.service.BikeRentServiceImpl;
+
+@WebServlet("/hgg/insertbikedestroy")
+public class InsertBikeDestroyServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+    
+	private BikeDestroyServiceImpl bikeDestroyServiceImpl;
+	private BikeRentServiceImpl bikeRentServiceImpl;
+	private BikeRent bikeRent;
+	
+    public InsertBikeDestroyServlet() {
+		super();
+		this.bikeDestroyServiceImpl=new BikeDestroyServiceImpl(new BikeDestroyDaoImpl());
+		this.bikeRentServiceImpl=new BikeRentServiceImpl(new BikeRentDaoImpl());
+	}
+
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		//获取页面中选中要报废自行车的id
+//		String id=request.getParameter("id").toString();
+//		int brid=Integer.parseInt(id);
+//		//获取该自行车的出租状态
+//		String isRented=request.getParameter("isRented").toString();
+//		
+//		System.out.println(brid+" "+isRented);
+//		
+//		//如果未出租
+//		if("未出租".equals(isRented)){
+//			//获取该自行车的相关信息
+//			bikeRent=bikeRentServiceImpl.queryBikeRentById(brid);
+//			
+//			System.out.println(bikeRent);
+//			
+//			//把该自行车从表bike_rent中删除掉
+//			bikeDestroyServiceImpl.deleteBikeById(brid);
+//			
+//			//格式化时间
+//			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//			//添加自行车报废信息
+//			BikeDestroy bikeDestroy=new BikeDestroy(bikeRent.getBikeNumber(),sdf.format(new Date()),
+//													bikeRent.getBikeName(),bikeRent.getKindName(), 
+//													bikeRent.getShopName(),bikeRent.getImgPath());
+//			System.out.println(bikeDestroy);
+//			bikeDestroyServiceImpl.insertBikeDestory(bikeDestroy);
+//			
+//		}
+		request.getRequestDispatcher("/WEB-INF/jsp/hgg/insertBikeDestroy.jsp").forward(request, response);;
+	}
+
+}

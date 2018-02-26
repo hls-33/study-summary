@@ -1,0 +1,44 @@
+package com.bikesystem.txz.ipml.service;
+
+import java.util.List;
+
+import com.bikesystem.entity.BikeSellInfo;
+import com.bikesystem.entity.UserRent;
+import com.bikesystem.hp.dao.IBikeSellInfoDao;
+import com.bikesystem.hs.dao.IUserRentDao;
+import com.bikesystem.txz.interfaces.service.IBikeSellRentService;
+
+public class BikeSellRentServiceIpml implements IBikeSellRentService {
+	private IBikeSellInfoDao bikeselldao;
+	private IUserRentDao userrentdao;
+	public BikeSellRentServiceIpml(IBikeSellInfoDao bikeselldao) {
+		super();
+		this.bikeselldao = bikeselldao;
+	}
+
+	public BikeSellRentServiceIpml(IBikeSellInfoDao bikeselldao, IUserRentDao userrentdao) {
+		super();
+		this.bikeselldao = bikeselldao;
+		this.userrentdao = userrentdao;
+	}
+
+	public BikeSellRentServiceIpml(IUserRentDao userrentdao) {
+		super();
+		this.userrentdao = userrentdao;
+	}
+
+	@Override
+	public List<BikeSellInfo> getUserBikeSellInfo(String name) {
+		if(name==null||"".equals(name))
+			return null;
+		return bikeselldao.queryUserBikeRent(name);
+	}
+
+	@Override
+	public List<UserRent> getUserRent(String name) {
+		if(name==null||"".equals(name))
+			return null;
+		return userrentdao.queryUserBikeRentByUsername(name);
+	}
+
+}

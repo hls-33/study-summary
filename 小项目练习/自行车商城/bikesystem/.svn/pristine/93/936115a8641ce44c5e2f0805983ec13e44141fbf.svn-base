@@ -1,0 +1,77 @@
+package com.bikesystem.hgg.dao;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import com.bikesystem.entity.BikeDestroy;
+
+public class BikeDestroyDaoImpl extends BaseDao implements IBikeDestroyDao {
+	
+	private static final String insertBikeDestroySql="insert into bike_destroy(bikenumber,destroydate,bikename,kindname,shopname,imgpath) values(?,?,?,?,?,?)";
+	private static final String queryAllBikeDestroySql="select * from bike_destroy where shopname=?";
+	private static final String deleteBikeSql="delete from bike_rent where bikenumber=?";
+	
+	private List<BikeDestroy> bdlist;
+	
+	//插入自行车报废信息
+	@Override
+	public boolean insertBikeDestory(BikeDestroy bikeDestroy) {
+		if(bikeDestroy==null){
+			return false;
+		}
+		try {
+			getDb(insertBikeDestroySql);
+			ps.setString(1, bikeDestroy.getBikeNumber());
+			ps.setString(2, bikeDestroy.getDestroydate());
+			ps.setString(3, bikeDestroy.getBikename());
+			ps.setString(4, bikeDestroy.getKindname());
+			ps.setString(5, bikeDestroy.getShopname());
+			ps.setString(6,bikeDestroy.getImgpath());
+			if(ps.executeUpdate()>0){
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	//根据商店名查询店内所有自行车报废信息
+	@Override
+	public List<BikeDestroy> queryBikeDestroy(String shopName) {
+		bdlist=new ArrayList<BikeDestroy>();
+		if(shopName==null){
+			return null;
+		}
+		try {
+			getDb(queryAllBikeDestroySql);
+			ps.setString(1, shopName);
+			rs=ps.executeQuery();
+			while(rs.next()){
+				bdlist.add(new BikeDestroy(rs.getInt("bdid"),rs.getString("bikenumber"),rs.getString("destroydate"),
+						rs.getString("bikename"),rs.getString("kindname"),rs.getString("shopname"),rs.getString("imgpath")));
+			}
+			return bdlist;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	
+	@Override
+	public boolean deleteBikeByBikeNumber(String bikeNumber){
+		try {
+			getDb(deleteBikeSql);
+			ps.setString(1, bikeNumber);
+			if(ps.executeUpdate()>0){
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+
+}

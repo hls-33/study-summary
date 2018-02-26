@@ -1,0 +1,56 @@
+2017-12-05
+学习SpirngBoot的基本使用：
+1.在IDEA下的基于Maven的搭建和最简单的使用：D:\我的JAVA之路\SprintBoot学习  http://www.cnblogs.com/larryzeal/p/5765945.html
+2.在Windows下的基于文本编辑器和Maven的配合使用：D:\我的JAVA之路\SpirngBoot原始学习   https://www.cnblogs.com/larryzeal/p/5799195.html
+	maven操作：
+	springboot项目的pom.xml如项目中所示，构件好之后，先在linux/windows下的cmd下进入当前项目根目录，先做mvn package指令。
+	待基本maven环境构建完毕之后，使用mvn dependency:tree 查看pom依赖树。
+	待全部pom下载依赖完成后，再进行 java代码编写
+	java代码：
+		SpringBoot注解：
+			@EnableAutoConfigration :当前类根据配置文件自动进行环境配置。 
+			@Controller:代表当前类是一个Web环境下的控制器。
+			@SpringBootApplication 等同于默认的属性的 @Configuration, @EnableAutoConfiguration and @ComponentScan
+			@Import 和 @ComponentScan 类似；
+			@EnableAutoConfiguration 和 @SpringBootApplication 类似；---注意，只能使用一次，建议用在primary @Configuration class上。
+			注意，自动配置永远是第二位的，一旦你配置自己的东西，那自动配置的就会被覆盖。
+			查看自动配置都配置了什么，以及为什么，启动应用的时候加上 --debug即可。
+			禁用特定的自动配置：@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
+			
+	mvn中加入spring-boot-maven-plugin插件后，再进行mvn package 打包之后，可以生成excutable jars，即可以在生产环境上直接执行的jar项目
+	jar项目路径在/target/myproject-0.0.1-SNAPSHOT.jar
+	查看当前jar包含什么内容：jar tvf target/myproject-0.0.1-SNAPSHOT.jar来查看当前jar中有何内容。
+	启动当前jar项目：不带远程调试的直接启动：java -jar target/myproject-0.0.1-SNAPSHOT.jar
+					 带远程调试的的启动方式：java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8000[:ip],suspend=n -jar target/myproject-0.0.1-SNAPSHOT.jar	
+					 1.5之后可以用的调试方式：java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000 -jar myproject-0.0.1-SNAPSHOT.jar
+					dt_socket：使用的通信方式
+					server：是主动连接调试器还是作为服务器等待调试器连接
+					suspend：是否在启动JVM时就暂停，并等待调试器连接
+					address：地址和端口，地址可以省略，两者用冒号分隔
+		远程调试工具有很多：比如JAVA自带的JDB  命令帮助可以jdb之后help
+	如果不打包，可以通过maven启动当前springBoot项目:mvn spring-boot:run
+	
+SpringBoot的开发期工具：Developer tools ，注意，生产环境下（java -jar或者通过特定的类加载器启动），这些开发工具自动被禁止。
+上面的 <optional>true</optional> 是一个最佳实践，可以有效阻止用于其他模块。如想确保生产Build中不包含devtools，可以使用excludeDevtools build property。
+注意：DevTools在重启过程中依赖应用上下文的shutdown hook来关掉它（应用）。所以如果禁用了shutdown hook，它就无法正常工作了：SpringApplication.setRegisterShutdownHook(false)。
+	自动重启：spring.devtools.restart:  additional-exclude:除了exclude之外的，再添加新的排除选项。
+					    exclude: 不自动重启的资源设置。
+				      	    additional-paths:修改的classpath之外的文件触发自动重启的路径配置。
+					    enabled：控制是否开启自动重启功能：System.setProperty("spring.devtools.restart.enabled","false");在SpirngApplication.run(..)之前设置环境属性。
+					    trigger-file：触发这个特定的文件才会引起自动重启。
+					    
+	自定义restart类加载器：META/INF/spring-devtools.properties文件中，加入配置：restart-exclude.xx  和  restart.include.xx 前者加入base类加载器，后者加入restart类加载器。
+	自动重启的限制：反序列化时会出问题。 
+	热加载：LiveReload：改变资源时，浏览器自动刷新。关闭属性：spring.devtools.livereload.enabled=false  , 注意:只能运行一个LiveReload程序。
+	全局配置：$HOME文件夹下（项目根目录？），添加一个文件：spring-boot-devtools.properties文件。文件中的所有内容都会被用于所用的Spring-Boot项目。
+	远程应用：开启支持的方式:spring.devtools.remote.secret=mysecret   --不要再生产环境下开启。 前提：项目部署到了Cloud Foundry（VMware推出的业界第一个开源PaaS云平台具体使用，百度）
+	远程调试：就是项目的debug信息发送到远程服务器：
+		实现：1.远程应用以远程调试的方式启动：通常，配置JAVA_OPTS即可达到目的。例如，在Cloud Foundry上，你可以在 manifest.yml 中添加如下信息：env:JAVA_OPTS: "-Xdebug -Xrunjdwp:server=y,transport=dt_socket,suspend=n"
+			  2.修改默认端口： spring.devtools.remote.debug.local-port 。
+			  3.注意：，通过网络进行远程调试，可能很慢，所以你需要增加超时时间。Eclipse中：Java -> Debug -> Debugger timeout (ms)，设成60000很不错。
+	生产打包：Executable jars如之前的spring-boot-maven-plugin插件即支持 其他的生产就绪功能，例如监控等，可以考虑 spring-boot-actuator 。后面会有介绍。
+	
+	
+	
+	
+	

@@ -1,0 +1,48 @@
+@CHARSET "UTF-8";
+
+
+.tolocalshop-main{
+	width:1070px;
+	height:600px;
+	margin-left:98px;
+	padding-left: 200px;
+}
+
+.shop-robot{
+	display: inline-block;
+	
+}
+
+.local-info{
+	width:460px;
+	height:165px;
+	position: relative;
+	top:-175px;
+	left:219px;
+	font-size:20px;
+	font-family: "方正舒体";
+}
+.local-info>div{
+	height:25px;
+	overflow: hidden;
+}
+#gotoshop-button{
+	height:35px;
+	width:180px;
+	margin:0 auto;
+}
+.gotoshop-button>a{
+	display: block;
+	width: 180px;
+    height: 35px;
+    vertical-align: middle;
+    line-height: 35px;
+	cursor: pointer;
+    text-align: center;
+    font-weight: 700;
+    background: #ff0000;
+    color: #fff;
+}
+
+
+

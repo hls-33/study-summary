@@ -1,0 +1,54 @@
+/*自行车分类简介处鼠标移入对应的简介出现，移开后隐藏*/
+$(".bikeinfo").hide();
+$("#bike-info li").mouseover(function(){
+	$(".bikeinfo").hide();
+	$(this).children().show();	
+});
+$("#bike-info li").mouseleave(function(){
+	$(".bikeinfo").hide();
+});
+
+/*点击进入登陆与注册页面*/
+$("#login").click(function(){
+	location.href="/bikesystem/jsp/userlogins.jsp";
+});
+$("#create").click(function(){
+	location.href="/bikesystem/jsp/usercreate.jsp";
+});
+$("#exit").click(function(){
+	location.href="/bikesystem/user/userexit";
+});
+
+/*点击top-menu-list2中的li进入相关页面显示*/
+$("#top-menu-list2 li:nth-of-type(1)").click(function(){
+	location.href="/bikesystem/index.jsp";
+});
+$("#top-menu-list2 li:nth-of-type(2)").click(function(){
+	location.href="/bikesystem/user/userpersonal";
+});
+$("#top-menu-list2 li:nth-of-type(3)").click(function(){
+	location.href="/bikesystem/index.jsp";
+});
+$("#top-menu-list2 li:nth-of-type(4)").click(function(){
+	location.href="/bikesystem/index.jsp";
+});
+
+/*自行车种类及简介显示*/
+$.ajax({
+	url:"/bikesystem/allbikekind",
+	type:"post",
+	dataType:"json",
+	success:function(message){
+		$("#bike-info").html("");
+		for(var i=0;i<message.length;i++){
+			var str="<li>" +message[i].kindName+
+					"<div class='bikeinfo'>";
+			str+=message[i].bkInformation;
+			
+			str+="</div></li>";
+			$("#bike-info").append($(str));
+		}
+	}
+});
+
+

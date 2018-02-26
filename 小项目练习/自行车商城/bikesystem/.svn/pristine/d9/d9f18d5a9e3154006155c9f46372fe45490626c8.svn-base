@@ -1,0 +1,149 @@
+package com.bikesystem.hs.dao;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.junit.Test;
+
+import com.bikesystem.entity.BikeRent;
+import com.bikesystem.utils.JdbcUtils;
+
+/**
+ * 车辆出租Dao层实现类
+ * @author 祷
+ *
+ */
+public class BikeRentDaoImpl implements IBikeRentDao{
+	private QueryRunner qr = new QueryRunner(JdbcUtils.getDataSource());
+	
+	@Override
+	public boolean insertBikeRent(BikeRent bikeRent) {
+		String sql="insert into bike_rent(bikenumber,bikename,color,kindname," +
+				"shopname,hourprice,dayprice,isrented,imgpath,bikedeposit)" +
+				"values(?,?,?,?,?,?,?,?,?,?) ";
+		try{
+			int result = qr.update(sql,bikeRent.getBikeNumber(),bikeRent.getBikeName(),
+					bikeRent.getColor(),bikeRent.getKindName(),bikeRent.getShopName(),
+					bikeRent.getHourPrice(),bikeRent.getDayPrice(),bikeRent.getIsRented(),
+					bikeRent.getImgPath(),bikeRent.getBikedeposit());
+			if(result>0){return true;}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public boolean deleteBikeRentById(int brid) {
+		String sql="delete from bike_rent where brid=? ";
+		try{
+			int result = qr.update(sql,brid);
+			if(result>0){return true;}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public boolean updateBikeRent(BikeRent bikeRent) {
+		String sql="update bike_rent set bikename=?,color=?,kindname=?," +
+				"shopname=?,hourprice=?,dayprice=?,isrented=?,imgpath=?,bikedeposit=? " +
+				"where brid=? ";
+		try{
+			int result = qr.update(sql,bikeRent.getBikeName(),
+					bikeRent.getColor(),bikeRent.getKindName(),bikeRent.getShopName(),
+					bikeRent.getHourPrice(),bikeRent.getDayPrice(),bikeRent.getIsRented(),
+					bikeRent.getImgPath(),bikeRent.getBikedeposit(),bikeRent.getBrid());
+			if(result>0){return true;}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public List<BikeRent> queryAllBikeRentByShopName(String shopName) {
+		String sql="select * from bike_rent where shopname=? ";
+		try{
+			return qr.query(sql, new BeanListHandler<BikeRent>(BikeRent.class),shopName);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<BikeRent> queryAllBikeRentByBikeName(String bikeName) {
+		String sql="select * from bike_rent where bikename like '%?%' ";
+		try{
+			return qr.query(sql, new BeanListHandler<BikeRent>(BikeRent.class),bikeName);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public List<BikeRent> queryAllBikeRent(String bikeName, String shopName) {
+		String sql="select * from bike_rent where bikename like '%?%' and shopname=?";
+		try{
+			return qr.query(sql, new BeanListHandler<BikeRent>(BikeRent.class),bikeName,shopName);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Test
+	public void test(){
+//		BikeRent bikeRent = new BikeRent("bkshop1rent00001","山地捷安特","蓝色","山地自行车","shop1",12.0,100.0,"未出租","imgpath1",1000);
+//		BikeRent bikeRent2 = new BikeRent("bkshop2rent00002","山地捷安特","蓝色","山地自行车","shop2",12.0,100.0,"未出租","imgpath2",1000);
+//		BikeRent bikeRent3 = new BikeRent("bkshop1rent00003","公路捷安特","蓝色","公路车","shop1",12.0,100.0,"未出租","imgpath3",1000);
+//
+//		System.out.println(insertBikeRent(bikeRent));
+//		System.out.println(insertBikeRent(bikeRent2));
+//		System.out.println(insertBikeRent(bikeRent3));
+//		BikeRent bikeRent0 = new BikeRent(1,"bkshop1rent00001","山地捷安特","红色","山地车自行车","shop1",12.0,100.0,"未出租","imgpath1",1000);
+//		System.out.println(queryAllBikeRentByShopName("shop1"));
+//		System.out.println(queryAllBikeRentByBikeName("山地捷安特"));
+	}
+
+	/**
+	 * 根据传入的参数个数来自定义查询因子
+	 */
+	@Override
+	public List<BikeRent> queryAllBikeRentByParameter(Map<String,Object> map) {
+		String sql="select * from bike_rent where 1=1 ";
+		//查看是否存在bikename参数，有则要用模糊查询
+		Set<Entry<String, Object>> entrs = map.entrySet();
+		for(Entry<String, Object> entry : entrs){
+			String parameter = entry.getKey();
+			Object value=entry.getValue();
+			
+			if("bikename".equals(parameter)){
+				sql+=" and "+parameter+" like '%"+value+"%' ";
+			}else if("dayprice".equals(parameter)){
+				//如果是传入的日租金范围值，则需要解析
+				String[] prices = value.toString().split("~");
+				sql+=" and "+parameter+" between "+prices[0]+" and "+prices[1];
+			}else {
+				sql+=" and "+parameter+" = '"+value+"'";
+			}
+		}
+		System.out.println("sql:"+sql);
+		try{
+			return qr.query(sql, new BeanListHandler<BikeRent>(BikeRent.class));
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	
+
+}

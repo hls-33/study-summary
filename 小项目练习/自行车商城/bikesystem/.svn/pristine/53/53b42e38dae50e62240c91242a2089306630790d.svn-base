@@ -1,0 +1,134 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>My JSP 'queryallbike.jsp' starting page</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+	<link href="/bikesystem/css/hgg/basestyle.css" rel="stylesheet" type="text/css">
+	<link href="/bikesystem/css/hgg/queryallbikestyle.css" rel="stylesheet" type="text/css">
+	
+  </head>
+  
+  <body>
+  	<div class="top_div">
+	  	<div class="topcontent_div"></div>
+	  </div>
+	  <div class="background_div">
+	  		<div class="tittle_div">
+	  			<img src="/bikesystem/image/hgg/manager.png">
+	  		</div>
+	  		<div class="top_navigation_div">
+	  			<ul>
+	  				<li>首页</li>
+	  				<li>首页</li>
+	  				<li>首页</li>
+	  				<li>首页</li>
+	  			</ul>
+	  		</div>
+	  		<div class="navigation_div">
+	  			<div style="background-color:#F5F5F5;height:40px;border-bottom:1px solid #E0E0E0;line-height:40px;">
+	  				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我的应用
+	  			</div>
+	  			<div class="function_menu_div">
+	  				<ul>
+		  				<li>
+		  					<div class="function_div">
+		  						<span class="one_font">&nbsp;&nbsp;&nbsp;租赁管理</span>
+		  					</div>
+		  					<div>
+		  						<table>
+		  							<tr>
+		  								<td class="two_font">
+		  									<a style="color:#FF4700">查看自行车</a>
+		  								</td>
+		  								<td class="two_font">
+		  									<a href="/bikesystem/hgg/queryuserrent">用户租借信息</a>
+		  								</td>
+		  							</tr>
+		  							<tr>
+		  								<td class="two_font">
+		  									<a href="/bikesystem/hgg/queryadminuserrent">店铺租借信息</a>
+		  								</td>
+		  								<td></td>
+		  							</tr>
+		  						</table>
+		  					</div>
+		  					
+		  				</li>
+		  				<li>
+		  					<div class="function_div">
+		  						<span class="one_font">&nbsp;&nbsp;&nbsp;申购管理</span>
+		  					</div>
+		  					<ul>
+		  						<li class="two_font">
+		  							<a href="/bikesystem/hgg/insertbike">宝贝入库</a>
+		  						</li>
+		  					</ul>
+		  					
+		  				</li>
+		  				<li>
+		  					<div class="function_div">
+		  						<span class="one_font">&nbsp;&nbsp;&nbsp;报废管理</span>
+		  					</div>
+		  					<ul>
+		  						<li class="two_font">
+		  							<a href="/bikesystem/hgg/insertbikedestroy">宝贝报废</a>
+		  						</li>
+		  					</ul>
+		  				</li>
+	  				</ul>
+	  			</div>
+	  		</div>
+	  		<div class="content_div">
+	  			<table id="content_table">
+	  				<tr>
+	  					<th>ID</th>
+	  					<th>车牌号</th>
+	  					<th>车名</th>
+	  					<th>车身颜色</th>
+	  					<th>车型</th>
+	  					<th>店铺名</th>
+	  					<th>时租金</th>
+	  					<th>日租金</th>
+	  					<th>是否租出</th>
+	  					<th>图片路径</th>
+	  					<th>押金</th>
+	  				</tr>
+	  			<c:forEach items="${requestScope.allbikerent}" var="bike">
+	  				<tr>
+			  			<td>${bike.brid }</td>
+			  			<td>${bike.bikeNumber }</td>
+			  			<td>${bike.bikeName}</td>
+			  			<td>${bike.color}</td>
+			  			<td>${bike.kindName}</td>
+			  			<td>${bike.shopName}</td>
+			  			<td>${bike.hourPrice}</td>
+			  			<td>${bike.dayPrice}</td>
+			  			<td>${bike.isRented }</td>
+			  			<td>${bike.imgPath}</td>
+			  			<td>${bike.bikeDeposit}</td>
+			  		</tr>
+	  			</c:forEach>
+	 			</table>
+	   		</div>
+	  </div>
+  </body>
+</html>
+

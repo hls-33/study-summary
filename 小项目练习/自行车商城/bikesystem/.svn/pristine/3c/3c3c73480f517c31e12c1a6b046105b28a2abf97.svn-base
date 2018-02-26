@@ -1,0 +1,106 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>My JSP 'buyNow.jsp' starting page</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+		<script language="javascript" type="text/javascript" src="/bikesystem/js/hp/jquery-3.2.0.js"></script>
+		<link href="/bikesystem/css/hp/buynow.css" rel="stylesheet"/>
+  </head>
+  <body>
+  			 <jsp:include page="navigation.jsp"></jsp:include>
+  			
+  			 <div class="top-address">
+  			 				<div><h2>选择收货地址</h2></div>
+  			 				<div class="order-address "></div>
+  			 				<div>  
+  			 		
+  			 						<input class="addAddr" type="button" value="使用新地址"  >
+  			 	
+  			 				</div>
+  			 				
+  			 </div>
+  			 <div class="main-bottom">
+  			 		<div><h2>确认订单信息</h2></div>
+  			 		
+  			 		<div>
+  			 				<table>
+  			 						<thead>
+  			 								<tr>
+		  			 								<th>店铺宝贝</th>
+		  			 								<th>商品属性</th>
+		  			 								<th>单价</th>
+		  			 								<th>数量</th>
+  			 								</tr>
+  			 						</thead>
+  			 						<tbody>
+  			 								<tr>
+  			 										<th colspan="4"  class="main-bm-tr-th">店铺：${requestScope.shopname }</th>	
+  			 								</tr>
+  			 								<tr class="main-bm-tt">
+		  			 								<th><img alt="" src="${requestScope.imgpath }" style="width:50px;height:40px;"> ${requestScope.bikename}</th>
+		  			 								<th>颜色:${requestScope.color} 车型:${requestScope.kindname} </th>
+		  			 								<th>${requestScope.bikeprice}</th>		
+		  			 								<th> <jsp:include page="sellnumber.jsp"></jsp:include></th>
+  			 							</tr>	
+  			 						</tbody>
+  			 				</table>
+  			 		
+  			 		</div>
+  			 		<br>
+  			 		<div class="bottom-table">
+  			 				<div class="bottom-sp">
+  			 						<ul>
+  			 								<li >￥${requestScope.allbikeprice}112.00</li><li>实付款：</li>
+									</ul>
+									<br>
+									<ol>
+			  			 					<li>寄送至：</li>
+			  			 					<br>
+											<li>收货人：黄平18880402012</li>
+  			 						</ol>
+  			 				</div>
+
+  			 		</div>
+  			 		<br>
+  			 		 <form action="">
+  			 		<div class="bottom-bt">
+  			 				<div id="bottom-bt"><input type="button" value="提交订单"></div>
+  			 		</div>
+  			 			</form>	 
+  			 </div>
+  	
+	
+		<script type="text/javascript">
+						$(function(){
+								$("input[type='button']").click(function(){
+											
+											window.location.href="/bikesystem/address.jsp";	
+								
+								})
+
+						
+						})
+						
+						
+									
+											
+						
+						
+		</script>	  										
+			  										
+			  										
+  </body>
+</html>

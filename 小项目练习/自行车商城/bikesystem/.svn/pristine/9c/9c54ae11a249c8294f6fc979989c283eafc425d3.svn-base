@@ -1,0 +1,11 @@
+package com.bikesystem.txz.interfaces.service;
+
+import java.util.List;
+
+import com.bikesystem.entity.BikeSellInfo;
+import com.bikesystem.entity.UserRent;
+
+public interface IBikeSellRentService {
+	List<BikeSellInfo> getUserBikeSellInfo(String name);//获取用户个人购买自行车的所有信息
+	List<UserRent> getUserRent(String name);//获取用户个人租借自行车的所有信息
+}

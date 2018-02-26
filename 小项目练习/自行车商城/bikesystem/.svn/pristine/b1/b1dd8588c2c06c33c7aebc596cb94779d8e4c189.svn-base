@@ -1,0 +1,6 @@
+$(document).ready(function(){
+	  $("#cities").hide();
+	  $("#toggle").click(function(){
+	  $("#cities").toggle();
+	  });
+});

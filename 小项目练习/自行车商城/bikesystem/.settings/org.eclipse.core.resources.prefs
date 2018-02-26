@@ -1,0 +1,12 @@
+eclipse.preferences.version=1
+encoding//WebRoot/WEB-INF/jsp/hgg/test.jsp=UTF-8
+encoding//WebRoot/WEB-INF/jsp/hp/buyNow.jsp=UTF-8
+encoding//WebRoot/WEB-INF/jsp/hp/imagecolor.jsp=UTF-8
+encoding//WebRoot/WEB-INF/jsp/hp/sellnumber.jsp=UTF-8
+encoding//WebRoot/WEB-INF/jsp/hs/confirmorder.jsp=UTF-8
+encoding//WebRoot/WEB-INF/jsp/hs/payerror.jsp=UTF-8
+encoding//WebRoot/WEB-INF/jsp/hs/payqrcode.jsp=UTF-8
+encoding//WebRoot/WEB-INF/jsp/hs/tolocalshop.jsp=UTF-8
+encoding//src/com/bikesystem/txz/ajax/servlet/UserCreateUidnumberAjaxServlet.java=UTF-8
+encoding//src/com/bikesystem/txz/interfaces/dao/IUserDao.java=UTF-8
+encoding/<project>=UTF-8

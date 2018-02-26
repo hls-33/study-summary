@@ -1,0 +1,101 @@
+package com.bikesystem.hs.service;
+
+import java.util.List;
+import java.util.Map;
+
+import com.bikesystem.entity.BikeRent;
+import com.bikesystem.entity.BikeSell;
+import com.bikesystem.entity.Shop;
+import com.bikesystem.entity.ShopImage;
+import com.bikesystem.hs.dao.BikeRentDaoImpl;
+import com.bikesystem.hs.dao.BikeSellDaoImpl;
+import com.bikesystem.hs.dao.IBikeRentDao;
+import com.bikesystem.hs.dao.IBikeSellDao;
+import com.bikesystem.hs.dao.IShopDao;
+import com.bikesystem.hs.dao.IShopImageDao;
+import com.bikesystem.hs.dao.ShopDaoImpl;
+import com.bikesystem.hs.dao.ShopImageDaoImpl;
+/**
+ * shop服务层：
+ * 包含三个功能：
+ * 	1：获取商店信息
+ * 	2：获取商店商品信息:包括租用和出售的。
+ * 	3：获取商店主页图片路径信息
+ * @author bwfadmin
+ *
+ */
+public class ShopServiceImpl implements IShopService {
+	private IShopDao shopDao;
+	private IShopImageDao shopImageDao;
+	private IBikeRentDao bikeRentDao;
+	private IBikeSellDao bikeSellDao;
+	
+	
+	public ShopServiceImpl(IBikeRentDao bikeRentDao) {
+		super();
+		this.bikeRentDao = bikeRentDao;
+	}
+
+	public ShopServiceImpl(IBikeSellDao bikeSellDao) {
+		super();
+		this.bikeSellDao = bikeSellDao;
+	}
+
+	public ShopServiceImpl(IShopDao shopDao, IBikeRentDao bikeRentDao,
+			IBikeSellDao bikeSellDao) {
+		super();
+		this.shopDao = shopDao;
+		this.bikeRentDao = bikeRentDao;
+		this.bikeSellDao = bikeSellDao;
+	}
+
+	public ShopServiceImpl(IShopImageDao shopImageDao) {
+		super();
+		this.shopImageDao = shopImageDao;
+	}
+
+	@Override
+	public boolean insertShop(Shop shop) {
+		return shopDao.insertShop(shop);
+	}
+
+	@Override
+	public Shop queryShopById(int sid) {
+		return shopDao.queryShopById(sid);
+	}
+
+	@Override
+	public boolean updateShop(Shop shop) {
+		return shopDao.updateShop(shop);
+	}
+
+
+	@Override
+	public List<BikeRent> queryAllBikeRentByParameter(Map<String, Object> map) {
+		return bikeRentDao.queryAllBikeRentByParameter(map);
+	}
+
+	@Override
+	public List<BikeSell> queryAllBikeSellByParameter(Map<String, Object> map) {
+		return bikeSellDao.queryAllBikeSellByParameter(map);
+	}
+	
+	@Override
+	public List<BikeRent> queryHotBikeRentByShopName(String shopName) {
+		return bikeRentDao.queryHotBikeRentByShopName(shopName);
+	}
+	@Override
+	public List<BikeSell> queryAllBikeSell() {
+		return bikeSellDao.queryAllBikeSell();
+	}
+
+	@Override
+	public List<ShopImage> queryAllShopImage() {
+		return shopImageDao.queryAllShopImage();
+	}
+
+	@Override
+	public List<BikeRent> queryAllBikeRent() {
+		return bikeRentDao.queryAllBikeRent();
+	}
+}

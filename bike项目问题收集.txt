@@ -1,0 +1,65 @@
+------前端问题收集------
+（1）：$(".tab").css("height",31);这种设置属性的形式是行内style设置，优先级最高，会覆盖掉hover 的css属性设置。
+		解决方式：用jQuery.hover(inFunction,outFunction)来替代hover的css选择器，通过addClass()和removeClass()来设置hover的效果，同时还可以在点击
+		中removeClass来实现离开悬停的hover效果。
+		
+		
+		
+		
+		
+		
+		
+------后端问题收集------
+（1）对于动态参数（即参数个数不定的情况下）需要根据参数对数据库做查询，可以用map来保存参数个数，再根据参数名字判断，进行动态的sql语句拼接。
+
+（2）org.apache.jasper.JasperException: /WEB-INF/jsp/hs/shopInfo.jsp (line: 46, column: 59) quote symbol expected异常是由于jsp文件中在46行59列中
+	缺少了引号而导致的jsp文件无法正常编译。
+	
+（3）java.sql.SQLException: Can't create table 'jeesite.#sql-869e_36f' (errno: 121)：出现这个错误的原因是因为在设置外键时，该外键的名字已经在之前的
+	该关联外键设置时使用过了，换一个外键名字即可。。
+	
+（4）针对谷歌浏览器对前端的js、css文件的缓存，可以在开发者工具中（F12打开），选择右上角的设置中，勾选disabled cache即可。。
+
+（5）有关金钱的计算，在数据库中应该用decimal的类型，在java中应该用BigDecimal类来确保金钱的精度。。。
+
+（6）ajax返回json字符串，在java中必须是"{"key1":value1,"key2",value2}"的字符串格式，双引号不能使单引号，否则无法返回正确结果。在java字符串中的”应该
+	使用转义来完成\"
+	
+（7）模拟支付宝扫描二维码支付的功能遇见了诸多问题：
+	<1>:首先，我们时线下项目，所有通过二维码访问的网址，需要根据ip地址的变化而动态生成一个
+	<2>：其次，在用户通过浏览器扫描二维码的时候，必须确保用户在手机端浏览器也要登录，否则单纯的通过session是获取不到的，因为每个客户端（浏览器）
+		对应的是不同的session，通过手机浏览器扫描二维码访问的servlet 中在session存的信息，保存在的是手机客户端对应的的session，而不是电脑做异步
+		轮询端的session，所以获取不到。。
+		
+（8）在登录过滤器中，获取过滤请求访问的完整地址带参数：
+		String url = request.getRequestUrl();	//完整路径不包含参数
+		String uri = request.getRequestUri();	//简写路径
+		String params = request.getQueryString();	//所有的请求参数，不包含"？"
+		
+		
+（9）java后端生成二维码用qrcode.jar包
+	封装好的工具类QrcodeUtils.java和QrcodeImage.java
+	/** 
+     * 生成二维码(QRCode)图片 
+     * @param content 存储内容 
+     * @param imgPath 图片路径 
+     * @param imgType 图片类型 
+     * @param size 二维码尺寸 
+     * @param logopath:logo路径
+     */
+	public void encoderQRCode(String content, String imgPath, String imgType, int size,String logopath)
+	
+（10）获取本机IP地址：
+		InetAddress address = InetAddress.getLocalHost();
+		String ip =address.getHostAddress();
+		
+		request.getRemoteAddr():获取访问客户端的ip地址
+		
+（11）servlet中获取文件的绝对路径方法：
+		request.getSession().getServletContext().getRealPath("...");
+		
+（12）日期控件的选择：
+		（1）最简单：<input type="date"/"datetime-local"/"time"等 >
+		（2）bootstrap-datapicker日历控件
+		（3）My97DatePicker日历控件
+		（4）EasyUI Datebox 日期框

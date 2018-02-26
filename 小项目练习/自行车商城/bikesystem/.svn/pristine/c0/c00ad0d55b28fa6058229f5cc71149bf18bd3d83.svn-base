@@ -1,0 +1,137 @@
+@CHARSET "UTF-8";
+*{
+	margin: 0;
+	padding: 0;
+	font-family:"楷体";
+	background-color: rgb(254,242,204);
+}
+#top-div{
+	width:90%;
+	margin: auto;
+	margin-top:10px; 
+	position: relative;
+}
+#top-menu-list,#top-menu-list2{
+	display: block;
+	float:right;
+}
+li{
+	width:200px;
+	display: inline-block;
+	height:40px;
+	text-align:center;
+	font-size:18px;
+	list-style-type: none;
+	line-height: 40px;
+}
+#top-menu-list li{
+	color:red;
+}
+#top-menu-list li:hover{
+	color:blue;
+	cursor: pointer;
+}
+#top-menu-list2{
+	position:absolute;
+	bottom:0px;
+	right:60px;
+	color:rgb(0,176,240);
+}
+li:hover{
+	color:blue;
+	cursor: pointer;
+}
+
+
+#show-div{
+	width:90%;
+	margin: auto;
+	height:508px;
+	margin-top:20px;
+}
+#list-div,#show-item-div{
+	float:left;
+	height:100%;
+	border:1px solid gray;
+}
+#list-div{
+	width:30%;
+}
+#list-div span{
+	display: inline-block;
+	width:100%;
+	height:50px;
+	line-height: 50px;
+	text-align: center;
+	font-size:24px;
+	color:rgb(0,176,240);
+	background-color:rgb(219,218,241);
+}
+#show-item-div{
+	width:65%;
+	margin-left: 2%;
+	position: relative;
+	z-index: 1;
+}
+#bike-info{
+	display:block;
+	list-style-type: none;
+	width:100%;
+}
+#bike-info li{
+	display: block;
+	height:50px;
+	width:100%;
+	line-height: 50px;
+	border-bottom: 1px solid gray;
+}
+.bikeinfo{
+	width:150%;
+	height:50px;
+	background-color: rgb(233,248,255);
+	position: relative;
+	left:100%;
+	z-index: 10;
+}
+
+#bottom-div{
+	width:100%;
+	height:100px;
+	text-align: center;
+	position:absolute;
+	top:670px;
+	z-index:2;
+	background-color: rgb(197,219,194);
+}
+#bottom-div ul{
+	list-style: none;
+	width:100%;
+	text-align: center;
+	background-color: rgb(197,219,194);
+}
+#bottom-div ul li{
+	display: inline-block;
+	margin-top:5px;
+	width:110px;
+	text-align: center;
+	line-height: 40px;
+}
+#bottom-div ul li a{
+	text-decoration: none;
+	color:gray;
+	font-family: "宋体";
+}
+#bottom-div ul li:hover{
+	background-color: rgb(209,209,175);
+}
+#bottom-div ul li:hover a{
+	color:black;
+	background-color: rgb(209,209,175);
+}
+#bottom-div p{
+	color:gray;
+	font-family: "宋体";
+	background-color: rgb(197,219,194);
+	font-size:14px;
+	line-height: 20px;
+}

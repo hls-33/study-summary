@@ -1,0 +1,219 @@
+1、类似于斗鱼的登录，是一个超链接，但是并没有做页面的跳转，而是直接在页面上显示一个框！！进行登录和注册。。
+
+2、在jsp的java代码中获取的数据库查询到的商品信息，如何在js中进行获取商品的属性（除了将其商品成员设置为某个标签的属性！！太麻烦了）
+	js只能操作标签，所以只能获取标签中的值，而jsp中的java代码的变量js是获取不到的。。。
+
+3、怎么将一个字符串的‘true’或者‘false’值在if判断中转化成布尔值判断！！！（在判断是否登录状态时遇到）
+
+4、退出登录方法quit中的jsp代码是在点击执行qiut方法后执行还是一加载就是执行（猜测是页面一加载就会执行。。。因为刷新之后登录状态消失！！！）
+
+5、src路径引入的路径前缀是http://localhost:8080/，并不是依据相对路径来引入，所以引入第三方js库时，需要注意。。。（和location.href一样）；不过超链接的href就不一样了。。那是依据相对路径来说的。。。。（jsp中href或其他路径都最好依据basePath来定位或绝对url定位。）
+
+6、cookie的value中不能包含“，”否则An invalid character [44] was present in the Cookie value错误
+
+7、jsp文件写在WEB-INF下，以免浏览器直接通过地址栏访问，访问通过servlet转发/重定向过去("/WEB-INF/....");
+
+
+
+
+
+
+
+
+myDemo:
+
+1、jsp中的css、js等文件引入路径要通过
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+<script type="text/javascript" src="<%=path %>/js/jquery-1.9.0.min.js"></script>
+<script type="text/javascript" src="<%=path %>/js/login.js"></script>
+<link href="<%=path %>/css/login2.css" rel="stylesheet" type="text/css" />
+这种形式，而不能通过../xxxxx这种相对引用，这种做法只在html文件引入js/css时才管用，jsp中这样的话，在转发、重定向时就会无法加载资源！！
+
+2、reqeust.setAttribute("","")只能通过getAttribute("")来获取，而不是getParameter（）；
+
+3、js中的字符串替换问题replace(正则表达式，替换想)--正则表达式不加""双引号，直接写/.../g（g代表全局搜索）
+
+4、jQuery的ajax有个serelize()方法，可以用$("表单").serelize()即可得到key1=value1&key2=value2&key3=value3.....形式字符串（key和value为表单的值项）如果ajax是get请求，可以直接跟在url路径作为参数传递。。。
+
+5、表单form标签中，有一个onsubmit="jsFunction()"，可以通过控制jsFunction()的返回true或false来控制表单是否允许提交。。
+
+6、注意，在ajax中，一般发起请求的servlet中，不要做转发或者重定向，因为请求一般一个请求对应一个响应，不能跑到其他地方去不给ajax响应了。。要做响应，应该将信息返回后，在sucess中做结果判断后再做跳转(location.href)
+
+7、做分页时由脚本添加的标签无法继承使用on添加的监听事件！！！（myDemo--ajaxtable.jsp）
+	解决----深刻理解on("事件","子元素","function"),注意，是通过非脚本生成的父元素对子元素进行事件注册，这样才会有效果。。
+
+8、注意在js中获取的字符串数字做加法时，必须要先用parstInt(number)转为数值类型后再做加法，否则会做字符串拼接，而减法则没有必要
+
+9、在js中使用el表达式，只能在js已加载就是用，且用全局变量保存从el中获取的值，并且el表达式要用""双引号括起。
+
+10、EL表达式中获取request的header是的某些带横线"-"的header，需要使用中括号形式，如cookie['header头名']；使用cookie.header头名的形式会报错！
+
+11、不能在click事件函数中对节点进行click的事件注册，这样会对一个节点进行重复的click事件函数的注册，会导致该节点被点击后调用多个重复注册的click函数，事件的注册一定要放在全局中。。保证在页面加载时注册一次。《2017-04-20》
+
+12、在做数据库的记录数量count查询时，最好用count(主键)来，主键包含索引，查询效率比count(*)更高。
+
+
+
+
+
+
+
+
+
+
+
+
+
+requestCount:
+1、浏览器访问状态下---》重启服务器---》再次访问----》for(int i=0;i<userPathCountList.size();i++){这行发生空指针异常
+   --->>原因：因为服务器在重启时，会将session钝化到本地，重启之后，如果session中保存的属性对象没有实现序列化接口，（虽然在内存中是同一个      session对象，只是分配了不同的内存地址空间）那么活化之后的session就会丢失掉保存在其中的userPathCountList和user对象，就会获取不到值，发生      空指针异常 
+
+2、将对list从DB交互初始化或者创新空list的设定放在登录的时候进行，即放在登录的Servlet中，同理，退出登录保存list到DB，也在退出登录的Servlet中执行。
+
+3、通过request.getHeader(String header)，在request header中的refer请求头可以返回从跳转到当前页面前的前一个一面的地址
+
+4、默认情况下，过滤器只会过滤请求，而不过过滤servlet中的转发，如果要过滤转发（默认是会过滤ajax请求的。），则需要配置过滤器：
+	方式一：在@WebFilter（urlPatterns={"",""...},dispatcherTypes={DispatcherType.REQUEST,DispatcherType.FORWARD}）;
+	方式二：在web.xml中配置：在对应的<filter-mapping>下配置<dispatcher>REQUEST</dispatcher><dispatcher>FORWARD</dispatcher>；
+
+							<web.xml中常用配置：>
+
+5、fitler过滤器的初始化参数配置：
+	在web.xml中配置<init-param><init-name>初始name</init-name><init-value>初始value</init-value></init-param>
+
+6、application的初始化参数配置：
+	在web.xml中配置<context-param><param-name>初始name</param-name><param-value>初始value</param-value></context-param>	
+
+7、session配置过期时间：<session-config><session-timeout>30</session-timeout></session-config>
+
+8、在客户端获取request的header头，可以用el表达式：${header['header头名']}
+
+
+
+
+
+
+eldemo:
+1、对于网页中一直重复显示的内容，如导航栏，页面脚，可以通过四种方法<2017-04-20>
+	<1>:<c:import url="独立的导航栏/..页面"></c:import>
+	<2>：通过<iframe src="独立的导航栏/..页面" width="x" height="x" scrolling="[OPTION]" frameborder="0"></iframe>（0代表不要iframe边框）
+		iframe标签用于定义内联框架。内联框架是在一个页面中嵌入另一个页面。有很多网页看上去是一个网页，但实际上它其中可能镶嵌有其它网页，<iframe>标签就可以把其它网页无缝地嵌入在一个页面中。<iframe>主要用于那些多个网页的共有部分，如导航栏、广告栏等(会导致很多问题。。。实际开发尽量少使用)
+	<3>:<jsp:include page="独立的导航栏/..页面" flush="true">:定义在该页面中包含引入的页面,flush定义在包含资源前是否刷新缓存区。。
+		本质是向包含的页面发起请求，将相应的内容显示在当前位置。
+	<4><%@ include file="/文件" %>：注意，该jsp指令作用是指在该页面中包含引入文件的代码，将两个页面的代码合在一起，再一起编译。。（并不推荐）
+
+		
+		
+
+upload_dowload:
+1、对于文件上传的，还有一些异常需要控制，同时在ajax中完成文件上传，需要注意使用FormData对象：
+	FF4中增加了一个很有意思的对象，FormData。通常我们提交（使用submit button）时，会把form中的所有表格元素的name与value组成一个queryString，提交到后台。这用jQuery的方法来说，就是 serialize。但当我们使用Ajax提交时，这过程就要变成人工的了。
+	因此，FormData对象的出现可以减少我们一些工作量。W3c草案提供了三种方案来获取或修改FormData。
+	http://www.cnblogs.com/oygg/p/5845204.html<2017-04-24>
+
+2、获取当前项目目录/资源的真实路径：request.getServletContext.getRealPath("/目录（资源）")。Eclipse下等于自动添加了D:\JAVA\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\upload_dowload这段路径。
+
+3、对于上传的文件信息、资源路径、时间、上传人等信息，应该用数据库保存起来，需要获取的时候直接获取资源路径获取File就行了。。
+
+4、注意<button></button>按钮在表单中，默认的type是依据浏览器的不同来说是不同的，在IE中默认type是button，在其他浏览器中，默认是submit，所以使用button标签时，一定要设置type属性（"button"、"reset"、"submit"）
+	所以，在表单提交控制上，有两种方案:
+	一是利用<form onsubmit="return submit_check()">响应事件，通过函数返回false或true来决定是否提交;
+	二是规定<button type="button">来控制button的点击事件，在事件中控制是否$("#form-id").submit()<2017-04-25>
+
+5、文件上传需要做上传文件非空验证（前后端），已避免无法文件拒绝访问异常。。<2017-04-25>
+	
+
+
+netspacedemo:
+1、	对于文件上传栏<input type="file">可以通过onchange事件来触发是否已经选择了要提交的文件，要做自定义的导航来模拟文件提交（例如百度网盘），可以通过jQuery的trigger(事件)来模拟事件。<2017-04-25>
+
+2、
+	
+
+
+
+
+
+	
+	
+verifycodeDemo:
+1、在.	
+
+
+	
+	
+Eclipse模板修改：
+1、servlet模板修改：window-->preference-->java-->editor-->templates--->>new按钮--->>添加新提示模板：
+package ${enclosing_package};
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.ServletConfig;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ *
+ * @author ${user}  E-mail: 654835916@qq.com
+ * @version v1.0 创建时间：${date}  ${time}
+ * ${tags}
+ */
+@WebServlet("/${primary_type_name}")
+public class ${primary_type_name} extends HttpServlet {
+
+    private static final long serialVersionUID = 1L;
+	
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+	}
+
+	@Override
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+  
+    }
+}
+
+2、修改新建的JSP模板：window-->preference-->web-->jsp files-->editors-->templates--->>选择New JSP File(html)--->>点击edit：修改为如下模板：
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%--
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+--%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">    
+    <title>标题</title>        
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">    
+  <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+  <meta http-equiv="description" content="This is my page">
+ </head>
+ <body>
+ ${cursor}
+ </body>
+</html>
+
+3、修改新建java文件模板：window-->preference-->java-->code style-->code template--->>code--->>new java files修改模板如下：
+${filecomment}
+${package_declaration}
+/**
+ *
+ * @author ${user}  E-mail: 654835916@qq.com
+ * @version v1.0 创建时间：${date}  ${time}
+ */
+${typecomment}
+${type_declaration}

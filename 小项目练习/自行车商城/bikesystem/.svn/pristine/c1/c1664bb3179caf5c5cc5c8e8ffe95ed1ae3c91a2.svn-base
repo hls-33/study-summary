@@ -1,0 +1,188 @@
+package com.bikesystem.hp.dao;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.bikesystem.entity.BikeSell;
+
+public class BikeSellDaoImpl extends BaseDao implements IBikeSellDao {
+
+	private static final String InsertSellBike = "insert into bike_sell(bikename,bikecount,color,kindname,shopname,bikeprice,imgpath) values(?,?,?,?,?,?,?) ";
+	private static final String DeleteSellBike = "delete bike_sell  where bsid=? ";
+	private static final String UpdateSellBike = "update bike_sell set bikename=?,bikecount=?,color=?,kindname=?,shopname,bikeprice=?,imgpath=?  where bsid=? ";
+	private static final String QuerySellBike = "select  * from bike_sell  where bikeName=?";
+	private static final String QueryAllBikeSell = "select  * from bike_sell  where shopname=?";
+	private static final String QuerySpecialSellBike = "select  * from bike_sell  where shopname=? and bikename ";
+/**
+ * 插入要卖出的自行车
+ * */
+	@Override
+	public boolean insertBikeSell(BikeSell bikeSell) {
+		createPreparedStatement(InsertSellBike);
+		try {
+			pstmt.setString(1, bikeSell.getBikeName());
+			pstmt.setInt(2,bikeSell.getBikeCount());
+			pstmt.setString(3, bikeSell.getColor());
+			pstmt.setString(4, bikeSell.getKindName());
+			pstmt.setString(5, bikeSell.getShopName());
+			pstmt.setDouble(6, bikeSell.getBikePrice());
+			pstmt.setString(7, bikeSell.getImgPath());
+			int rs = pstmt.executeUpdate();
+			while(rs>0){
+				return true;
+				
+			}	
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		finally {
+			close();
+		}
+		return false;
+	}
+
+	
+	/**
+	 * 插入已经售出的自行车
+	 * */
+	@Override
+	public boolean deleteBikeSellById(int bsid) {
+		createPreparedStatement(DeleteSellBike);
+		try {
+			pstmt.setInt(1, bsid);
+			int rs = pstmt.executeUpdate();
+			while(rs>0){
+				return true;
+			}	
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		finally {
+			close();
+		}
+		
+		
+		return false;
+	}
+	/**
+	 * 修改自行车的信息
+	 * */
+	@Override
+	public boolean updateBikeSell(BikeSell bike) {
+	
+		createPreparedStatement(UpdateSellBike);
+		try {
+			pstmt.setString(1, bike.getBikeName());
+			pstmt.setInt(2,bike.getBikeCount());
+			pstmt.setString(3, bike.getColor());
+			pstmt.setString(4, bike.getKindName());
+			pstmt.setString(5, bike.getShopName());
+			pstmt.setDouble(6, bike.getBikePrice());
+			pstmt.setString(7, bike.getImgPath());
+			pstmt.setInt(8, bike.getBsid());
+			int rs = pstmt.executeUpdate();
+			while(rs>0){
+				return true;
+			}	
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		finally {
+			close();
+		}
+		
+		
+		return false;
+	}
+	/**
+	 * 查看所有卖出的自行车
+	 * */
+	@Override
+	public List<BikeSell> queryAllBikeSell(String shopName) {
+		createPreparedStatement(QueryAllBikeSell);
+		List<BikeSell> list = null;
+		try {
+			list= new ArrayList<BikeSell>();
+			pstmt.setString(1,shopName);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				list.add(new BikeSell(rs.getString("bikename"),
+						rs.getInt("bikecount"),rs.getString("color"),
+						rs.getString("kindname"),rs.getString("shopname"),
+						rs.getDouble("bikeprice"),rs.getString("imgpath")));
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		finally {
+			close();
+		}
+		return list;
+	}
+	/**
+	 * 用户自己查看自行车，通过搜索框检索的
+	 * */
+	@Override
+	public List<BikeSell> queryBikeSell(String bikeName) {
+		createPreparedStatement(QuerySellBike);
+		List<BikeSell> list = null;
+		try {
+			list= new ArrayList<BikeSell>();
+			pstmt.setString(1, bikeName);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				//显示自行车的基本信息
+				list.add(new BikeSell(rs.getString("bikename"),
+						rs.getInt("bikecount"),rs.getString("color"),
+						rs.getString("kindname"),rs.getString("shopname"),
+						rs.getDouble("bikeprice")));
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		finally {
+			close();
+		}
+		
+		return list;
+	}
+	/**
+	 * 查看特定的的自行车
+	 * */
+	@Override
+	public List<BikeSell> querySpecialBikeSell(String bikeName, String shopName) {
+		createPreparedStatement(QuerySpecialSellBike);
+		List<BikeSell> list = null;
+		try {
+			list= new ArrayList<BikeSell>();
+			pstmt.setString(1, bikeName);
+			pstmt.setString(2, shopName);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				//显示商店的自行车的基本信息
+				list.add(new BikeSell(rs.getString("bikename"),
+						rs.getInt("bikecount"),rs.getString("color"),
+						rs.getString("kindname"),
+						rs.getDouble("bikeprice")));
+			}
+		} catch (SQLException e) {
+	
+			e.printStackTrace();
+		}
+		finally {
+			close();
+		}
+		
+		return list;
+	}
+
+}

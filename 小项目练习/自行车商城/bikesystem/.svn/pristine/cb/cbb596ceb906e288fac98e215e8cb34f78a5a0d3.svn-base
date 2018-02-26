@@ -1,0 +1,75 @@
+package com.bikesystem.hs.servlet;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.bikesystem.entity.BikeRent;
+import com.bikesystem.entity.RentOrderInfo;
+import com.bikesystem.entity.Shop;
+import com.bikesystem.hs.dao.BikeRentDaoImpl;
+import com.bikesystem.hs.dao.IBikeRentDao;
+import com.bikesystem.hs.dao.IShopDao;
+import com.bikesystem.hs.dao.ShopDaoImpl;
+import com.bikesystem.utils.DateCaculateUtils;
+import com.bikesystem.utils.ParseNumberUtils;
+
+/**
+ * 处理到店取车的servlet
+ * @author bwfadmin  E-mail: 654835916@qq.com
+ * @version v1.0 创建时间：2017年5月8日  下午2:56:03
+ * tags
+ */
+@WebServlet("/user/hs/toshop")
+public class GetBikeAtShopServlet extends HttpServlet {
+
+	private static final long serialVersionUID = 1L;
+	private IShopDao shopDao;
+	private IBikeRentDao bikeRentDao;
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		shopDao = new ShopDaoImpl();
+		bikeRentDao = new BikeRentDaoImpl();
+	}
+
+	@Override
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		//获取session中的信息传递实体类
+		RentOrderInfo rentOrderInfo = (RentOrderInfo) request.getSession().getAttribute("rentOrderInfo");
+		
+		if(rentOrderInfo != null){
+			request.setAttribute("orderDate",rentOrderInfo.getOrderDate());
+			request.setAttribute("returnDate",
+					DateCaculateUtils.dateAdd(rentOrderInfo.getOrderDate(), 
+							rentOrderInfo.getRentType(), rentOrderInfo.getRentTimes()));
+			int brid = rentOrderInfo.getBrid();
+			int sid = rentOrderInfo.getSid();
+			
+			Shop shop = shopDao.queryShopById(sid);
+			Map<String,Object> map = new HashMap<String, Object>();
+			map.put("brid",brid);
+			List<BikeRent> list = bikeRentDao.queryAllBikeRentByParameter(map);
+			
+			if(list != null && shop != null){
+				BikeRent bikeRent = list.get(0);
+				request.setAttribute("bikeRent", bikeRent);
+				request.setAttribute("shop", shop);
+			}
+		}
+		
+		request.setAttribute("continaerPage", "./tolocalshop.jsp");
+		
+		request.getRequestDispatcher("/WEB-INF/jsp/hs/bikerentorder.jsp").forward(request, response);
+	}
+	
+	
+}

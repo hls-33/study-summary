@@ -1,0 +1,16 @@
+package com.bikesystem.txz.interfaces.dao;
+import com.bikesystem.entity.User;
+public interface IUserDao {
+//	用户
+	User UserLogin(String username,String password);//用户登录
+	boolean userRegist(User user);//用户注册
+	User queryUserInfo(String uphone);//通过用户手机获取用户所有信息
+	boolean updateUserInfo(User user);//修改用户信息
+	boolean updateUserInfo(User user,String name);//修改用户信息
+	boolean deleteUserInfo(String uphone);//删除用户信息
+	boolean queryUserByPhone(String uphone);//注册手机用户名时判断此手机号是否存在
+	boolean queryUserByEmail(String email);//注册邮箱用户名时判断此邮箱是否存在
+	boolean updateUserInfoByEmail(String uphone,String email);
+	boolean updateUserInfoByPhone(String oldphone,String newphone);
+	boolean updateUserInfoByPassword(String uphone,String oldpassword,String newpassword);
+}

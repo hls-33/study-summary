@@ -1,0 +1,50 @@
+$("input[name='aphone']").blur(function(){
+	$.ajax({
+		url:"/bikesystem/aphone",
+		type:"post",
+		date:{"aphone":$("input[name='aphone']").val()},
+		success:function(message){
+			$("#aphonespan").html(message);
+		}
+	});
+});
+$("input[name='aname']").blur(function(){
+	$.ajax({
+		url:"/bikesystem/aname",
+		type:"post",
+		date:{"aname":$("input[name='aname']").val()},
+		success:function(message){
+			$("anamespan").html(message);
+		}
+	});
+});
+$("input[name='apassword']").blur(function(){
+	$.ajax({
+		url:"/bikesystem/apassword",
+		type:"post",
+		date:{"apass":$("input[name='apassword']").val()},
+		success:function(message){
+			$("apassspan").html(message);
+		}
+	});
+});
+$("input[name='asurepass']").blur(function(){
+	$.ajax({
+		url:"/bikesystem/asurepass",
+		type:"post",
+		date:{"asure":$("input[name='asurepass']").val()+":"+$("input[name='apassword']").val()},
+		success:function(message){
+			$("asurepassspan").html(message);
+		}
+	});
+});
+$("input[name='aidnumber']").blur(function(){
+	$.ajax({
+		url:"/bikesystem/aidnumber",
+		type:"post",
+		date:{"aidnbmber":$("input[name='aidnumber']").val()},
+		success:function(message){
+			$("aidnumberspan").html(message);
+		}
+	});
+});

@@ -1,0 +1,71 @@
+package com.bikesystem.hgg.service;
+
+import java.util.List;
+
+import com.bikesystem.entity.BikeRent;
+import com.bikesystem.hgg.dao.IBikeRentDao;
+
+public class BikeRentServiceImpl implements IBikeRentService {
+
+	private IBikeRentDao iBikeRentDao;
+	
+	
+	public BikeRentServiceImpl(IBikeRentDao iBikeRentDao) {
+		super();
+		this.iBikeRentDao = iBikeRentDao;
+	}
+	
+	@Override
+	public boolean queryBikeNumber(String bikenumber){
+		return iBikeRentDao.queryBikeNumber(bikenumber);
+	}
+	
+	@Override
+	public List<BikeRent> queryAllBikeRentNoRented(String shopname) {
+		// TODO Auto-generated method stub
+		return iBikeRentDao.queryAllBikeRentNoRented(shopname);
+	}
+
+	@Override
+	public List<BikeRent> queryBikeRentByShopName(String shopName) {
+		if(shopName==null){
+			return null;
+		}
+		
+		// TODO Auto-generated method stub
+		return iBikeRentDao.queryBikeRentByShopName(shopName);
+	}
+
+	@Override
+	public int getTotalPage(int pagecount,String shopname){
+		if(pagecount<1){
+			pagecount=1;
+		}
+		return iBikeRentDao.getTotalPage(pagecount,shopname);
+	}
+	
+	@Override
+	public boolean insertBikeRent(BikeRent bikeRent) {
+		// TODO Auto-generated method stub
+		return iBikeRentDao.insertBikeRent(bikeRent);
+	}
+
+	@Override
+	public BikeRent queryBikeRentByBikeNumber(String bikeNumber) {
+		// TODO Auto-generated method stub
+		return iBikeRentDao.queryBikeRentByBikeNumber(bikeNumber);
+	}
+
+	@Override
+	public boolean deleteBikeRent(BikeRent bikeRent) {
+		// TODO Auto-generated method stub
+		return iBikeRentDao.deleteBikeRent(bikeRent);
+	}
+
+	@Override
+	public boolean updateBikeRent(String bikeNumber,double hourPrice,double dayPrice,double deposit) {
+		// TODO Auto-generated method stub
+		return iBikeRentDao.updateBikeRent(bikeNumber,hourPrice,dayPrice,deposit);
+	}
+
+}

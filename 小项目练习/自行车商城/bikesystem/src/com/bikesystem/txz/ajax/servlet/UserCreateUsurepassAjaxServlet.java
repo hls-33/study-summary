@@ -1,0 +1,45 @@
+package com.bikesystem.txz.ajax.servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class UserCreateUsurepassAjaxServlet
+ */
+@WebServlet("/surepass")
+public class UserCreateUsurepassAjaxServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public UserCreateUsurepassAjaxServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String pass=request.getParameter("surepass");
+		PrintWriter out=response.getWriter();
+		if(pass==null||"".equals(pass))
+			out.write("确认密码不能为空");
+		else{
+			if(pass.length()>1&&pass.contains(":")){
+				String[] values=pass.split(":");
+				if(values[0]==null||values[1]==null||values[0].length()<=0||values[1].length()<=0)
+					out.write("确认密码格式错误");
+				else if(values[0].equals(values[1]))
+					out.write("");
+				else out.write("确认密码与设置密码不同");
+			}
+			else out.write("确认密码格式错误");
+		}
+	}
+
+}

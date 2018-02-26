@@ -1,0 +1,143 @@
+@CHARSET "UTF-8";
+.top-address{
+					width:1100px;
+					height:260px;
+					margin-left:100px;
+				}
+					h2{
+						font-size:18px;
+				}
+	
+				.order-address{
+					width:1100px;
+					border:1px solid #9bdf70;
+					background:#f0fbeb;
+					margin-bottom:15px;
+					float:left;
+					cursor: default;
+					margin-left:10px;
+				}
+				 .tableid table{
+				height:150px;
+				width:150px;
+				border:1px solid gray;
+				float:left;
+				}
+				.tableid table tr{
+				font-size:12px;
+					width:145px;
+					heigth:35px;		
+					text-align:right;	
+				}
+				.tableid table tr a{
+					cursor:pointer;
+					 text-decoration: none;
+				}
+				.tableid table tr a:hover{
+					font-weight:bold;
+					color:red;
+				}
+				
+				
+				.addAddr {
+						    display: inline-block;
+						    vertical-align: middle;
+						    padding: 0 10px;
+						    overflow: hidden;
+						    border: 1px solid #ccc;
+						    border-width:2 2px;
+						    border-radius: 2px;
+						    cursor: pointer;
+						    color: #333;
+						    height: 25px;
+						    line-height: 25px;
+						    font-weight: 700;
+						    text-decoration: none;
+						    color: black;
+    						background-color: #fff;
+				}
+				
+				.main-bottom{
+						margin-left:100px;
+				}
+				.main-bottom thead tr  th{
+					border-bottom:4px solid #B2D1FF;
+				}
+				.main-bottom th{
+						width:270px;
+						height:60px;
+						font-size:15px;
+				}
+				.main-bm-tr-th{
+						display:block;
+						margin-left:-60px;
+						margin-bottom:-35px;
+				}
+				
+			.main-bm-tt th{
+				font-size:13px;
+				height:90px;
+				border-top:2px dotted #B2D1FF;
+				background-color:#F2F7FF;
+			}
+			.bottom-table{
+				width:1100px;
+				height:120px;
+			}
+			.bottom-table div{
+					float:right;
+					width:450px;
+					height:120px;
+					border:1px solid #DD2727;
+			}
+			.bottom-sp ul li{
+					list-style-type:none;
+					font-size:25px;
+					float:right;
+					height:25px;
+					line-height:25px;
+					font-weight:bold;
+					color:#DD2727
+			}
+			.bottom-sp ul li:last-of-type{
+					font-size:15px;
+					height:25px;
+					line-height:25px;
+					color:black;
+			}
+			.bottom-sp ol li{
+					list-style-type:none;
+					font-size:14px;
+					float:right;
+					height:25px;
+					line-height:25px;
+					font-weight:bold;
+			}
+		.bottom-sp ol li:last-of-type>span{
+			float:right;
+		
+		}
+			.bottom-bt{
+					width:1100px;
+					height:120px;
+			
+			}
+		#bottom-bt input{
+					float:right;
+					width:150px;
+					height:50px;
+					background-color:#DD2727;
+					border:1px solid#DD2727;
+					color:white;
+					cursor:pointer;
+					margin-top:-17px;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	

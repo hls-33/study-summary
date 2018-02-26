@@ -1,0 +1,57 @@
+package com.bikesystem.hs.servlet;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.bikesystem.entity.BikeRent;
+import com.bikesystem.hs.dao.BikeRentDaoImpl;
+import com.bikesystem.hs.dao.IBikeRentDao;
+
+/**
+ *
+ * @author bwfadmin  E-mail: 654835916@qq.com
+ * @version v1.0 创建时间：2017年5月2日  下午5:13:43
+ * tags
+ */
+@WebServlet("/hs/bikerent")
+public class BikeRentServlet extends HttpServlet {
+
+	private static final long serialVersionUID = 1L;
+	private IBikeRentDao bikeRentDao;
+	
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		bikeRentDao = new BikeRentDaoImpl();
+	}
+
+	@Override
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String bikeName=request.getParameter("bikename");
+		String shopName = request.getParameter("shopname");
+		String bikeNumber = request.getParameter("bikenumber");
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("bikename", bikeName);
+		map.put("shopname", shopName);
+		map.put("bikenumber",bikeNumber);
+		//查询数据库中中要租的那个车辆
+		List<BikeRent> rents = bikeRentDao.queryAllBikeRentByParameter(map);
+		if(rents!=null){
+			BikeRent bikeRent = rents.get(0);
+			System.out.println("bikeRent:"+bikeRent);
+			
+			request.setAttribute("bikeRent",bikeRent);
+		}
+		
+		request.getRequestDispatcher("/WEB-INF/jsp/hs/marketrent.jsp").forward(request, response);
+	}
+}

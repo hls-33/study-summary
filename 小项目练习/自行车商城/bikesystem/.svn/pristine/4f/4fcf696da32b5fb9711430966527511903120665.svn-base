@@ -1,0 +1,82 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>My JSP 'navigation.jsp' starting page</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	
+	<style type="text/css">
+			#top_header{
+				width: 1366px;
+				 height: 35px;
+				 background-color:#F2F2F2;
+				 margin-bottom:10px;}
+			#top_header_left{
+					float:left;
+					width:300px;
+					height: 35px;
+					line-height:35px;
+					font-size:15px;
+					margin-left:100px;
+					color:#999999;
+					cursor:pointer;
+			}
+		
+			#top_header_right{
+					display:block;
+					width:400px;
+					float:right;
+					height: 35px;
+					line-height:35px;
+					font-size:15px;
+					margin-right:100px;
+					color:#999999;
+					cursor:pointer;
+			}
+			#top_header_left >span a,#top_header_right >span a{
+					color:#999999;
+					text-decoration:none;
+			}
+			#top_header_left >span a:hover,#top_header_right >span a:hover{
+					color:#C40000;
+					text-decoration:underline;
+			}
+			
+	</style>
+	
+  </head>
+  
+  <body>
+  <div id="top_header">
+	<div id="top_header_left">
+			<span>欢迎您的光临</span>&nbsp;	&nbsp;				
+			<span><a href="">请登录</a></span>	&nbsp;&nbsp;	
+			<span><a href="">免费注册</a></span>&nbsp;		
+	</div>
+	
+	
+	<div  id="top_header_right">
+			<span><a href="">购物车</a></span>&nbsp;&nbsp;	
+			<span><a href="">已买到的宝贝</a></span>&nbsp;&nbsp;	
+			<span><a href="">已租赁的宝贝</a></span>&nbsp;
+			
+	</div>
+	</div>
+
+
+
+
+  </body>
+</html>

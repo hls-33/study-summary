@@ -1,0 +1,93 @@
+package com.bikesystem.entity;
+
+public class SellAddress {
+
+	private int  said;
+	/** 帐号的用户名字*/
+	private String name;
+	/** 收货的名字*/
+	private String uesrname;
+	/**省，市，区*/
+	private String address ;
+	/**详细地址*/
+	private String minuteaddress;
+	private String phone;
+	
+	/**详细地址*/
+	public SellAddress(String uesrname, String address, String minuteaddress, String phone) {
+		super();
+		this.uesrname = uesrname;
+		this.address = address;
+		this.minuteaddress = minuteaddress;
+		this.phone = phone;
+	}
+	
+	public SellAddress(int said, String name, String uesrname, String address, String minuteaddress, String phone) {
+		super();
+		this.said = said;
+		this.name = name;
+		this.uesrname = uesrname;
+		this.address = address;
+		this.minuteaddress = minuteaddress;
+		this.phone = phone;
+	}
+
+	public SellAddress(String name, String uesrname, String address, String minuteaddress, String phone) {
+		super();
+		this.name = name;
+		this.uesrname = uesrname;
+		this.address = address;
+		this.minuteaddress = minuteaddress;
+		this.phone = phone;
+	}
+
+	public SellAddress(int said, String uesrname, String address, String minuteaddress, String phone) {
+		super();
+		this.said = said;
+		this.uesrname = uesrname;
+		this.address = address;
+		this.minuteaddress = minuteaddress;
+		this.phone = phone;
+	}
+	public int getSaid() {
+		return said;
+	}
+	public void setSaid(int said) {
+		this.said = said;
+	}
+	public String getUesrname() {
+		return uesrname;
+	}
+	public void setUesrname(String uesrname) {
+		this.uesrname = uesrname;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getMinuteaddress() {
+		return minuteaddress;
+	}
+	public void setMinuteaddress(String minuteaddress) {
+		this.minuteaddress = minuteaddress;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	
+	
+	
+	
+}

@@ -1,0 +1,88 @@
+package com.bikesystem.hp.service;
+
+import java.util.List;
+
+import com.bikesystem.entity.BikeSell;
+import com.bikesystem.entity.SellAddress;
+import com.bikesystem.hp.dao.IBikeSellDao;
+
+public class BikeSellServiceImpl implements IBikeSellService {
+
+	private IBikeSellDao ibsd;
+	
+	
+	public BikeSellServiceImpl(IBikeSellDao ibsd) {
+		super();
+		this.ibsd = ibsd;
+	}
+
+	
+
+	@Override
+	public List<BikeSell> queryBikeSell(String bikeName) {
+		if(bikeName.equals(null)||bikeName.equals("")){
+			return null;
+		}
+		return queryBikeSell(bikeName);
+	}
+
+	@Override
+	public List<BikeSell> querySpecialBikeSell(String bikeName, String shopName) {
+		if(bikeName.equals(null)||bikeName.equals("")||shopName.equals(null)||shopName.equals("")){
+			return null;
+		}
+		return querySpecialBikeSell(bikeName, shopName);
+	}
+
+
+	/**
+	 * 添加新地址
+	 * */
+	@Override
+	public boolean insertBikeSellAddress(SellAddress sellAddress) {
+		
+		return ibsd.insertBikeSellAddress(sellAddress);
+	}
+
+
+	/**
+	 * 删除已过期的地址
+	 * */
+	@Override
+	public boolean deleteBikeSellAddressById(int said) {
+		
+		return ibsd.deleteBikeSellAddressById(said);
+	}
+
+
+	/**
+	 * 修改用户收货地址
+	 * */
+	@Override
+	public boolean updateBikeSellAddress(SellAddress sellAddress) {
+	
+		return ibsd.updateBikeSellAddress(sellAddress);
+	}
+
+
+	/**
+	 * 查看用户自己所有的地址
+	 * */
+	@Override
+	public List<SellAddress> queryAllBikeSellAddress(String name) {
+		
+		return ibsd.queryAllBikeSellAddress(name);
+	}
+
+
+
+	@Override
+	public List<BikeSell> getBikeSellByBsid(int bsid) {
+		return ibsd.getBikeSellByBsid(bsid);
+	}
+
+
+
+
+
+}

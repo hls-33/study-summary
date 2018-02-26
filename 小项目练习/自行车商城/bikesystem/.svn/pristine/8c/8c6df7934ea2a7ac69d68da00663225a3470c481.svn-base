@@ -1,0 +1,64 @@
+package com.bikesystem.hgg.dao;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.bikesystem.entity.UserRent;
+
+public class UserRentDaoImpl extends BaseDao implements IUserRentDao {
+	private static final String queryAllUserRentSql="select * from user_rent";
+	private static final String queryBikeRentByUserSql="select * from user_rent where shopname=?";
+	
+	
+	private List<UserRent> list;
+	
+	//查询所有的租借信息
+	@Override
+	public List<UserRent> queryAllUserRent() {
+		list=new ArrayList<UserRent>();
+		try {
+			getDb(queryAllUserRentSql);
+			rs=ps.executeQuery();
+			while(rs.next()){
+				list.add(new UserRent(rs.getInt("urid"), rs.getString("name"), rs.getString("bikenumber"), rs.getString("bikename"), 
+						rs.getString("shopname"), rs.getString("rentdate"), rs.getString("returndate"), rs.getDouble("deposit"),
+						rs.getString("rentType")));
+			}
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			close();
+		}
+		return null;
+	}
+	
+	//查询用户的租借信息
+	@Override
+	public List<UserRent> queryBikeRentByShopName(String shopName) {
+		if(shopName==null)
+			return null;
+		try {
+			list=new ArrayList<UserRent>();
+			getDb(queryBikeRentByUserSql);
+			ps.setString(1, shopName);
+			rs=ps.executeQuery();
+			while(rs.next()){
+				list.add(new UserRent(rs.getInt("urid"),rs.getString("name"),rs.getString("bikenumber"),
+						rs.getString("bikename"),rs.getString("shopname"),rs.getString("rentdate"),
+						rs.getString("returndate"),rs.getDouble("deposit"),rs.getString("rentType")));
+			}
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			close();
+		}
+		return null;
+	}
+
+	
+
+	
+}

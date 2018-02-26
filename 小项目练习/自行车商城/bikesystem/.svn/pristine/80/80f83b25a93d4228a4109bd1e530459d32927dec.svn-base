@@ -1,0 +1,16 @@
+package com.bikesystem.hgg.dao;
+
+import java.util.List;
+
+import com.bikesystem.entity.BikeRent;
+
+public interface IBikeRentDao {
+
+	//查看所有的自行车信息
+	public List<BikeRent> queryAllBikeRent();
+	
+	//根据ID查看自行车信息
+	public BikeRent queryBikeRentById(int brid);
+	
+	
+}

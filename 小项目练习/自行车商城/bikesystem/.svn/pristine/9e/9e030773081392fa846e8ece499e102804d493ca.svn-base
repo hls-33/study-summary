@@ -1,0 +1,84 @@
+package com.bikesystem.hp.servlet;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.bikesystem.entity.BikeKind;
+import com.bikesystem.entity.BikeSell;
+import com.bikesystem.hs.dao.BikeKindDaoImpl;
+import com.bikesystem.hp.dao.BikeSellDaoImpl;
+import com.bikesystem.hs.dao.IBikeKindDao;
+import com.bikesystem.hp.dao.IBikeSellDao;
+
+/**
+ * 搜索自行车的结果
+ */
+@WebServlet("/hp/search")
+public class SearchBikesServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+    private	IBikeSellDao sellDao;   
+    private IBikeKindDao kindDao;
+    public SearchBikesServlet() {
+        super();
+    }
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+    	sellDao = new BikeSellDaoImpl();
+    	kindDao = new BikeKindDaoImpl();
+    }
+	@Override
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String bikeName=request.getParameter("bikename");
+		String shopName = request.getParameter("shopname");
+		String color = request.getParameter("color");
+		String sellCount = request.getParameter("sellcount");
+		String bikePrice = request.getParameter("bikeprice");
+		String kindName = request.getParameter("kindname");
+		
+		//动态添加传入的参数
+		Map<String,Object> parMaps = new HashMap<String, Object>();
+		addParameters(parMaps,"bikename",bikeName);
+		addParameters(parMaps,"shopname",shopName);
+		addParameters(parMaps,"color",color);
+		addParameters(parMaps,"sellcount",sellCount);
+		addParameters(parMaps,"bikeprice",bikePrice);
+		addParameters(parMaps,"kindname",kindName);
+		
+		List<BikeSell> bikeSellList = null;
+		System.out.println("bikeName:"+bikeName);
+		if(parMaps.size() != 0){
+			bikeSellList = sellDao.queryAllBikeSellByParameter(parMaps);
+		}
+		
+		if(bikeSellList!=null){
+			request.setAttribute("bikeSellList", bikeSellList);
+		}
+		request.setAttribute("bikename",bikeName);
+		request.setAttribute("shopname",shopName);
+		System.out.println(bikeSellList);
+		
+		//查询赛车种类
+		List<BikeKind> bikeKindsList = kindDao.queryAllBikeKind();
+		if(bikeKindsList != null){
+			request.setAttribute("bikeKindsList", bikeKindsList);
+		}
+		
+		request.getRequestDispatcher("/WEB-INF/jsp/hp/searchBikeSell.jsp").forward(request, response);
+		
+	}
+	private void addParameters(Map<String,Object> map,String key , String value){
+		if(value!=null){
+			map.put(key, value);
+		}
+	}
+
+}

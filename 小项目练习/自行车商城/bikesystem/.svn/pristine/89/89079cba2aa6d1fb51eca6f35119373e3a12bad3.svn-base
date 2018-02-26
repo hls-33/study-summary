@@ -1,0 +1,283 @@
+@CHARSET "UTF-8";
+*{
+	margin: 0 auto;
+	padding: 0 auto;
+}
+div{
+	display:block;
+}
+#top_header{
+	width: 1366px;
+	 height: 35px;
+	 background-color:#F2F2F2;
+	 margin-bottom:10px;
+}
+#header{
+	width: 1190px;
+	 height: 85px;
+}
+#mallLogo{
+	background-color:#fff;
+	 float: left;
+	 width: 162px;
+    padding-top: 0;
+    padding-right:15px;
+    line-height: 18px;
+    position: relative;
+    height: 64px;
+}
+.mlogo a,.slogo a{
+		text-decoration:none;
+}
+.mlogo a{
+	height:85px;
+	width:145px;
+	font-size:22px;
+	 color: red;
+	  line-height: 65px;
+}
+#shopExtra {
+    float: left;
+    position: relative;
+    padding: 15px 0 0;
+    height: 49px;
+
+}
+#shopExtra .slogo {
+    background: -174px -30px no-repeat;
+    float: left;
+    padding: 0 10px;
+    height: 38px;
+    border-left: 1px solid #f0f0f0;
+    line-height: 35px;
+    width: auto;
+}
+#input-sou{
+	margin-top:10px;
+	width:500px;
+	height:50px;
+	float:right;
+
+}
+#input-sou input{
+	height:50px;
+	width:370px;
+	 border:7px solid #C40000;
+}
+#input-sou button{
+	height:50px;
+	font-size:15px;
+}
+#input-sou button:first-of-type{
+	background-color: #C40000;
+	color:white;	
+	border-bottom:5px solid #C40000;
+	border-top:1px solid #C40000;
+	border-left:1px solid #C40000;
+}
+#input-sou button:last-of-type{
+	border-bottom:5px solid black;
+	background-color: black;
+	color:white;	
+	border-top:1px solid black;
+	border-left:1px solid black;
+	border-right:1px solid black;
+}
+#top-bm{
+	background-color: #FF1C2F;
+	width: 1366;
+	height:30px;
+	color:white;
+	text-align:center;
+}
+li{
+	list-style-type:none;
+}
+#top-bm li{
+	float:left;
+	line-height:30px;
+	width:150px;
+	height:30px;
+	font-size:18px;
+	margin-left:140px;
+}
+#top-bm li:hover{
+	background-color:#C60011;
+	cursor:pointer;
+}
+#main{
+	width: 1190px;
+	height:700px;
+
+}
+
+#main-left{
+	width:400px;
+	float:left;
+}
+#main-left	#img{
+			display:block;
+			width:400px;
+			height:370px;
+			margin:auto;
+			border-right:3px solid #FFFFFD;
+}
+#img_bottom{
+	width:400px;
+	height:100px;
+	margin:auto;
+	padding-left:2px;
+}
+#img_bottom >img{
+	height:60px;
+	width:50px;
+	margin:6px;
+}
+#main-center{
+	float:left;
+	width:600px;
+	height:500px;
+	margin-left:20px;
+}
+.main-center-li-f{
+	font-size:18px;
+}
+.main-center-li-f span,#main-center li:nth-of-type(2) span{
+	font-size:15px;
+	color:#DE2D2D;
+	 font-weight:bold;
+}
+#main-center li:nth-of-type(2){
+	background-color:#F6F5F5;
+	height:30px;
+	font-size:15px;
+	line-height:30px;
+}
+
+#main-center li a:hover{
+	cursor:pointer;
+}
+.font_size{
+	font-family: 楷体;
+	 color: #878787;
+	 font-size:15px;
+}
+.font_size div{
+	
+	margin-left:80px;
+}
+#main-center li:nth-of-type(5){
+
+	height:60px;
+}
+#main-center-num{
+	height: 35px;
+    line-height: 31px;
+    color: #878787;
+
+}
+#main-center-num span {
+	display: inline-block;
+    vertical-align: middle;
+
+}
+
+#main-center-num input{
+	width:40px;
+	height:40px;
+}
+.main-num-s1,.main-num-s2{
+	width: 15px;
+    height: 20px;
+    overflow: hidden;
+    border: 1px solid #a7a6ab;
+    display: block;
+    font-family: tm-detail-font;
+    line-height: 20px;
+    font-size: 16px;
+    cursor: pointer;
+     margin-bottom: 3px;
+  
+}
+
+.buy-now,.shopping-cart{
+	float:left;
+	width:200px;
+	height:50px;
+	line-height:50px;
+	font-size:18px;
+	border:1px solid red;
+	text-align:center;
+	margin-left:40px;
+	cursor: pointer;
+}
+.buy-now{
+	color:#C40000;
+	background-color:#FFEDED;
+}
+.shopping-cart{
+	background-color:#C40000;
+	color:white;
+}
+.shopping-cart li div{
+	float:left;
+}
+
+#bottom{
+	margin-top:-100px;
+	width:1190px;
+	height:590px;
+	margin-bottom:10px;
+}
+#bottom-left{
+	width:260px;
+	height:400px;
+	float:left;
+}
+#bottom-left_tp{
+	width:260px;
+	height:200px;
+	border:1px solid #DFDFDF;
+}
+#bottom-left_bm{
+	margin-top:30px;
+	width:260px;
+	height:160px;
+	border:1px solid #DFDFDF;
+}
+
+#bottom-center{
+	margin-left:50px;
+	width:700px;
+	height:390px;
+	float:left;
+	border:1px solid #DFDFDF;
+}
+
+#bottom-center_lt,#bottom-center_rt{
+	background-color:#DFDFDF;
+	border:1px solid #DDDFDD;
+	margin-right:3px;
+	width:150px;
+	height:60px;
+	line-height:60px;
+	float:left;
+	font-size:15px;
+	text-align:center;
+	cursor: pointer;
+}
+#bottom-center_lt:hover,#bottom-center_rt:hover{
+	color:red;
+	border:3px solid red;
+	
+}
+
+
+
+
+
+
+
+
+
+

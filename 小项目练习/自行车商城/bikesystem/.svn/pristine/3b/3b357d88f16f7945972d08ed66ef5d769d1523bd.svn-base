@@ -1,0 +1,96 @@
+package com.bikesystem.hs.service;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.bikesystem.entity.BikeRent;
+import com.bikesystem.entity.BikeSell;
+import com.bikesystem.entity.Shop;
+import com.bikesystem.hs.dao.IBikeRentDao;
+import com.bikesystem.hs.dao.IBikeSellDao;
+import com.bikesystem.hs.dao.IShopDao;
+import com.bikesystem.hs.dao.IShopImageDao;
+/**
+ * shop服务层：
+ * 包含三个功能：
+ * 	1：获取商店信息
+ * 	2：获取商店商品信息:包括租用和出售的。
+ * 	3：获取商店主页图片路径信息
+ * @author bwfadmin
+ *
+ */
+public class ShopServiceImpl implements IShopService {
+	private IShopDao shopDao;
+	
+	private IBikeRentDao bikeRentDao;
+	private IBikeSellDao bikeSellDao;
+	
+	
+	public ShopServiceImpl(IBikeRentDao bikeRentDao) {
+		super();
+		this.bikeRentDao = bikeRentDao;
+	}
+
+	public ShopServiceImpl(IShopDao shopDao, IBikeRentDao bikeRentDao,
+			IBikeSellDao bikeSellDao) {
+		super();
+		this.shopDao = shopDao;
+		this.bikeRentDao = bikeRentDao;
+		this.bikeSellDao = bikeSellDao;
+	}
+
+	@Override
+	public boolean insertShop(Shop shop) {
+		return shopDao.insertShop(shop);
+	}
+
+	@Override
+	public Shop queryShopById(int sid) {
+		return shopDao.queryShopById(sid);
+	}
+
+	@Override
+	public boolean updateShop(Shop shop) {
+		return shopDao.updateShop(shop);
+	}
+
+
+	@Override
+	public List<BikeRent> queryAllBikeRentByParameter(Map<String, Object> map) {
+		checkParameters(map);
+		System.out.println(map);
+		return bikeRentDao.queryAllBikeRentByParameter(map);
+	}
+
+	@Override
+	public List<BikeSell> queryAllBikeSellByParameter(Map<String, Object> map) {
+		checkParameters(map);
+		System.out.println("map2"+map);
+		return bikeSellDao.queryAllBikeSellByParameter(map);
+	}
+	
+	//封装验证方法，如果value为空，删除这个键值对
+	private void checkParameters(Map<String,Object> map){
+		Set<Entry<String, Object>> entries = map.entrySet();
+		Iterator<Entry<String, Object>> it = entries.iterator();
+		List<String> nullKeys = new ArrayList<String>();
+		while(it.hasNext()){
+			Entry<String, Object> entry = it.next();
+			if(entry.getValue() == null){
+				nullKeys.add(entry.getKey());
+			}
+		}
+		for(String key : nullKeys){
+			map.remove(key);
+		}
+	}
+
+	@Override
+	public List<BikeRent> queryHotBikeRentByShopName(String shopName) {
+		return bikeRentDao.queryHotBikeRentByShopName(shopName);
+	}
+}

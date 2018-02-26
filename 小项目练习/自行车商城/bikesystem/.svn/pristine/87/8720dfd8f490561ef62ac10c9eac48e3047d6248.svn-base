@@ -1,0 +1,14 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+	<link    href="/bikesystem/css/hp/marketsell.css" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="/bikesystem/js/hp/image.js"></script>
+	
+	
+	<img id="img" src="/bikesystem/image/hp/a1.jpg" onmouseover="over(-1)" onmouseout="out()" />
+								<div id="img_bottom">
+										<img id="img0" src="/bikesystem/image/hp/a1.jpg"  onmouseover="over(0)" onmouseout="out()" />
+										<img id="img1" src="/bikesystem/image/hp/a2.jpg" onmouseover="over(1)" onmouseout="out()" />
+										<img id="img2" src="/bikesystem/image/hp/a3.jpg" onmouseover="over(2)" onmouseout="out()" />
+										<img id="img3" src="/bikesystem/image/hp/a4.jpg"  onmouseover="over(3)" onmouseout="out()" />
+										<img id="img4" src="/bikesystem/image/hp/a5.jpg"  onmouseover="over(4)" onmouseout="out()" />
+										<img id="img5" src="/bikesystem/image/hp/a6.jpg" onmouseover="over(5)" onmouseout="out()" />
+								</div>				

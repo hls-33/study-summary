@@ -1,0 +1,131 @@
+/*自行车分类简介处鼠标移入对应的简介出现，移开后隐藏*/
+$(".bikeinfo").hide();
+$("#bike-info li").mouseover(function(){
+	$(".bikeinfo").hide();
+	$(this).children().show();	
+});
+$("#bike-info li").mouseleave(function(){
+	$(".bikeinfo").hide();
+});
+
+/*点击进入登陆与注册页面*/
+$("#login").click(function(){
+	location.href="/bikesystem/jsp/userlogins.jsp";
+});
+$("#create").click(function(){
+	location.href="/bikesystem/jsp/usercreate.jsp";
+});
+$("#exit").click(function(){
+	location.href="/bikesystem/user/userexit";
+});
+
+
+
+/*自行车种类及简介显示*/
+$.ajax({
+	url:"/bikesystem/allbikekind",
+	type:"post",
+	dataType:"json",
+	success:function(message){
+		$("#bike-info").html("");
+		for(var i=0;i<message.length;i++){
+			var str="<li>" +message[i].kindName+
+					"<div class='bikeinfo' style='display:none'>";
+			str+="<p class='introp'><img src='/bikesystem/image/hp/a1.jpg'>自行车简介</p>";
+			str+=message[i].bkInformation;
+			str+="</div></li>";
+			$("#bike-info").append($(str));
+		}
+	}
+});
+$("#bike-info").on("mouseover","li",function(){
+	$(this).children().css("display","inline-block");
+});
+$("#bike-info").on("mouseout","li",function(){
+	$(this).children().css("display","none");
+});
+
+/*店铺信息显示*/
+
+$.ajax({
+	url:"/bikesystem/showinformation",
+	type:"post",
+	data:{"content":""},
+	dataType:"json",
+	success:function(message){
+		$("#shopshow").html("");
+		for(var i=0;i<message.length;i++){
+			var str="<div class='shopinfo'>";
+			str+="<img  src='"+message[i].imagePath+"'>";
+			str+="店铺名："+message[i].shopname;
+			str+="</div>";
+			$("#shopshow").append($(str));
+		}
+	}
+});
+$("#chose-div ul li:nth-of-type(1)").click(function(){
+	var str=$(this).html();
+	$.ajax({
+		url:"/bikesystem/showinformation",
+		type:"post",
+		data:{"content":str},
+		dataType:"json",
+		success:function(message){
+			$("#shopshow").html("");
+			if(message.length==0){
+				$("#shopshow").html("没有搜索到相关的信息");
+			}
+			else{
+				for(var i=0;i<message.length;i++){
+					var str="<div class='shopinfo'>";
+					str+="<img  src='"+message[i].imagePath+"'>";
+					str+="店铺名："+message[i].shopname;
+					str+="</div>";
+					$("#shopshow").append($(str));
+				}
+			}
+		}
+	});
+});
+$("#chose-div ul li:nth-of-type(2)").click(function(){
+	var str=$(this).html();
+	$.ajax({
+		url:"/bikesystem/querybikesellinfo",
+		type:"post",
+		data:{"content":str},
+		dataType:"json",
+		success:function(message){
+			$("#shopshow").html("");
+			for(var i=0;i<message.length;i++){
+				var str="<div class='shopinfo'>";
+				str+="<img  src='"+message[i].imgPath+"'>";
+				str+="自行车名："+message[i].bikeName;
+				str+="<br>店铺名："+message[i].shopName;
+				str+="<br>售价：￥"+message[i].bikePrice;
+				str+="</div>";
+				$("#shopshow").append($(str));
+			}
+		}
+	});
+});
+$("#chose-div ul li:nth-of-type(3)").click(function(){
+	var str=$(this).html();
+	$.ajax({
+		url:"/bikesystem/querybikerentinfo",
+		type:"post",
+		data:{"content":str},
+		dataType:"json",
+		success:function(message){
+			$("#shopshow").html("");
+			for(var i=0;i<message.length;i++){
+				var str="<div class='shopinfo'>";
+				str+="<img  src='"+message[i].imgPath+"'>";
+				str+="自行车名："+message[i].bikeName;
+				str+="<br>店铺名："+message[i].shopName;
+				str+="<br>日租金：￥"+message[i].dayPrice;
+				str+="</div>";
+				$("#shopshow").append($(str));
+			}
+		}
+	});
+});

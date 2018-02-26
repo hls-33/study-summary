@@ -1,0 +1,58 @@
+package com.bikesystem.hgg.dao;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.bikesystem.entity.BikeRent;
+
+public class BikeRentDaoImpl extends BaseDao implements IBikeRentDao {
+	private static final String queryAllBikeRentSql="select * from bike_rent";
+	private static final String queryBikeRentByIdSql="select * from bike_rent where brid=?";
+	
+	private List<BikeRent> brlist;
+	
+	@Override
+	public List<BikeRent> queryAllBikeRent() {
+		brlist=new ArrayList<BikeRent>();
+		getDb(queryAllBikeRentSql);
+		try {
+			rs=ps.executeQuery();
+			while(rs.next()){
+				brlist.add(new BikeRent(rs.getInt("brid"),rs.getString("bikenumber"),rs.getString("bikename"),rs.getString("color"),
+						rs.getString("kindname"),rs.getString("shopname"),rs.getDouble("hourprice"),
+						rs.getDouble("dayprice"),rs.getString("isrented"),rs.getString("imgpath"),
+						rs.getDouble("bikedeposit"),rs.getInt("rentcount")));
+			}
+			return brlist;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public BikeRent queryBikeRentById(int brid) {
+		if(brid<=0){
+			return null;
+		}
+		
+		try {
+			getDb(queryBikeRentByIdSql);
+			ps.setInt(1, brid);
+			rs=ps.executeQuery();
+			if(rs.next()){
+				return new BikeRent(rs.getInt("brid"), rs.getString("bikenumber"), rs.getString("bikename"), rs.getString("color"), 
+									rs.getString("kindname"), rs.getString("shopname"), rs.getDouble("hourprice"), rs.getDouble("dayprice"),
+									rs.getString("isrented"), rs.getString("imgpath"), rs.getDouble("bikedeposit"),rs.getInt("rentcount"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	
+
+}

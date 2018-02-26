@@ -1,0 +1,67 @@
+package com.bikesystem.hp.service;
+
+import java.util.List;
+
+import com.bikesystem.entity.BikeSell;
+import com.bikesystem.hp.dao.IBikeSellDao;
+
+public class BikeSellServiceImpl implements IBikeSellService {
+
+	private IBikeSellDao ibsd;
+	
+	
+	public BikeSellServiceImpl(IBikeSellDao ibsd) {
+		super();
+		this.ibsd = ibsd;
+	}
+
+	@Override
+	public boolean insertBikeSell(BikeSell bikeSell) {
+		if(bikeSell.equals(null)){
+			return false;
+		}
+		return ibsd.insertBikeSell(bikeSell);
+	}
+
+	@Override
+	public boolean deleteBikeSellById(int bsid) {
+		if(bsid<=0){
+			return false;
+		}
+		return deleteBikeSellById(bsid);
+	}
+
+	@Override
+	public boolean updateBikeSell(BikeSell bike) {
+		if(bike.equals(null)){
+			return false;
+		}
+		return updateBikeSell(bike);
+	}
+
+	@Override
+	public List<BikeSell> queryAllBikeSell(String shopName) {
+
+		if(shopName.equals(null)||shopName.equals("")){
+			return null;
+		}
+		return queryAllBikeSell(shopName);
+	}
+
+	@Override
+	public List<BikeSell> queryBikeSell(String bikeName) {
+		if(bikeName.equals(null)||bikeName.equals("")){
+			return null;
+		}
+		return queryBikeSell(bikeName);
+	}
+
+	@Override
+	public List<BikeSell> querySpecialBikeSell(String bikeName, String shopName) {
+		if(bikeName.equals(null)||bikeName.equals("")||shopName.equals(null)||shopName.equals("")){
+			return null;
+		}
+		return querySpecialBikeSell(bikeName, shopName);
+	}
+
+}

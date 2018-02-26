@@ -1,0 +1,27 @@
+package com.bikesystem.hp.dao;
+
+import java.util.List;
+import java.util.Map;
+
+
+import com.bikesystem.entity.BikeSell;
+
+public interface IBikeSellDao {
+
+	/**添加自行车*/
+	boolean insertBikeSell(BikeSell bikeSell);
+	/**删除出售的自行车*/
+	boolean deleteBikeSellById(int bsid);	
+	/**修改自行车信息*/
+	boolean updateBikeSell(BikeSell bike);		
+	/**查看所有出售自行车*/
+	List<BikeSell> queryAllBikeSell(String shopName);	
+	/**查看相关自行车信息*/
+	List<BikeSell> queryBikeSell(String bikeName);
+	/**查看特定自行车信息*/
+	List<BikeSell> querySpecialBikeSell(String bikeName,String shopName);
+	/**根据动态的参数个数来查询*/
+	List<BikeSell> queryAllBikeSellByParameter(Map<String,Object> map);
+	/**查询最热销的6个车*/
+	List<BikeSell> queryHotBikeSellByShopName(String shopName);
+}

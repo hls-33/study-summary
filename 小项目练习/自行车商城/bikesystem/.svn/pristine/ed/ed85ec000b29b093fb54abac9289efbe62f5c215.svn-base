@@ -1,0 +1,36 @@
+package com.bikesystem.hgg.service;
+
+import java.util.List;
+
+import com.bikesystem.entity.BikeDestroy;
+import com.bikesystem.hgg.dao.IBikeDestroyDao;
+
+public class BikeDestroyServiceImpl implements IBikeDestroyService {
+	private IBikeDestroyDao bikeDestroyDao;
+	
+	
+
+	public BikeDestroyServiceImpl(IBikeDestroyDao bikeDestroyDao) {
+		super();
+		this.bikeDestroyDao = bikeDestroyDao;
+	}
+
+	@Override
+	public boolean insertBikeDestory(BikeDestroy bikeDestory) {
+		
+		return bikeDestroyDao.insertBikeDestory(bikeDestory);
+	}
+
+	@Override
+	public List<BikeDestroy> queryBikeDestroyByShopName(String shopName) {
+		
+		return bikeDestroyDao.queryBikeDestroy(shopName);
+	}
+
+	@Override
+	public boolean deleteBikeByBikeNumber(String bikeNumber) {
+		// TODO Auto-generated method stub
+		return bikeDestroyDao.deleteBikeByBikeNumber(bikeNumber);
+	}
+
+}

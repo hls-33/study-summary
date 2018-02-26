@@ -1,0 +1,20 @@
+package com.bikesystem.hgg.dao;
+
+import java.util.List;
+
+import com.bikesystem.entity.BikeRent;
+
+public interface IBikeRentDao {
+
+	//查看所有的自行车信息
+	public List<BikeRent> queryAllBikeRent();
+	
+	//根据商店名查看自行车信息
+	public List<BikeRent> queryBikeRentByShopName(String shopName);
+	
+	//根据车牌号查看自行车信息
+	public BikeRent queryBikeRentByBikeNumber(String bikeNumber);
+	
+	//添加出租的自行车信息
+	public boolean insertBikeRent(BikeRent bikeRent);
+}

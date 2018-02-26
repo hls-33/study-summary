@@ -1,0 +1,286 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>My JSP 'queryallbike.jsp' starting page</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+	<link href="/bikesystem/css/hgg/basestyle.css" rel="stylesheet" type="text/css">
+	<link href="/bikesystem/css/hgg/queryallbikestyle.css" rel="stylesheet" type="text/css">
+	
+  </head>
+  
+  <body>
+  	
+	<div class="background_div">
+	  		<div class="tittle_div">
+	  			<img src="/bikesystem/image/hgg/98cac46cc66e28f53ba200816b2fee19.jpg">
+	  			<p>管理中心</p>
+	  		</div>
+	  		<div class="top_navigation_div">
+	  			<ul>
+	  				<li>首页</li>
+	  				<li>首页</li>
+	  				<li>首页</li>
+	  				<li>首页</li>
+	  			</ul>
+	  		</div>
+	  		<div class="navigation_div">
+	  			<div style="background-color:#F5F5F5;height:40px;border-bottom:1px solid #E0E0E0;line-height:40px;">
+	  				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我的应用
+	  			</div>
+	  			<div class="function_menu_div">
+	  				<ul>
+		  				<li>
+		  					<div class="function_div">
+		  						<span class="one_font">&nbsp;&nbsp;&nbsp;租赁管理</span>
+		  					</div>
+		  					<div>
+		  						<table>
+		  							<tr>
+		  								<td class="two_font">
+		  									<span style="color:#FF4700">查看自行车</span>
+		  								</td>
+		  								<td class="two_font">
+		  									<a href="/bikesystem/hgg/queryuserrent">用户租借信息</a>
+		  								</td>
+		  							</tr>
+		  						</table>
+		  					</div>
+		  					
+		  				</li>
+		  				<li>
+		  					<div class="function_div">
+		  						<span class="one_font">&nbsp;&nbsp;&nbsp;申购管理</span>
+		  					</div>
+		  					<ul>
+		  						<li class="two_font">
+		  							<a href="/bikesystem/hgg/showinsertbike">宝贝入库</a>
+		  						</li>
+		  					</ul>
+		  					
+		  				</li>
+		  				<li>
+		  					<div class="function_div">
+		  						<span class="one_font">&nbsp;&nbsp;&nbsp;报废管理</span>
+		  					</div>
+		  					<ul>
+		  						<li class="two_font">
+		  							<a href="/bikesystem/hgg/showbikedestroy">宝贝报废</a>
+		  						</li>
+		  					</ul>
+		  				</li>
+	  				</ul>
+	  			</div>
+	  		</div>
+	  		<div class="content_div">
+	  			<table id="content_table">
+	  				<tr>
+	  					<th>宝贝</th>
+	  					<th>时租金</th>
+	  					<th>日租金</th>
+	  					<th>是否租出</th>
+	  					<th>押金</th>
+	  					<th>出租次数</th>
+	  					<th>修改</th>
+	  				</tr>
+	  			</table>
+	  			<br>
+	  			<c:forEach items="${requestScope.allbikerent}" var="bike">
+	  				<div class="good_div">
+	  					<table>
+	  						<tr>
+	  							<td>
+	  								<img src="${bike.imgPath}" style="width:80px;height:80px;">
+	  							</td>
+	  							<td>
+	  								<div>
+	  									<span>${bike.bikeName}</span>
+	  									<span class="bn">${bike.bikeNumber}</span><br>
+	  									<span>${bike.color}</span>&nbsp;&nbsp;
+	  									<span>${bike.kindName}</span>
+	  								</div>
+	  								
+	  							</td>
+	  							<td id="hp">${bike.hourPrice}</td>
+	  							<td id="dp">${bike.dayPrice}</td>
+	  							<td>${bike.isRented }</td>
+	  							<td id="bd">${bike.bikedeposit}</td>
+	  							<td>${bike.rentCount }</td>
+	  							<td>
+	  								<input type="button" class="updatebut" value="修改">
+	  							</td>
+	  						</tr>
+	  						
+	  					</table>
+	  				</div>
+	  				<br>
+	  			</c:forEach>
+	  			
+	  			
+	   		</div>
+	   		
+	  </div>
+	  <div id="model_div">
+	  	
+	  </div>
+	  <div id="model_content_div">
+	  	<div id="update_div">
+	  		<div id="modeltittle_div">
+	  			<span>修改信息</span>
+	  			<img src="/bikesystem/image/hgg/5-140FG95151.png" id="close">
+	  		</div>
+		  	<table>
+		  		<tbody>
+		  			<tr>
+		  				<td>车名：</td>
+		  				<td id="upbikename"></td>
+		  			</tr>
+		  			<tr>
+		  				<td>车编号：</td>
+		  				<td id="upbikenumber"></td>
+		  			</tr>
+		  			<tr>
+		  				<td>车身颜色：</td>
+		  				<td id="upcolor"></td>
+		  			</tr>
+		  			<tr>
+		  				<td>车型：</td>
+		  				<td id="upkindname"></td>
+		  			</tr>
+		  			<tr>
+		  				<td>时租金：</td>
+		  				<td><input type="text" id="uphourprice"></td>
+		  			</tr>
+		  			<tr>
+		  				<td>日租金：</td>
+		  				<td><input type="text" id="updayprice"></td>
+		  			</tr>
+		  			<tr>
+		  				<td>押金：</td>
+		  				<td><input type="text" id="updeposit"></td>
+		  			</tr>
+		  			<tr>
+		  				<td>出租次数：</td>
+		  				<td id="uprentcount"></td>
+		  			</tr>
+		  			<tr>
+		  				<td colspan="2">
+		  					<input type="button" id="upbuttton" value="确认修改">
+		  				</td>
+		  			</tr>
+		  		</tbody>
+		  	</table>
+	  	</div>
+	  	
+	  </div>
+	  <script type="text/javascript" src="/bikesystem/js/hgg/jquery-3.2.0.js"></script>
+	  <script>
+	  	$(".updatebut").click(function(){
+	  		var bikename=$(this).parent().prev().prev().prev().prev().prev().prev().children().children().html();
+	  		var bikenumber=$(this).parent().prev().prev().prev().prev().prev().prev().children().children().next().html();
+	  		var color=$(this).parent().prev().prev().prev().prev().prev().prev().children().children().next().next().next().html();
+	  		var kindname=$(this).parent().prev().prev().prev().prev().prev().prev().children().children().next().next().next().next().html();
+	  		var hourprice=$(this).parent().prev().prev().prev().prev().prev().html();
+	  		var dayprice=$(this).parent().prev().prev().prev().prev().html();
+	  		var deposit=$(this).parent().prev().prev().html();
+	  		var rentcount=$(this).parent().prev().html();
+	  		$("#model_div").css("display","block");
+	  		$("#model_content_div").css("display","block");
+	  		$("#upbikename").html(bikename);
+	  		$("#upbikenumber").html(bikenumber);
+	  		$("#upcolor").html(color);
+	  		$("#upkindname").html(kindname);
+	  		
+	  		$("#uphourprice").val(hourprice);
+	  		$("#updayprice").val(dayprice);
+	  		$("#updeposit").val(deposit);
+	  		$("#uprentcount").html(rentcount);
+	  		
+	  	})
+	  	$("#close").click(function(){
+	  		$("#model_div").css("display","none");
+	  		$("#model_content_div").css("display","none");
+	  	})
+	  	$("#upbuttton").click(function(){
+	  		var bikenumber=$("#upbikenumber").html();
+	  		var hourprice=$("#uphourprice").val();
+	  		var dayprice=$("#updayprice").val();
+	  		var deposit=$("#updeposit").val();
+	  		$.ajax({
+	  			url:"/bikesystem/hgg/updatebikeinfo",
+	  			type:"post",
+	  			data:{"bikenumber":bikenumber,"hourprice":hourprice,
+	  					"dayprice":dayprice,"deposit":deposit},
+	  			datatype:"String",
+	  			success:function(result){
+	  				if(result=="true"){
+	  					var bnarr=document.getElementsByClassName("bn");
+	  					for(var i=0;i<bnarr.length;i++){
+	  						if($(bnarr[i]).html()==bikenumber){
+	  							$(bnarr[i]).parent().parent().next().html(hourprice);
+	  							$(bnarr[i]).parent().parent().next().next().html(dayprice);
+	  							$(bnarr[i]).parent().parent().next().next().next().next().html(deposit);
+	  						}
+	  					}
+	  				}
+	  			}
+	  		})
+	  		$("#model_div").css("display","none");
+	  		$("#model_content_div").css("display","none");
+	  	})
+	  	$("input[type=text]").focus(function(){
+	  		$(this).val("");
+	  		
+	  	})
+	  	$$("input[type=text]").blur(function(){
+	  		
+	  	})
+	  </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

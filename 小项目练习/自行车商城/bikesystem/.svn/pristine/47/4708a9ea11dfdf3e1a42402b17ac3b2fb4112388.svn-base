@@ -1,0 +1,194 @@
+package com.bikesystem.hgg.dao;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.bikesystem.entity.BikeRent;
+
+public class BikeRentDaoImpl extends BaseDao implements IBikeRentDao {
+	
+	private static final String queryAllBikeRentSql="select * from bike_rent where isrented=?";
+	private static final String queryBikeRentByShopNameSql="select * from bike_rent where shopname=?";
+	private static final String insertBikeRentSql="insert into bike_rent(bikenumber,bikename,color,kindname,shopname,hourprice,dayprice,isrented,imgpath,bikedeposit,rentcount) values(?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String queryBikeRentByBikeNumberSql="select * from bike_rent where bikenumber=?";
+	private static final String deleteBikeRentSql="delete from bike_rent where bikenumber=?";
+	private static final String updateBikeRentSql="update bike_rent set hourprice=?,dayprice=?,bikedeposit=? where bikenumber=?";
+	private static final String getTotalCountSql="select count(brid) as totalcount from (select * from bike_rent where shopname=?)shopname";
+	
+	@Override
+	public List<BikeRent> queryAllBikeRent() {
+		List<BikeRent> allBikeRentList=new ArrayList<BikeRent>();
+		getDb(queryAllBikeRentSql);
+		try {
+			ps.setString(1, "未出租");
+			rs=ps.executeQuery();
+			
+			while(rs.next()){
+				allBikeRentList.add(new BikeRent(rs.getInt("brid"),rs.getString("bikenumber"),rs.getString("bikename"),rs.getString("color"),
+						rs.getString("kindname"),rs.getString("shopname"),rs.getDouble("hourprice"),
+						rs.getDouble("dayprice"),rs.getString("isrented"),rs.getString("imgpath"),
+						rs.getDouble("bikedeposit"),rs.getInt("rentcount")));
+			}
+			return allBikeRentList;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally{
+			close();
+		}
+		return null;
+	}
+
+	@Override
+	public List<BikeRent> queryBikeRentByShopName(String shopName) {
+		
+		List<BikeRent> shopBikeRentList=new ArrayList<BikeRent>();
+		
+		
+		try {
+			getDb(queryBikeRentByShopNameSql);
+			ps.setString(1, shopName);
+			rs=ps.executeQuery();
+			while(rs.next()){
+				shopBikeRentList.add(new BikeRent(rs.getInt("brid"), rs.getString("bikenumber"), rs.getString("bikename"), rs.getString("color"), 
+						rs.getString("kindname"), rs.getString("shopname"), rs.getDouble("hourprice"), rs.getDouble("dayprice"),
+						rs.getString("isrented"), rs.getString("imgpath"), rs.getDouble("bikedeposit"),rs.getInt("rentcount"))) ;
+			}
+			return shopBikeRentList;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally{
+			close();
+		}
+		return null;
+	}
+
+	@Override
+	public int getTotalPage(int pagecount,String shopname){
+		//数据表里的总记录数
+		int totalcount=-1;
+		getDb(getTotalCountSql);
+		try {
+			ps.setString(1, shopname);
+			rs=ps.executeQuery();
+			if(rs.next()){
+				totalcount=rs.getInt("totalcount");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		//总页数
+		int totalpage=-1;
+		if(totalcount>0){
+			if(totalcount%pagecount==0){
+				totalpage=totalcount/pagecount;
+			}else{
+				totalpage=totalcount/pagecount+1;
+			}
+		}else{
+			totalpage=0;
+		}
+		return totalpage;
+	}
+	
+	@Override
+	public boolean insertBikeRent(BikeRent bikeRent) {
+		if(bikeRent==null)
+			return false;
+		try {
+			getDb(insertBikeRentSql);
+			ps.setString(1, bikeRent.getBikeNumber());
+			ps.setString(2, bikeRent.getBikeName());
+			ps.setString(3, bikeRent.getColor());
+			ps.setString(4, bikeRent.getKindName());
+			ps.setString(5, bikeRent.getShopName());
+			ps.setDouble(6, bikeRent.getHourPrice());
+			ps.setDouble(7, bikeRent.getDayPrice());
+			ps.setString(8, bikeRent.getIsRented());
+			ps.setString(9, bikeRent.getImgPath());
+			ps.setDouble(10, bikeRent.getBikedeposit());
+			ps.setInt(11, bikeRent.getRentCount());
+			if(ps.executeUpdate()>0){
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally{
+			close();
+		}
+		return false;
+	}
+
+	@Override
+	public BikeRent queryBikeRentByBikeNumber(String bikeNumber) {
+		if(bikeNumber==null){
+			return null;
+		}
+		BikeRent bikerent=null;
+		try {
+			getDb(queryBikeRentByBikeNumberSql);
+			ps.setString(1, bikeNumber);
+			rs=ps.executeQuery();
+			if(rs.next()){
+				bikerent=new BikeRent(rs.getInt("brid"),rs.getString("bikeNumber"),rs.getString("bikeName"),
+						rs.getString("color"),rs.getString("kindName"),rs.getString("shopName"),
+						rs.getDouble("hourPrice"),rs.getDouble("dayPrice"),rs.getString("isRented"),
+						rs.getString("imgPath"),rs.getDouble("bikedeposit"),rs.getInt("rentCount"));
+			}
+			return bikerent;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally{
+			close();
+		}
+		return null;
+	}
+
+	@Override
+	public boolean deleteBikeRent(BikeRent bikeRent) {
+		if(bikeRent==null)
+			return false;
+		
+		try {
+			getDb(deleteBikeRentSql);
+			ps.setString(1, bikeRent.getBikeNumber());
+			if(ps.executeUpdate()>0){
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			close();
+		}
+		return false;
+	}
+
+	@Override
+	public boolean updateBikeRent(String bikeNumber,double hourPrice,double dayPrice,double deposit) {
+		try {
+			getDb(updateBikeRentSql);
+			ps.setDouble(1, hourPrice);
+			ps.setDouble(2, dayPrice);
+			ps.setDouble(3, deposit);
+			ps.setString(4, bikeNumber);
+			if(ps.executeUpdate()>0){
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			close();
+		}
+		return false;
+	}
+
+	
+
+}

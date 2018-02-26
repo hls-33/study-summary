@@ -1,0 +1,164 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<base href="<%=basePath%>">
+<base target="_blank">
+<title>My JSP 'marketSell.jsp' starting page</title>
+
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="This is my page">
+<script language="javascript" type="text/javascript"
+	src="/bikesystem/js/hp/jquery-3.2.0.js"></script>
+<script type="text/javascript" src="/bikesystem/js/hp/market.js"></script>
+<script type="text/javascript" src="/bikesystem/js/hs/image.js"></script>
+<link href="/bikesystem/css/hp/marketsell.css" rel="stylesheet"
+	type="text/css" />
+<link rel="stylesheet" type="text/css"
+	href="/bikesystem/css/hs/marketrentappendix.css" />
+</head>
+
+<body>
+	<jsp:include page="../hp/navigation.jsp"></jsp:include>
+	<div id="header" class="tm-chn">
+		<div id="headerCon">
+			<h1 id="mallLogo">
+				<span class="mlogo"> <a href="//www.tmall.com/"
+					title="天猫Tmall.com"> 天猫Tmall.com </a>
+				</span>
+			</h1>
+			<div id="shopExtra">
+				<div class="slogo">
+					<a class="slogo-shopname" href=""> <strong>${requestScope.bikeRent.shopName}自行车店铺，欢迎您的到来</strong>
+					</a>
+				</div>
+			</div>
+			<div id="input-sou">
+				<input value="" placeholder="请输入要搜索的词">
+				<button>搜本店</button>
+				&nbsp;
+				<button>全店搜</button>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div id="top-bm">
+		<ol>
+			<li><a href="/bikesystem/hs/category?shopname=${requestScope.bikeRent.shopName}&biketype=rent">本店所有商品</a></li>
+			<li><a href="/bikesystem/hs/shop?shopname=${requestScope.bikeRent.shopName}">首页</a></li>
+			<li><a href="">热卖款</a></li>
+			<li><a href="">店铺活动</a></li>
+		</ol>
+	</div>
+	<br>
+	<br>
+	<div id="main">
+		<div id="main-left">
+			<img id="img" src="${requestScope.bikeRent.imgPath }"
+				onmouseover="over(-1)" onmouseout="out()" />
+			<div id="img_bottom">
+				<c:set var="index" value="-1" />
+
+				<c:forEach items="${requestScope.bikeSellList }" var="bikeSellList"
+					varStatus="st">
+					<c:set var="index" value="${index+1}" />
+					<img id="img${st.index}" src="${bikeSellList.imgPath}"
+						onmouseover="over(${index})" onmouseout="out()" />
+				</c:forEach>
+			</div>
+		</div>
+
+		<div id="main-center">
+			<ul>
+				<li class="main-center-li-f">永久自行车山地车24/27速铝合金架减震双碟刹男女式山地车YE880<br>
+					<span>YE880镇店之款总销19万辆多种配置</span>
+				</li>
+				<br>
+				<li>
+					<div>
+						日租金 &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&yen;<span>${requestScope.bikeRent.dayPrice}</span>
+						&nbsp; &nbsp; &nbsp;&nbsp;小时租金 &nbsp; &nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&yen;<span>
+							${requestScope.bikeRent.hourPrice}</span>
+					</div> <br>
+				</li>
+				<br>
+				<li>
+					<div class="font_size">取车方式： &nbsp; &nbsp;到店自取</div>
+				</li>
+				<br>
+				<li>
+					<div class="font_size">出租状态： &nbsp; &nbsp;${requestScope.bikeRent.isRented}</div>
+				</li>
+				<br>
+				<c:if test="${requestScope.bikeRent.isRented=='已出租'}">
+					<li>
+						<div class="font_size">预计归还时间： &nbsp; &nbsp;${requestScope.userRent.returnDate}</div>
+					</li>
+				<br>
+				</c:if>
+				<li>
+					<div id="main-center-num"></div>
+
+				</li>
+
+				<li><div class="buy-now"><a href="/bikesystem/user/hs/rentorder?shopname=${requestScope.bikeRent.shopName}&brid=${requestScope.bikeRent.brid}">立即预约</a></div>
+					<div class="shopping-cart"><a href="/bikesystem/user/hs/shoppingcart?shopname=${requestScope.bikeRent.shopName}&brid=${requestScope.bikeRent.brid}">加入备租篮</a></div></li>
+				<br>
+				<br>
+				<br>
+				<br>
+				<li class="font_size"><div>服务承诺 &nbsp; &nbsp;正品保证
+						&nbsp;&nbsp;T2极速退款 &nbsp; &nbsp;七天无理由退换</div></li>
+			</ul>
+		</div>
+
+
+	</div>
+	<div id="bottom">
+		<div id="bottom-left">
+			<div id="bottom-left_tp"><%@ include
+					file="./bottomcentertp.jsp"%></div>
+			<div id="bottom-left_bm"><%@ include
+					file="./bottomcenterbm.jsp"%></div>
+		</div>
+		<div id="bottom-center">
+			<div id="bottom-center_lt">商品详情</div>
+			<div id="bottom-center_rt">累计评价</div>
+		</div>
+	</div>
+	<script>
+		$(document).ready(function() {
+			var i = 1;
+			$("#number-text").val(i);
+			$(".main-num-s1").click(function() {
+				++i;
+				if (i >= "${requestScope.bikecount-requestScope.sellcount}") {
+					$("#number-text").val("${requestScope.bikecount-requestScope.sellcount}");
+				} else {
+					$("#number-text").val(i);
+				}
+			});
+			$(".main-num-s2").click(function() {
+				--i;
+				if (i <= 1) {
+					$("#number-text").val(1);
+				} else {
+					$("#number-text").val(i);
+				}
+			});
+	
+		});
+	</script>
+</body>
+</html>

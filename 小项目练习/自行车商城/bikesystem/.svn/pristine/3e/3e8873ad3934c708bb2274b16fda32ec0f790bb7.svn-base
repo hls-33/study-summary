@@ -1,0 +1,158 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>My JSP 'bikerentorder.jsp' starting page</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+	<link rel="stylesheet" type="text/css" href="css/hs/bikerentorder.css" >
+	<!-- js文件 -->
+	<script type="text/javascript" src=""></script>
+	<!-- jqeury库和bootstrap库 -->
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+ 	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  	<link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+  </head>
+  	
+  <body>
+    <jsp:include page="../hp/navigation.jsp"></jsp:include>
+    <div class="header-order" >
+    	<div class="malllogo">
+    	<a href="#"><span class="logo-item"></span></a>
+    	</div>
+    	<div class="stepbarbox">
+    		<ol class="order-stepbar">
+    			<li class="step-first step-item">
+    				<div class="step-name">预约商品</div>
+    				<div class="step-no"></div>
+    			</li>
+    			<li class="step-second step-item">
+    				<div class="step-name">支付预约押金</div>
+    				<div class="step-no">2</div>
+    			</li>
+    			<li class="step-third step-item">
+    				<div class="step-name">到店取车</div>
+    				<div class="step-no">3</div>
+    			</li>
+    			<li class="step-fourth step-item">
+    				<div class="step-name">到店还车</div>
+    				<div class="step-no">4</div>
+    			</li>
+    			<li class="step-last step-item">
+    				<div class="step-name">评价</div>
+    				<div class="step-no">5</div>
+    			</li>
+    		</ol>
+    	</div>
+    </div>
+    <div class="confirm-order">
+    	<div class="order-title">
+    		<h2 class="order-th">确认预约信息</h2>
+    		<div class="order-td-div">
+    			<div class="order-td-0 order-td-item">店铺宝贝</div>
+    			<div class="order-td-1 order-td-item">商品属性</div>
+    			<div class="order-td-2 order-td-item">小时租金</div>
+    			<div class="order-td-3 order-td-item">日租金</div>
+    			<div class="order-td-4 order-td-item">最低押金</div>
+    		</div>
+    	</div>
+    	<div class="order-main">
+    		<div class="order-info">
+    			<img class="shop-icon" src="//img.alicdn.com/tps/i4/TB12mhwHVXXXXctXVXXAAT2HVXX-63-63.png">
+    			<span>店铺:</span>
+    			<span><a href="/bikesystem/hs/shop?shopname=${requestScope.shop.shopName}">${requestScope.shop.shopName }</a></span>
+    			<span></span>
+    		</div>
+    		<div class="order-item">
+    			<div class="order-item-0 order-item-row">
+    				<img class="order-rent-image" src="${requestScope.bikeRent.imgPath}">
+    				<div class="order-rent-info">
+    					<a>${requestScope.bikeRent.bikeName}</a>
+    					<div>
+    					<a href="#" class="icon-a"><img src="//img.alicdn.com/tps/i3/T1Vyl6FCBlXXaSQP_X-16-16.png"></a>
+    					<a href="#" cl><img src="//img.alicdn.com/tps/i4/T1BCidFrNlXXaSQP_X-16-16.png"></a>
+    					<a href="#"><img src="//assets.alicdn.com/sys/common/icon/trade/xcard.png"></a>
+    					</div>
+    				</div>
+    			</div>
+    			<div class="order-item-1  order-item-row">
+    				<ul>
+    					<li>车身颜色:${requestScope.bikeRent.color }</li>
+    					<li>车型:${requestScope.bikeRent.kindName }</li>
+    					<li>状态:完好</li>
+    				</ul>
+    			</div>
+    			<div class="order-item-2 order-item-row money-strong">￥${requestScope.bikeRent.hourPrice}</div>
+    			<div class="order-item-3 order-item-row money-strong">￥${requestScope.bikeRent.dayPrice}</div>
+    			<div class="order-item-4 order-item-row money-strong">￥${requestScope.bikeRent.bikedeposit}</div>
+    		</div>
+    		<div class="order-service">
+    			<div class="order-service-title">售后服务:</div>
+    			<div class="order-service-info">
+    				<div class="order-service-icon">
+    					<input type="checkbox" name="shopsale" value="sale">
+    					<span>商家优惠</span>
+    					<img src="http://gtd.alicdn.com/tps/i2/T1nsmkXu0iXXbfMpDa-17-16.jpg">
+    					<a><img src="//img.alicdn.com/tps/TB1zNZ_LVXXXXasapXXXXXXXXXX-32-32.png" style="width:15px;height:15px;"></a>
+    				</div>
+    				<div class="order-service-saleprice money-strong">
+    					<c:if test="${not empty requestScope.rentSale}">
+    						<span>￥${rentSale.hourSalePrice}</span>
+    						<span>￥${rentSale.daySalePrice}</span>
+    					</c:if>
+    					
+    					<c:if test="">
+    						<span>￥0.00</span>
+    						<span>￥0.00</span>
+    					</c:if>
+    				</div>
+    			</div>
+    		</div>
+    		<div class="order-ext">
+    			<div class="order-ext-user"><span>租车用户:${sessionScope.user.name}</span></div>
+    			<div class="order-ext-diliver"><span>配送方式:上门自提</span></div>
+    			<div class="order-ext-price money-strong"><span>￥0.0</span></div>
+    		</div>
+	    	<div class="order-pay">
+	    		<span style="color:#333;">店铺合计(上门自提)</span>
+	    		<span class="total-price money-strong" >￥599.00</span>
+	    	</div>
+    	</div>
+    	
+    	<div class="order-payinfo">
+    		<div class="order-payInfo-wrapper">
+    			<div class="order-payinfo-money"><span style="font-size: 14px;color:#333;font-weight: 700;">实付款:</span><span style="font: 700 26px tahoma;">￥</span><span class="money-strong" style="font: 700 26px tahoma;">599.00</span></div>
+    			<div class="order-payinfo-address"><span style="font-size: 14px;color:#333;font-weight: 700;">店铺地址（提车）:</span><span>${requestScope.shop.shopAddress}</span></div>
+    			<div class="order-payinfo-user"><span style="font-size: 14px;color:#333;font-weight: 700;">预约人:</span><span>${sessionScope.user.name}</span></div>
+    		</div>
+    	</div>
+    	<div class="order-submit">
+    		<div class="order-submit-button"><a class="a-button">提交预约</a></div>
+    	</div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </body>
+</html>

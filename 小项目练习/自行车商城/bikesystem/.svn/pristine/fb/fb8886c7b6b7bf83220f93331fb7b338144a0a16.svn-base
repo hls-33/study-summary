@@ -1,0 +1,142 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>My JSP 'buyNow.jsp' starting page</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+		<script language="javascript" type="text/javascript" src="/bikesystem/js/hp/jquery-3.2.0.js"></script>
+		<script language="javascript" type="text/javascript" src="/bikesystem/js/hp/buynow.js"></script>
+		<link href="/bikesystem/css/hp/buynow.css" rel="stylesheet"/>
+  </head>
+  <body>
+  			 <jsp:include page="navigation.jsp"></jsp:include>
+  			
+  			 <div class="top-address">
+  			 				<div><h2>选择收货地址</h2></div>
+  			 				<div class="order-address ">
+  			 						
+  			 						<c:forEach  items="${requestScope.SellAddressList }" var="AddressList"  varStatus="st">
+												<div class="tableid">
+													<table class="delete${st.index}">
+																<tr>
+																		<td style="text-align:left;font-size:15px;font-weight:bold;">
+																			<span><span style="display:none">	${AddressList.said}</span></span>
+																			${AddressList.address}</td>
+																</tr>
+																<tr>
+																		<td>${AddressList.minuteaddress}</td>
+																</tr>
+																<tr>
+																		<td>${AddressList.username}(${AddressList.phone}) 收</td>
+																</tr>
+																<tr>
+																		<td>&nbsp;&nbsp;&nbsp;<a class="delete">删除</a></td>
+																</tr>
+												</table>
+											</div>
+									</c:forEach>
+  			 				</div>
+  			 				<br>	<br>	<br>	<br>	<br>	<br>	<br>	<br>
+  			 				<div>  
+  			 						<input class="addAddr" type="button" value="添加新地址"  >
+  			 				</div>
+  			 				
+  			 </div>
+  			 <div class="main-bottom">
+  			 		<div><h2>确认订单信息</h2></div>
+  			 		
+  			 		<div>
+  			 				<table>
+  			 						<thead>
+  			 								<tr>
+		  			 								<th>店铺宝贝</th>
+		  			 								<th>商品属性</th>
+		  			 								<th>单价</th>
+		  			 								<th>数量</th>
+  			 								</tr>
+  			 						</thead>
+  			 						<tbody>
+  			 								<tr>
+  			 										<th colspan="4"  class="main-bm-tr-th">店铺：${requestScope.shopname }</th>	
+  			 								</tr>
+  			 								<tr class="main-bm-tt">
+		  			 								<th><img alt="" src="${requestScope.imgpath }" style="width:50px;height:40px;"> ${requestScope.bikename}</th>
+		  			 								<th>颜色:${requestScope.bikecolor} 车型:${requestScope.kindname} </th>
+		  			 								<th>${requestScope.bikeprice}</th>		
+		  			 								<th> ${ requestScope.count}</th>
+  			 							</tr>	
+  			 						</tbody>
+  			 				</table>
+  			 		
+  			 		</div>
+  			 		<br>
+  			 		<div class="bottom-table">
+  			 				<div class="bottom-sp">
+  			 						<ul>
+  			 								<li >￥<span>${requestScope.bikeprice*requestScope.count}</span></li><li>实付款：</li>
+									</ul>
+									<br>
+									<ol>
+			  			 					<li>寄送至:<span>${requestScope.minuteaddress}</span></li>
+			  			 					<br>
+											<li>收货人：<span>${requestScope.username}(${requestScope.phone})</span> </li>
+  			 						</ol>
+  			 				</div>
+
+  			 		</div>
+  			 		<br>
+  
+  			 		<div class="bottom-bt">
+  			 				<div id="bottom-bt"><input type="button" value="提交订单"></div>
+  			 		</div>
+  			 		
+  			 </div>
+  		</div>
+		<script type="text/javascript">
+						$(function(){
+								$("#bottom-bt input[type='button']").click(function(){
+											window.location.href="/bikesystem/hp/referto";	
+								});
+								$(".addAddr").click(function(){
+											window.location.href="/bikesystem/buyaddress.jsp";	
+								});
+							$(".delete").click(function(){
+									var said = $(this).parent().parent().parent().children().children().children().children().html();
+									var dt = $(this).parent().parent().parent().parent().attr("class");
+									$.ajax({
+												url:"/bikesystem/user/hp/priceajax",
+												type:"POST",
+												data:{"said":said},
+												 dataType: "json", 
+												success:function(message){
+														if(message){
+														$("."+dt).remove(); 
+														}
+												}			
+												
+									
+									})
+									
+							});
+							
+								
+								
+				})	
+		</script>	  										
+			  										
+			  										
+  </body>
+</html>

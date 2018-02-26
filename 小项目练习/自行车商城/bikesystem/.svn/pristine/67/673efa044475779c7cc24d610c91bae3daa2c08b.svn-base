@@ -1,0 +1,101 @@
+package com.bikesystem.entity;
+/**
+ * 对应数据库表user_rent实体类
+ * @author bwfadmin
+ *
+ */
+public class UserRent {
+	private int urid;
+	private String name;//name关联user表
+	private String bikeNumber;
+	private String bikeName;
+	private String shopName;
+	private String rentDate;
+	private String returnDate;
+	private double deposit;	//用户缴纳押金
+	
+	public UserRent() {
+		super();
+	}
+	public UserRent(int urid, String name, String bikeNumber, String bikeName, String shopName, String rentDate,
+			String returnDate, double deposit) {
+		super();
+		this.urid = urid;
+		this.name = name;
+		this.bikeNumber = bikeNumber;
+		this.bikeName = bikeName;
+		this.shopName = shopName;
+		this.rentDate = rentDate;
+		this.returnDate = returnDate;
+		this.deposit = deposit;
+	}
+	
+	public UserRent(String name, String bikeNumber, String bikeName, String shopName, String rentDate,
+			String returnDate, double deposit) {
+		super();
+		this.name = name;
+		this.bikeNumber = bikeNumber;
+		this.bikeName = bikeName;
+		this.shopName = shopName;
+		this.rentDate = rentDate;
+		this.returnDate = returnDate;
+		this.deposit = deposit;
+	}
+	
+	public int getUrid() {
+		return urid;
+	}
+	public void setUrid(int urid) {
+		this.urid = urid;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getBikeNumber() {
+		return bikeNumber;
+	}
+	public void setBikeNumber(String bikeNumber) {
+		this.bikeNumber = bikeNumber;
+	}
+	public String getBikeName() {
+		return bikeName;
+	}
+	public void setBikeName(String bikeName) {
+		this.bikeName = bikeName;
+	}
+	public String getShopName() {
+		return shopName;
+	}
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+	public String getRentDate() {
+		return rentDate;
+	}
+	public void setRentDate(String rentDate) {
+		this.rentDate = rentDate;
+	}
+	public String getReturnDate() {
+		return returnDate;
+	}
+	public void setReturnDate(String returnDate) {
+		this.returnDate = returnDate;
+	}
+	public double getDeposit() {
+		return deposit;
+	}
+	public void setDeposit(double deposit) {
+		this.deposit = deposit;
+	}
+	@Override
+	public String toString() {
+		return "UserRent [urid=" + urid + ", name=" + name + ", bikeNumber=" + bikeNumber + ", bikeName=" + bikeName
+				+ ", shopName=" + shopName + ", rentDate=" + rentDate + ", returnDate=" + returnDate + ", deposit="
+				+ deposit + "]";
+	}
+	
+	
+}

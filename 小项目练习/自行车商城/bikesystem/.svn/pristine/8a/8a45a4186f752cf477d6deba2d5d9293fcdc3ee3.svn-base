@@ -1,0 +1,63 @@
+@CHARSET "UTF-8";
+
+
+
+.kind-nav{
+	width:150px;
+	height:auto;
+	border:1px solid rgb(221, 221, 221);
+}
+
+.kind-nav-title{
+	height: 36px;
+	padding-left: 20px;
+}
+.kind-nav-rent{
+	height: 72px;
+	padding-left: 20px;
+}
+.kind-nav-rent a:first-child{
+	font-weight: bolder;
+	display: block;
+}
+.kind-nav-rent a:NTH-OF-TYPE(2){
+	display: inline-block;
+	margin-left:10px;
+}
+.kind-nav-rent a:NTH-OF-TYPE(3){
+	display: inline-block;
+}
+
+.kind-nav-sell{
+	height: 72px;
+	padding-left: 20px;
+}
+.kind-nav-sell a:NTH-OF-TYPE(2){
+	display: inline-block;
+	margin-left:10px;
+}
+.kind-nav-sell a:NTH-OF-TYPE(3){
+	display: inline-block;
+}
+
+.kind-nav-kindname{
+	height: 36px;
+	padding-left: 20px;
+}
+.nav-kindname{
+	
+}
+.kind-nav-icon{
+	
+}
+
+
+
+
+
+
+
+
+
+
+
